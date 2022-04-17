@@ -48,7 +48,7 @@ static int	parse_line(t_scene *scene, char *line, int line_num)
 	error = false;
 	if (ft_strchr(line, '\t'))
 		return (scene_print_error(line_num, ERR_FILE_TABS, NULL, NULL));
-	if (line[0] != '\0')
+	if (line[0] != '\0' && line[0] != '#')
 	{
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
