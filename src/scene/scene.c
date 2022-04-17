@@ -14,6 +14,41 @@ int scene_create(t_scene *scene, int argc, char **argv)
 	return (0);
 }
 
+int	scene_check(t_scene *scene)
+{
+	if (scene->img.res_set == false)
+		return (scene_print_error(-1, ERR_SCENE_INCOM, ERR_MISS_RES, NULL));
+	if (scene->sampling.set == false)
+		return (scene_print_error(-1, ERR_SCENE_INCOM, ERR_MISS_SAM, NULL));
+	if (scene->cam.set == false)
+		return (scene_print_error(-1, ERR_SCENE_INCOM, ERR_MISS_CAM, NULL));
+	if (scene->bg.set == false)
+		return (scene_print_error(-1, ERR_SCENE_INCOM, ERR_MISS_BG, NULL));
+	if (scene->amb.set == false)
+		return (scene_print_error(-1, ERR_SCENE_INCOM, ERR_MISS_AMB, NULL));
+	if (scene->l_obj == NULL)
+		return (scene_print_error(-1, ERR_SCENE_INCOM, ERR_MISS_OBJ, NULL));
+	return (0);
+}
+
+int	scene_setup(t_scene *scene)
+{
+	int	i;
+
+	scene->img.color = malloc(sizeof(t_color) * scene->img.width * scene->img.height);
+	if (scene->img.color == NULL)
+		return (ERROR);
+	i = 0;
+	while (i < THREADS)
+	{
+		scene->thread[i].num = i;
+		scene->thread[i].scene = scene;
+		i++;
+	}
+	scene_img_pos(scene);
+	return (0);
+}
+
 int	scene_destroy(t_scene *scene)
 {
 	free(scene->img.color);
