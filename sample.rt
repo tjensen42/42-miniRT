@@ -26,10 +26,11 @@ r  0,10,0 0,-1,0   2  6  255,255,255
 # cy 2,0,0   0.5,1,0.5   1.5 10   150,150,200    0.0 1.0 0.0 0.0       0.0 1.5
 
 
-- Parser & Struct umbauen in list for lights and objects
+@- Parser um light-/BSDF-Sampling Verhältnis ergänzen
+@- Parser um max_samples && rec_depth ergänzen
+@- Parser & Struct umbauen in list for lights and objects
+
 - Parser um lichter ergänzen
-- Parser um light-/BSDF-Sampling Verhältnis ergänzen
-- Parser um max_samples && rec_depth ergänzen
 
 - Object Type Axis-Aligned Rectangle hinzufügen
 - Trace function splitten in ihre Bestandteile

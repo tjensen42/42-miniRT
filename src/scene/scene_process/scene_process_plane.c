@@ -19,6 +19,8 @@ int process_plane(t_scene *scene, char **split, int line_num)
 		return (scene_print_error(line_num, ERR_PARSE, ERR_INVAL_DIR, NULL));
 	if (process_material(&(c_obj->material), &split[3], line_num))
 		return (ERROR);
+	if (c_obj->material.surface[SURF_DIELECTRIC] != 0.0)
+		return (scene_print_error(line_num, ERR_PARSE, "Value for DIELECTRIC must be 0.0 for 2D Objects", NULL));
 	c_obj->print = &print_plane;
 	return (0);
 }

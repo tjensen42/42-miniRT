@@ -32,7 +32,6 @@ inline t_color	color_blend(double f, t_color c1, t_color c2)
 inline t_color	color_gamma_encode(t_color color)
 {
 	return ((t_color){sqrt(color.r), sqrt(color.g), sqrt(color.b)});
-	// return ((t_color){pow(color.r, 1 / WIN_GAMMA), pow(color.g, 1 / WIN_GAMMA), pow(color.b, 1 / WIN_GAMMA)});
 }
 
 inline int	color_to_int(t_color color)

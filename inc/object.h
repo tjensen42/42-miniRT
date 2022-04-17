@@ -14,6 +14,11 @@
 # define	SURF_DIELECTRIC	2
 # define	SURF_EMISSION	3
 
+# define	CY_CAP_NONE		1
+# define	CY_CAP_TOP		2
+# define	CY_CAP_BOTTOM	4
+# define	CY_CAP_BOTH		8
+
 /* ************************************************************************** */
 /* STRUCTS																	  */
 /* ************************************************************************** */
@@ -36,6 +41,7 @@ typedef struct s_cylinder
 	t_vec3		dir;
 	double		radius;
 	double		height;
+	int			caps;
 }	t_cylinder;
 
 typedef struct s_material

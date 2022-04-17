@@ -13,7 +13,7 @@
 /* ************************************************************************** */
 
 // GENERAL
-# define	FILE_ENDING			".rt"
+# define	SCENE_FILE_ENDING	".rt"
 
 // ERRORS
 # define	ERR_USAGE			"program usage........"
@@ -31,7 +31,7 @@
 # define	ERR_PARSE			"Parsing failure"
 # define	ERR_PARSE_DUP		"This object cannot be defined twice"
 
-# define	ERR_INVAL_NUM		"Invalid number of arguments for object"
+# define	ERR_INVAL_NUM		"Invalid number of arguments for identifier"
 # define	ERR_INVAL_FILE		"Is not a valid scene (<name>.rt) file"
 # define	ERR_INVAL_LINE		"Invalid line in scene file"
 # define	ERR_INVAL_IDENT		"Invalid identifier in scene file"
@@ -45,6 +45,7 @@
 # define	ERR_INVAL_SURF		"Invalid surfaces"
 
 // IDENTIFIERS
+# define	IDENT_PPM			"PPM"
 # define	IDENT_RES			"R"
 # define	IDENT_SAMPLING		"S"
 # define	IDENT_CAM			"C"
@@ -73,10 +74,11 @@ struct s_ident
 /* ************************************************************************** */
 
 int		scene_parser(t_scene *scene, int argc, char **argv);
-int		scene_open_rt_file(const char *input_file);
+FILE	*scene_open_rt_file(const char *file);
 int		scene_check(t_scene *scene);
 int		scene_setup(t_scene *scene);
 
+int		process_ppm(t_scene *scene, char **split, int line_num);
 int		process_img(t_scene *scene, char **split, int line_num);
 int		process_sampling(t_scene *scene, char **split, int line_num);
 int		process_cam(t_scene *scene, char **split, int line_num);
@@ -84,6 +86,7 @@ int		process_bg(t_scene *scene, char **split, int line_num);
 int		process_amb(t_scene *scene, char **split, int line_num);
 int		process_plane(t_scene *scene, char **split, int line_num);
 int		process_sphere(t_scene *scene, char **split, int line_num);
+int		process_cylinder(t_scene *scene, char **split, int line_num);
 
 int		scene_print(t_scene *scene);
 int		scene_print_error(int line_num, const char *msg1, const char *msg2, const char *msg3);
@@ -96,10 +99,11 @@ void	scene_print_double(double num, const char *str, const char *color);
 void	print_img(struct s_img *img);
 void	print_sampling(struct s_sampling *sampling);
 void	print_cam(struct s_cam *cam);
-void	print_bg(t_color bg[2]);
+void	print_bg(struct s_bg *bg);
 void	print_amb(struct s_amb *amb);
 void	print_plane(t_list *obj);
 void	print_sphere(t_list *obj);
+void	print_cylinder(t_list *obj);
 
 
 // UTILS

@@ -6,27 +6,29 @@
 
 static int	check_file_ending(const char *file, const char *ending);
 
-int	scene_open_rt_file(const char *input_file)
+FILE	*scene_open_rt_file(const char *file)
 {
-	int	file_fd;
+	FILE	*fp;
 
-	if (input_file == NULL)
-		return (-1);
-	if (check_file_ending(input_file, FILE_ENDING) == ERROR)
+	if (file == NULL)
+		return (NULL);
+	if (check_file_ending(file, SCENE_FILE_ENDING) == ERROR)
 	{
-		scene_print_error(-1, input_file, ERR_INVAL_FILE, NULL);
-		return (-1);
+		scene_print_error(-1, file, ERR_INVAL_FILE, NULL);
+		return (NULL);
 	}
-	file_fd = open(input_file, O_RDONLY, 0);
-	if (file_fd == -1)
-		scene_print_error(-1, input_file, strerror(errno), NULL);
-	return (file_fd);
+	fp = fopen(file, "r");
+	if (fp == NULL)
+		scene_print_error(-1, file, strerror(errno), NULL);
+	return (fp);
 }
 
 static int	check_file_ending(const char *file, const char *ending)
 {
 	size_t	i;
 
+	if (file == NULL || ending == NULL)
+		return (ERROR);
 	if (ft_strlen(file) <= ft_strlen(ending))
 		return (ERROR);
 	i = 0;

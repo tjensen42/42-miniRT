@@ -6,7 +6,7 @@
 #    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 09:02:38 by tjensen           #+#    #+#              #
-#    Updated: 2022/04/15 15:25:27 by tjensen          ###   ########.fr        #
+#    Updated: 2022/04/17 14:07:54 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,9 @@ SRCS			:= miniRT.c
 SRCS_GLOBAL		:= vec3.c color.c object.c
 SRCS_SCENE		:= scene.c scene_check.c scene_parser.c scene_open.c scene_setup.c
 SRCS_SCENE_PROC	:= scene_process_amb.c scene_process_bg.c scene_process_cam.c scene_process_cylinder.c \
-				   scene_process_light.c scene_process_plane.c scene_process_img.c scene_process_sampling.c \
+				   scene_process_light.c scene_process_plane.c scene_process_ppm.c scene_process_img.c scene_process_sampling.c \
 				   scene_process_sphere.c scene_process_utils.c
-SRCS_SCENE_PRINT:= scene_print.c scene_print_amb.c scene_print_bg.c scene_print_cam.c scene_print_plane.c \
+SRCS_SCENE_PRINT:= scene_print.c scene_print_amb.c scene_print_bg.c scene_print_cam.c scene_print_cylinder.c scene_print_plane.c \
 				   scene_print_img.c scene_print_sampling.c scene_print_sphere.c scene_print_utils.c
 
 SRCS			+= $(addprefix global/, $(SRCS_GLOBAL)) \

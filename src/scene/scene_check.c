@@ -9,7 +9,7 @@ int	scene_check(t_scene *scene)
 		return (scene_print_error(-1, ERR_SCENE_INCOM, ERR_MISS_SAM, NULL));
 	if (scene->cam.set == false)
 		return (scene_print_error(-1, ERR_SCENE_INCOM, ERR_MISS_CAM, NULL));
-	if (scene->bg_set == false)
+	if (scene->bg.set == false)
 		return (scene_print_error(-1, ERR_SCENE_INCOM, ERR_MISS_BG, NULL));
 	if (scene->amb.set == false)
 		return (scene_print_error(-1, ERR_SCENE_INCOM, ERR_MISS_AMB, NULL));

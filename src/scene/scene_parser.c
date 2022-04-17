@@ -1,63 +1,43 @@
 #include "miniRT.h"
 #include "scene.h"
 
-static int	parse_options(t_scene *scene, char **argv);
-static int	parse_file(t_scene *scene, int file_fd);
+static int	parse_file(t_scene *scene, FILE *fp);
 static int	parse_line(t_scene *scene, char *line, int line_num);
 static int	parse_identifier(t_scene *scene, char **split, int line_num);
 
 int	scene_parser(t_scene *scene, int argc, char **argv)
 {
-	int		file_fd;
+	int		error;
+	FILE	*fp;
 
-	if (argc != 2 && argc != 3)
+	if (argc != 2)
 		return (scene_print_error(-1, ERR_USAGE, NULL, NULL));
-	file_fd = scene_open_rt_file(argv[1]);
-	if (file_fd == -1)
+	fp = scene_open_rt_file(argv[1]);
+	if (fp == NULL)
 		return (ERROR);
-	if (parse_options(scene, argv) || parse_file(scene, file_fd))
-	{
-		close(file_fd);
-		return (ERROR);
-	}
-	close(file_fd);
-	return (0);
+	error = parse_file(scene, fp);
+	fclose(fp);
+	return (error);
 }
 
-static int	parse_options(t_scene *scene, char **argv)
+static int	parse_file(t_scene *scene, FILE *fp)
 {
-	if (argv[2])
-	{
-		if (ft_strcmp(argv[2], "--ppm") == 0)
-			scene->img.ppm = true;
-		else
-		{
-			scene_print_error(-1, ERR_INVAL_OPTION, ERR_USAGE, NULL);
-			return (ERROR);
-		}
-	}
-	return (0);
-}
-
-static int	parse_file(t_scene *scene, int file_fd)
-{
-	int		line_num;
+	int		error;
 	char	*line;
+	size_t	line_size;
+	int		line_num;
 
+	error = false;
+	line = NULL;
+	line_size = 0;
 	line_num = 1;
-	line = ft_gnl_without_buffer(file_fd);
-	while (line)
+	while (!error && getline(&line, &line_size, fp) > 0)
 	{
-		if (parse_line(scene, line, line_num) == ERROR)
-		{
-			free(line);
-			return (ERROR);
-		}
-		free(line);
-		line = ft_gnl_without_buffer(file_fd);
+		error = parse_line(scene, line, line_num);
 		line_num++;
 	}
-	return (0);
+	free(line);
+	return (error);
 }
 
 static int	parse_line(t_scene *scene, char *line, int line_num)
@@ -83,6 +63,7 @@ static int	parse_line(t_scene *scene, char *line, int line_num)
 }
 
 static const struct s_ident	g_ident[] = {
+{IDENT_PPM, &process_ppm},
 {IDENT_RES, &process_img},
 {IDENT_SAMPLING, &process_sampling},
 {IDENT_CAM, &process_cam},
@@ -91,7 +72,7 @@ static const struct s_ident	g_ident[] = {
 {IDENT_LIGHT, NULL},
 {IDENT_PLANE, &process_plane},
 {IDENT_SPHERE, &process_sphere},
-{IDENT_CYLINDER, NULL},
+{IDENT_CYLINDER, &process_cylinder},
 {NULL, NULL}
 };
 

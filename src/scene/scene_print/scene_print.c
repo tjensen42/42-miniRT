@@ -9,7 +9,7 @@ int	scene_print(t_scene *scene)
 	print_img(&(scene->img));
 	print_sampling(&scene->sampling);
 	print_cam(&(scene->cam));
-	print_bg(scene->bg);
+	print_bg(&(scene->bg));
 	print_amb(&(scene->amb));
 	iter = scene->l_obj;
 	while (iter)

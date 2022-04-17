@@ -1,10 +1,10 @@
 #include "miniRT.h"
 #include "../scene.h"
 
-void	print_bg(t_color bg[2])
+void	print_bg(struct s_bg *bg)
 {
 	printf("BACKGROUND:\n");
-	color_print(bg[0]);
-	color_print(bg[1]);
+	color_print(bg->color[0]);
+	color_print(bg->color[1]);
 	printf("\n");
 }
