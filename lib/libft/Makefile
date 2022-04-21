@@ -6,7 +6,7 @@
 #    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/17 11:48:30 by hepple            #+#    #+#              #
-#    Updated: 2022/04/15 13:16:19 by tjensen          ###   ########.fr        #
+#    Updated: 2022/04/19 15:54:45 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,9 @@ SRC_BNS	=	ft_lstadd_back.c \
 			ft_lstmap.c \
 			ft_lstnew.c \
 			ft_lstsize.c
-SRC_ADD	=	ft_free_split.c ft_strcmp.c ft_gnl_without_buffer.c
+SRC_ADD	=	ft_free_split.c ft_strcmp.c ft_gnl_without_buffer.c \
+			ft_split_count_str.c ft_strncmp_rev.c ft_str_count_chr.c \
+			ft_rand_double.c ft_double_from_str.c ft_int_from_str.c
 SRC_GNL	=	get_next_line_bonus.c \
 			get_next_line_utils_bonus.c
 SRC_PRF	=	ft_printf.c \

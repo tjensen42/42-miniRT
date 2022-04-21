@@ -6,7 +6,7 @@
 #    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 09:02:38 by tjensen           #+#    #+#              #
-#    Updated: 2022/04/17 14:07:54 by tjensen          ###   ########.fr        #
+#    Updated: 2022/04/21 13:57:41 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,33 +17,33 @@
 NAME			:= miniRT
 
 CC				:= cc
-CFLAGS			:= -O3 -Wall -Wextra -Werror -pthread
+CFLAGS			:= -Wall -Wextra -pthread -O3 #-Werror
 
-SRCS			:= miniRT.c
-SRCS_GLOBAL		:= vec3.c color.c object.c
-SRCS_SCENE		:= scene.c scene_check.c scene_parser.c scene_open.c scene_setup.c
-SRCS_SCENE_PROC	:= scene_process_amb.c scene_process_bg.c scene_process_cam.c scene_process_cylinder.c \
-				   scene_process_light.c scene_process_plane.c scene_process_ppm.c scene_process_img.c scene_process_sampling.c \
-				   scene_process_sphere.c scene_process_utils.c
-SRCS_SCENE_PRINT:= scene_print.c scene_print_amb.c scene_print_bg.c scene_print_cam.c scene_print_cylinder.c scene_print_plane.c \
-				   scene_print_img.c scene_print_sampling.c scene_print_sphere.c scene_print_utils.c
+SRCS			:= main.c mrt_color.c mrt_obj.c mrt_scene.c
+SRCS_GRAPHIC	:= mrt_graphic_render.c
+SRCS_MATH		:= mrt_math_color.c mrt_math_vec3_1.c mrt_math_vec3_2.c
+SRCS_PARSE		:= mrt_parse_cam.c mrt_parse_material.c mrt_parse_obj_sphere.c mrt_parse_scene.c \
+				   mrt_parse_amb.c mrt_parse_color.c mrt_parse_obj_cylinder.c mrt_parse_ppm.c mrt_parse_utils.c \
+				   mrt_parse_bg.c mrt_parse_img.c mrt_parse_obj_plane.c mrt_parse_sampling.c mrt_parse_vec3.c
+SRCS_PRINT		:= mrt_print_error.c mrt_print_obj_plane.c mrt_print_scene.c \
+				   mrt_print_color.c mrt_print_obj_cylinder.c mrt_print_obj_sphere.c mrt_print_vec3.c mrt_print_material.c
+SRCS_TRACE		:= mrt_dielectric.c mrt_diffuse.c mrt_onb.c mrt_pdf.c mrt_specular.c \
+				   mrt_trace.c mrt_trace_random.c mrt_obj_normal.c mrt_obj_intersec.c
 
-SRCS			+= $(addprefix global/, $(SRCS_GLOBAL)) \
-				   $(addprefix scene/, $(SRCS_SCENE)) \
-				   $(addprefix scene/scene_process/, $(SRCS_SCENE_PROC)) \
-				   $(addprefix scene/scene_print/, $(SRCS_SCENE_PRINT))
+SRCS			+= $(addprefix graphic/, $(SRCS_GRAPHIC)) \
+				   $(addprefix math/, $(SRCS_MATH)) \
+				   $(addprefix parse/, $(SRCS_PARSE)) \
+				   $(addprefix print/, $(SRCS_PRINT)) \
+				   $(addprefix trace/, $(SRCS_TRACE))
 
-IDIR			:= inc
 SDIR			:= src
 ODIR			:= obj
 OBJS			:= $(addprefix $(ODIR)/, $(SRCS:.c=.o))
+IDIR			:= $(SDIR)
 
-LIBDIRS			:= lib/libft lib/libmlx
-LDLIBS			:= $(addprefix -L./, $(LIBDIRS)) -lm -lft \
-				   -lmlx42 -lglfw -framework Cocoa -framework OpenGL -framework IOKit
-INCLUDES		:= -I$(IDIR) \
-			   	   -I./lib/libft/inc \
-			   	   -I./lib/libmlx
+LIBS			:= lib/libft/libft.a lib/libmlx/libmlx42.a
+LDFLAGS			:= $(LIBS) -lm -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+CFLAGS			+= -I. -I$(IDIR)
 
 # **************************************************************************** #
 #	SYSTEM SPECIFIC SETTINGS							   					   #
@@ -57,36 +57,32 @@ endif
 #	RULES																	   #
 # **************************************************************************** #
 
-$(NAME): lib/libmlx/libmlx42.a lib/libft/libft.a $(ODIR) $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDLIBS)
+$(NAME): $(LIBS) $(ODIR) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS)
 
-$(ODIR)/%.o: $(SDIR)/%.c $(IDIR)/*
+$(ODIR)/%.o: $(SDIR)/%.c $(IDIR)/*.h
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(ODIR):
 	mkdir -p $(ODIR)
-
-all: $(NAME)
-
-clean:
-	make -C lib/libft clean
-	make -C lib/libmlx clean
-	$(RM) -r $(ODIR)
-	$(RM) -r *.dSYM $(SDIR)/*.dSYM
-
-fclean:
-	make -C lib/libft fclean
-	make -C lib/libmlx fclean
-	$(RM) -r $(ODIR)
-	$(RM) -r *.dSYM $(SDIR)/*.dSYM
-	$(RM) $(NAME)
 
 lib/libft/libft.a:
 	make -C lib/libft/
 
 lib/libmlx/libmlx42.a:
 	make -C lib/libmlx/
+
+all: $(NAME)
+
+clean:
+	make -C lib/libft fclean
+	make -C lib/libmlx fclean
+	$(RM) -r $(ODIR)
+
+fclean: clean
+	$(RM) -r *.dSYM $(SDIR)/*.dSYM
+	$(RM) $(NAME)
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 10:54:31 by hepple            #+#    #+#             */
-/*   Updated: 2022/04/15 13:15:56 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/04/20 11:55:30 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,13 @@ int		ft_lstsize(t_list *lst);
 /* Additional Functions */
 
 void	ft_free_split(char ***split);
+int		ft_split_count_str(char **split);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_gnl_without_buffer(int fd);
+int		ft_strncmp_rev(const char *s1, const char *s2, size_t n);
+int		ft_str_count_chr(const char *str, const char c);
+double	ft_rand_double(double min, double max);
+double	ft_rand_double_0_1(void);
+int		print_error(char *s1, char *s2, char *s3, char *s4);
 
 #endif
