@@ -10,6 +10,7 @@
 # include "mrt_vec3.h"
 # include "mrt_scene.h"
 # include "mrt_obj.h"
+# include "mrt_is.h"
 # include "print/mrt_print.h"
 
 # include <errno.h>
@@ -74,6 +75,8 @@ int		parse_ppm(t_scene *scene, char **split, int line_num);
 int		parse_obj_plane(t_scene *scene, char **split, int line_num);
 int		parse_obj_sphere(t_scene *scene, char **split, int line_num);
 int		parse_obj_cylinder(t_scene *scene, char **split, int line_num);
+
+int		parse_is(t_scene *scene, char **split, int line_num);
 
 int		parse_scene(t_scene *scene, const char *file);
 

@@ -14,6 +14,14 @@ t_vec3	random_in_unit_sphere(void)
 	}
 }
 
+t_vec3	random_cosine_direction_onb(t_vec3 normal)
+{
+	t_onb	uvw;
+
+	uvw = onb_build(normal);
+	return (onb_transform(uvw, random_cosine_direction()));
+}
+
 t_vec3 random_cosine_direction(void)
 {
 	t_vec3 vec3;

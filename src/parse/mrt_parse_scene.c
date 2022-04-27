@@ -71,7 +71,7 @@ static const struct s_ident	g_ident[] = {
 {IDENT_CAM, &parse_cam},
 {IDENT_BG, &parse_bg},
 {IDENT_AMB, &parse_amb},
-{IDENT_LIGHT, NULL},
+{IDENT_LIGHT, &parse_is},
 {IDENT_PLANE, &parse_obj_plane},
 {IDENT_SPHERE, &parse_obj_sphere},
 {IDENT_CYLINDER, &parse_obj_cylinder},

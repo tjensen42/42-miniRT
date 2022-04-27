@@ -17,7 +17,7 @@ int	print_scene(t_scene *scene)
 	iter = scene->l_is;
 	while (iter)
 	{
-		// is_cont(iter)->print(iter);
+		is_cont(iter)->print(iter);
 		iter = iter->next;
 	}
 	return (0);

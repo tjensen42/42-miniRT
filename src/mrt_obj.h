@@ -34,6 +34,7 @@ typedef struct s_material
 	double	surface[4];
 	double	fuzz;
 	double	refraction_index;
+	double	brightness;
 }	t_material;
 
 typedef struct s_plane
