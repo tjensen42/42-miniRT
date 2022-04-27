@@ -11,10 +11,10 @@ double mixed_sampling_pdf(t_scene *scene, t_ray *ray, t_hit *hit)
 	t_list	*iter;
 
 	cosine = vec3_scalar_product(hit->normal, ray->dir);
-	if (cosine <= 0)
+	if ((cosine < 0 && hit->side == OUTSIDE) || (cosine > 0 && hit->side == INSIDE))
 		return (0);
 	else
-		cosine_pdf = cosine / M_PI;
+		cosine_pdf = fabs(cosine / M_PI);
 	import_pdf = 0;
 	iter = scene->l_is;
 	while (iter)
@@ -68,8 +68,8 @@ t_color	trace(t_scene *scene, t_ray *ray, int depth)
 			if (rand_double < scene->sampling.import_samp)
 			{
 				ray_recursion.dir = random_dir_import_sampling(scene->l_is, &hit);
-				if (vec3_scalar_product(ray_recursion.dir, hit.normal) < 0)
-					return ((t_color){0.0, 0.0, 0.0});
+				// if (vec3_scalar_product(ray_recursion.dir, hit.normal) < 0)
+				// 	return ((t_color){0.0, 0.0, 1.0});
 			}
 			else
 			{
@@ -81,10 +81,10 @@ t_color	trace(t_scene *scene, t_ray *ray, int depth)
 			if (mixed_sampling_pdf_value == 0)
 				return ((t_color){0.0, 0.0, 0.0});
 			double cosine = vec3_scalar_product(hit.normal, ray_recursion.dir);
-			if (cosine < 0)
+			if ((cosine < 0 && hit.side == OUTSIDE) || (cosine > 0 && hit.side == INSIDE))
 				scattering_pdf = 0;
 			else
-				scattering_pdf = cosine / M_PI;
+				scattering_pdf = fabs(cosine / M_PI);
 			color = trace(scene, &ray_recursion, depth + 1);
 			return (color_multiply(obj_cont(hit_obj)->material.color, color_scale(scattering_pdf / mixed_sampling_pdf_value, color)));
 		}

@@ -12,9 +12,9 @@ int parse_sampling(t_scene *scene, char **split, int line_num)
 		scene->sampling.max_samp = INT_MAX;
 	if (int_from_str(split[2], 1, INT_MAX, &(scene->sampling.recursion_depth)))
 		return (print_error_scene(line_num, ERR_PARSE, "Invalid number of rec_depth", NULL));
-	if (double_from_str(split[3], 1, 2, &(scene->sampling.cosine_samp)))
+	if (double_from_str(split[3], 1, 4, &(scene->sampling.cosine_samp)))
 		return (print_error_scene(line_num, ERR_PARSE, "Invalid cosine sampling", NULL));
-	if (double_from_str(split[4], 1, 2, &(scene->sampling.import_samp)))
+	if (double_from_str(split[4], 1, 4, &(scene->sampling.import_samp)))
 		return (print_error_scene(line_num, ERR_PARSE, "Invalid Import sampling", NULL));
 	if (scene->sampling.cosine_samp + scene->sampling.import_samp != 1)
 		return (print_error_scene(line_num, ERR_PARSE, "Cosine + Import not equal 1", NULL));
