@@ -6,11 +6,12 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:12:06 by tjensen           #+#    #+#             */
-/*   Updated: 2022/04/21 10:39:08 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/05/16 15:55:17 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt_color.h"
+#include "math/mrt_math.h"
 
 #include <math.h>
 
@@ -45,6 +46,12 @@ inline int	color_to_rgba_int(t_color color)
 		color.g = 0;
 	if (color.b != color.b)
 		color.b = 0;
+	if (color.r > 1.0 && color.r >= color.g && color.r >= color.b)
+		color = color_scale(1.0 / color.r, color);
+	else if (color.g > 1.0 && color.g >= color.r && color.g >= color.b)
+		color = color_scale(1.0 / color.g, color);
+	else if (color.b > 1.0 && color.b >= color.r && color.b >= color.g)
+		color = color_scale(1.0 / color.b, color);
 	color = color_gamma_encode(color);
 	return (
 		(int)(256.0 * color_clamp(color.r, 0.0, 0.999)) << 24 |
