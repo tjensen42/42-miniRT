@@ -4,6 +4,7 @@
 
 static int	scene_setup(t_scene *scene);
 static int	scene_check(t_scene *scene);
+void		scene_calc_is_weights(t_list *l_is);
 
 int scene_create(t_scene *scene, const char *file)
 {
@@ -44,6 +45,8 @@ static int	scene_check(t_scene *scene)
 		return (print_error_scene(-1, ERR_SCENE_INCOM, ERR_MISS_AMB, NULL));
 	if (scene->l_obj == NULL)
 		return (print_error_scene(-1, ERR_SCENE_INCOM, ERR_MISS_OBJ, NULL));
+	if (scene_check_is_weights(scene->l_is))
+		return (print_error_scene(-1, ERR_SCENE_INCOM, "Invalid is-weight sum", NULL));
 	return (0);
 }
 
@@ -63,6 +66,29 @@ static int	scene_setup(t_scene *scene)
 		i++;
 	}
 	scene_calc_img_pos(scene);
+	return (0);
+}
+
+int scene_check_is_weights(t_list *l_is)
+{
+	t_list	*iter;
+	double	weight_sum;
+
+	weight_sum = 0;
+	iter = l_is;
+	while (iter)
+	{
+		weight_sum += is_cont(iter)->weight;
+		iter = iter->next;
+	}
+	if (weight_sum <= 0)
+		return (-1);
+	iter = l_is;
+	while (iter)
+	{
+		is_cont(iter)->weight /= weight_sum;
+		iter = iter->next;
+	}
 	return (0);
 }
 

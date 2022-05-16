@@ -22,8 +22,8 @@ int	parse_is(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, "Invalid radius", NULL));
 	if (parse_is_obj(scene, split, line_num))
 		return (-1);
-	if (double_from_str(split[5], 1, 2, &(c_is->weight)))
-		return (print_error_scene(line_num, ERR_PARSE, "Invalid is weight", NULL));
+	if (double_from_str(split[5], 3, 2, &(c_is->weight)) || c_is->weight < 0.0)
+		return (print_error_scene(line_num, ERR_PARSE, "Invalid is-weight", NULL));
 	c_is->linked_obj = ft_lstlast(scene->l_obj);
 	c_is->print = &print_is;
 	c_is->pdf_value = &pdf_sphere;

@@ -9,7 +9,7 @@ int parse_cam(t_scene *scene, char **split, int line_num)
 	if (ft_split_count_str(split) != 4)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
 	if (parse_vec3(split[1], &(scene->cam.pos)) == -1)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_POS, NULL));
 	if (parse_vec3(split[2], &look_at) == -1)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIR, NULL));
 	if (vec3_equal(scene->cam.pos, look_at))
