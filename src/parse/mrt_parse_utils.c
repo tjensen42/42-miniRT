@@ -26,16 +26,6 @@ int	double_from_str(const char *str, int before_point,
 {
 	int	i;
 
-	if (ft_strchr(str, '.') != ft_strrchr(str, '.'))
-		return (-1);
-	if (ft_strchr(str, '.') && (int)(ft_strchr(str, '.') - str) > before_point)
-		return (-1);
-	if (ft_strchr(str, '.') && (int)(ft_strlen(ft_strchr(str, '.') + 1)) > after_point)
-		return (-1);
-	if (ft_strchr(str, '.') && !ft_isdigit(*(ft_strchr(str, '.') + 1)))
-		return (-1);
-	if (!ft_strchr(str, '.') && (int)(ft_strlen(str)) > before_point)
-		return (-1);
 	i = 0;
 	if ((str[0] == '+' || str[0] == '-') && str[1] != '\0')
 		i++;
@@ -46,6 +36,18 @@ int	double_from_str(const char *str, int before_point,
 		i++;
 	}
 	*res = get_double(str);
+	if (str[0] == '+' || str[0] == '-')
+		str = str + 1;
+	if (ft_strchr(str, '.') != ft_strrchr(str, '.'))
+		return (-1);
+	if (ft_strchr(str, '.') && (int)(ft_strchr(str, '.') - str) > before_point)
+		return (-1);
+	if (ft_strchr(str, '.') && (int)(ft_strlen(ft_strchr(str, '.') + 1)) > after_point)
+		return (-1);
+	if (ft_strchr(str, '.') && !ft_isdigit(*(ft_strchr(str, '.') + 1)))
+		return (-1);
+	if (!ft_strchr(str, '.') && (int)(ft_strlen(str)) > before_point)
+		return (-1);
 	return (0);
 }
 

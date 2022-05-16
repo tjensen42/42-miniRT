@@ -11,7 +11,7 @@ int	graphic(t_scene *scene)
 	t_graphic_data	graphic;
 
 	graphic.scene = scene;
-	graphic.mlx = mlx_init(scene->img.width, scene->img.height, WIN_NAME, true);
+	graphic.mlx = mlx_init(scene->img.width, scene->img.height, WIN_NAME, false);
 	if (graphic.mlx == NULL)
 		return (-1);
 	graphic.mlx_img = mlx_new_image(graphic.mlx, scene->img.width, scene->img.height);
@@ -121,7 +121,6 @@ void	graphic_render(t_graphic_data *graphic)
 	scene = graphic->scene;
 	if (scene->sampling.samp == scene->sampling.max_samp)
 		return ;
-	printf("sample %d / %d\n", scene->sampling.samp + 1, scene->sampling.max_samp);
 	i = 0;
 	while (i < THREADS)
 	{
@@ -140,6 +139,7 @@ void	graphic_render(t_graphic_data *graphic)
 			print_error("Error\n", "pthread_join() failed", NULL, NULL);
 		i++;
 	}
+	printf("sample %d / %d\n", scene->sampling.samp + 1, scene->sampling.max_samp);
 	scene->sampling.samp++;
 	img_to_mlx_img(scene, graphic->mlx_img);
 }
