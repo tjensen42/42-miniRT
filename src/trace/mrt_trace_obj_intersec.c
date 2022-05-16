@@ -52,10 +52,18 @@ static double cylinder_caps(t_obj *cap, t_ray *ray, double t_min, double t_max, 
 {
 	double	t;
 
-	t = intersec_plane(ft_lstnew(cap), ray, t_min, t_max);
-	if (vec3_distance(cap->pl.pos, vec3_linear_comb(1.0, ray->pos, t, ray->dir)) > radius)
-		return (-1);
-	return (t);
+    double denom = vec3_scalar_product(cap->pl.dir, ray->dir);
+    if (fabs(denom) > 1e-6) //1e-6
+	{
+        t_vec3	p0l0 = vec3_subtract(cap->pl.pos, ray->pos);
+        t = (double)vec3_scalar_product(p0l0, cap->pl.dir) / denom;
+		if (t > t_min && t < t_max)
+		{
+			if (vec3_distance(cap->pl.pos, vec3_linear_comb(1.0, ray->pos, t, ray->dir)) <= radius)
+        		return (t);
+		}
+    }
+	return (-1);
 }
 
 static double	cylinder_lateral(t_list *obj, t_ray *ray, double t_min, double t_max)
