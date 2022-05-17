@@ -1,6 +1,6 @@
 #include "mrt_trace.h"
 
-# include <float.h>
+#include <float.h>
 
 double mixed_sampling_pdf(t_scene *scene, t_ray *ray, t_hit *hit)
 {
@@ -73,7 +73,10 @@ t_color	trace(t_scene *scene, t_ray *ray, int depth)
 			}
 			else
 			{
-				ray_recursion.dir = random_cosine_direction_onb(hit.normal);
+				if (hit.side == INSIDE)
+					ray_recursion.dir = random_cosine_direction_onb(vec3_scale(-1.0, hit.normal));
+				else
+					ray_recursion.dir = random_cosine_direction_onb(hit.normal);
 				// if (calc_hit(scene->l_obj, &ray_recursion, &hit2) == NULL)
 				// 	return (color_multiply(obj_cont(hit_obj)->material.color, color_blend(0.5 * (ray->dir.y + 1), scene->bg.color[1], scene->bg.color[0]))); // color add
 			}
