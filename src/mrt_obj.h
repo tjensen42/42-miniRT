@@ -58,25 +58,36 @@ typedef struct s_cylinder
 	int			caps;
 }	t_cylinder;
 
+typedef struct s_rectangle
+{
+	t_vec3		pos;
+	t_vec3		dir;
+	double		width;
+	double		height;
+	t_vec3		rot;
+	t_vec3		rel_pos;
+}	t_rectangle;
+
 typedef struct s_ray t_ray;
 typedef struct s_hit t_hit;
 
-typedef void	(*print)(t_list *obj);
-typedef double	(*intersec)(t_list *obj, t_ray *ray, double t_min, double t_max);
-typedef t_vec3	(*normal)(t_list *obj, t_hit *hit);
+typedef void	(*f_print)(t_list *obj);
+typedef double	(*f_intersec)(t_list *obj, t_ray *ray, double t_min, double t_max);
+typedef t_vec3	(*f_normal)(t_list *obj, t_hit *hit);
 
 typedef struct	s_obj
 {
 	int				type;
 	t_material		material;
-	print			print;
-	intersec		intersec;
-	normal			normal;
+	f_print			print;
+	f_intersec		intersec;
+	f_normal		normal;
 	union
 	{
 		t_plane 	pl;
 		t_sphere	sp;
 		t_cylinder	cy;
+		t_rectangle	rt;
 	};
 }	t_obj;
 

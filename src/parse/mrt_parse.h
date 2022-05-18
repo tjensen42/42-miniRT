@@ -51,6 +51,8 @@
 # define IDENT_PLANE		"pl"
 # define IDENT_SPHERE		"sp"
 # define IDENT_CYLINDER		"cy"
+# define IDENT_RECTANGLE	"rt"
+# define IDENT_CUBOID		"cu"
 
 
 /* ************************************************************************** */
@@ -75,6 +77,8 @@ int		parse_ppm(t_scene *scene, char **split, int line_num);
 int		parse_obj_plane(t_scene *scene, char **split, int line_num);
 int		parse_obj_sphere(t_scene *scene, char **split, int line_num);
 int		parse_obj_cylinder(t_scene *scene, char **split, int line_num);
+int		parse_obj_rectangle(t_scene *scene, char **split, int line_num);
+int		parse_obj_cuboid(t_scene *scene, char **split, int line_num);
 
 int		parse_is(t_scene *scene, char **split, int line_num);
 

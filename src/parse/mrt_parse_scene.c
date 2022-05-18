@@ -75,6 +75,8 @@ static const struct s_ident	g_ident[] = {
 {IDENT_PLANE, &parse_obj_plane},
 {IDENT_SPHERE, &parse_obj_sphere},
 {IDENT_CYLINDER, &parse_obj_cylinder},
+{IDENT_RECTANGLE, &parse_obj_rectangle},
+{IDENT_CUBOID, &parse_obj_cuboid},
 {NULL, NULL}
 };
 

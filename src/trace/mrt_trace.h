@@ -42,10 +42,14 @@ t_color	trace(t_scene *scene, t_ray *ray, int depth);
 double	intersec_plane(t_list *obj, t_ray *ray, double t_min, double t_max);
 double	intersec_sphere(t_list *obj, t_ray *ray, double t_min, double t_max);
 double	intersec_cylinder(t_list *obj, t_ray *ray, double t_min, double t_max);
+double	intersec_rectangle_z(t_list *obj, t_ray *ray, double t_min, double t_max);
+double	intersec_rectangle_y(t_list *obj, t_ray *ray, double t_min, double t_max);
+double	intersec_rectangle_x(t_list *obj, t_ray *ray, double t_min, double t_max);
 
 t_vec3	normal_plane(t_list *obj, t_hit *hit);
 t_vec3	normal_sphere(t_list *obj, t_hit *hit);
 t_vec3	normal_cylinder(t_list *obj, t_hit *hit);
+t_vec3	normal_rectangle(t_list *obj, t_hit *hit);
 
 double	pdf_sphere(t_scene *scene, t_list *is, t_hit *hit);
 t_vec3	random_dir_to_sphere(t_list *is, t_hit *hit);

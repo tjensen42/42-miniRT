@@ -21,7 +21,7 @@
 typedef struct s_scene t_scene;
 typedef struct s_hit t_hit;
 
-typedef void	(*print)(t_list *is);
+typedef void	(*f_print)(t_list *is);
 typedef double	(*pdf_value)(t_scene *scene, t_list *is, t_hit *hit);
 typedef t_vec3	(*random_dir)(t_list *is, t_hit *hit);
 
@@ -30,7 +30,7 @@ typedef struct	s_is
 	t_vec3			pos;
 	double			radius;
 	double			weight;
-	print			print;
+	f_print			print;
 	pdf_value		pdf_value;
 	random_dir		random_dir;
 	t_list			*linked_obj;

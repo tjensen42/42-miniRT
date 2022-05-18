@@ -33,6 +33,7 @@ void	print_scene_double(double num, const char *str, const char *color);
 void	print_obj_plane(t_list *obj);
 void	print_obj_sphere(t_list *obj);
 void	print_obj_cylinder(t_list *obj);
+void	print_obj_rectangle(t_list *obj);
 
 void	print_is(t_list *is);
 

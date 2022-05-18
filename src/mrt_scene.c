@@ -4,7 +4,7 @@
 
 static int	scene_setup(t_scene *scene);
 static int	scene_check(t_scene *scene);
-void		scene_calc_is_weights(t_list *l_is);
+int			scene_check_is_weights(t_list *l_is);
 
 int scene_create(t_scene *scene, const char *file)
 {
@@ -74,6 +74,8 @@ int scene_check_is_weights(t_list *l_is)
 	t_list	*iter;
 	double	weight_sum;
 
+	if (l_is == NULL)
+		return (0);
 	weight_sum = 0;
 	iter = l_is;
 	while (iter)
