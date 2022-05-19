@@ -87,6 +87,8 @@ struct s_img
 	t_vec3	pos;
 	t_vec3	px;
 	t_vec3	py;
+	t_vec3	qx;
+	t_vec3	qy;
 };
 
 struct s_bg
@@ -115,6 +117,6 @@ typedef struct s_scene
 int		scene_create(t_scene *scene, const char *file);
 int		scene_destroy(t_scene *scene);
 
-void	scene_calc_img_pos(t_scene *scene);
+void	scene_calc_img_pos(t_scene *scene, bool update_px);
 
 #endif // SCENE_H

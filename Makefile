@@ -6,7 +6,7 @@
 #    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 09:02:38 by tjensen           #+#    #+#              #
-#    Updated: 2022/05/19 14:29:25 by tjensen          ###   ########.fr        #
+#    Updated: 2022/05/19 15:13:14 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,9 @@ endif
 #	RULES																	   #
 # **************************************************************************** #
 
+all:
+	@make $(NAME) -j10
+
 $(NAME): $(LIBS) $(ODIR) $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS)
 
@@ -72,8 +75,6 @@ lib/libft/libft.a:
 
 lib/libmlx/libmlx42.a:
 	make -C lib/libmlx/
-
-all: $(NAME)
 
 clean:
 	make -C lib/libft fclean

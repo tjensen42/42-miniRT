@@ -65,7 +65,7 @@ static int	scene_setup(t_scene *scene)
 		scene->thread[i].scene = scene;
 		i++;
 	}
-	scene_calc_img_pos(scene);
+	scene_calc_img_pos(scene, true);
 	return (0);
 }
 
@@ -94,11 +94,17 @@ int scene_check_is_weights(t_list *l_is)
 	return (0);
 }
 
-void scene_calc_img_pos(t_scene *scene)
+void	scene_calc_img_pos(t_scene *scene, bool update_px)
 {
-	scene->img.px = vec3_scale(tan((double)scene->cam.fov / 2 * DEG2RAD), vec3_normalize(vec3_vector_product((t_vec3){0, 1, 0}, scene->cam.dir)));
-	scene->img.py = vec3_scale(vec3_length(scene->img.px) * scene->img.height / scene->img.width, vec3_normalize(vec3_vector_product(scene->img.px, scene->cam.dir)));
-	scene->img.pos = vec3_add(vec3_add(scene->cam.pos, scene->cam.dir), vec3_add(scene->img.px, scene->img.py));
-	scene->img.px = vec3_scale(-2.0 / (scene->img.width - 1), scene->img.px);
-	scene->img.py = vec3_scale(-2.0 / (scene->img.height - 1), scene->img.py);
+	if (update_px)
+	{
+		if (fabs(scene->cam.dir.x) < 1e-4 && fabs(scene->cam.dir.z) < 1e-4)
+			scene->img.qx = vec3_scale(tan((double)scene->cam.fov / 2 * DEG2RAD), vec3_normalize(vec3_vector_product((t_vec3){1, 0, 0}, scene->cam.dir)));
+		else
+			scene->img.qx = vec3_scale(tan((double)scene->cam.fov / 2 * DEG2RAD), vec3_normalize(vec3_vector_product((t_vec3){0, 1, 0}, scene->cam.dir)));
+		scene->img.px = vec3_scale(-2.0 / (scene->img.width - 1), scene->img.qx);
+	}
+	scene->img.qy = vec3_scale(vec3_length(scene->img.qx) * scene->img.height / scene->img.width, vec3_normalize(vec3_vector_product(scene->img.qx, scene->cam.dir)));
+	scene->img.pos = vec3_add(vec3_add(scene->cam.pos, scene->cam.dir), vec3_add(scene->img.qx, scene->img.qy));
+	scene->img.py = vec3_scale(-2.0 / (scene->img.height - 1), scene->img.qy);
 }
