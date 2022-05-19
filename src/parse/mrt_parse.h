@@ -53,6 +53,8 @@
 # define IDENT_CYLINDER		"cy"
 # define IDENT_RECTANGLE	"rt"
 # define IDENT_CUBOID		"cu"
+# define IDENT_DISC			"di"
+# define IDENT_TUBE			"tb"
 
 
 /* ************************************************************************** */
@@ -75,6 +77,8 @@ int		parse_img(t_scene *scene, char **split, int line_num);
 int		parse_ppm(t_scene *scene, char **split, int line_num);
 
 int		parse_obj_plane(t_scene *scene, char **split, int line_num);
+int		parse_obj_disc(t_scene *scene, char **split, int line_num);
+int		parse_obj_tube(t_scene *scene, char **split, int line_num);
 int		parse_obj_sphere(t_scene *scene, char **split, int line_num);
 int		parse_obj_cylinder(t_scene *scene, char **split, int line_num);
 int		parse_obj_rectangle(t_scene *scene, char **split, int line_num);

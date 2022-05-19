@@ -43,20 +43,26 @@ typedef struct s_plane
 	t_vec3		dir;
 }	t_plane;
 
+typedef struct s_disc
+{
+	t_vec3		pos;
+	t_vec3		dir;
+	double		radius;
+}	t_disc;
+
 typedef struct s_sphere
 {
 	t_vec3		pos;
 	double		radius;
 }	t_sphere;
 
-typedef struct s_cylinder
+typedef struct s_tube
 {
 	t_vec3		pos;
 	t_vec3		dir;
 	double		radius;
 	double		height;
-	int			caps;
-}	t_cylinder;
+}	t_tube;
 
 typedef struct s_rectangle
 {
@@ -85,8 +91,9 @@ typedef struct	s_obj
 	union
 	{
 		t_plane 	pl;
+		t_disc		di;
 		t_sphere	sp;
-		t_cylinder	cy;
+		t_tube		tb;
 		t_rectangle	rt;
 	};
 }	t_obj;

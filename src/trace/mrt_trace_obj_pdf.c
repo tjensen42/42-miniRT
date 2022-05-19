@@ -1,8 +1,7 @@
 #include "mrt_trace.h"
 
-double pdf_sphere(t_scene *scene, t_list *is, t_hit *hit)
+double pdf_sphere(t_scene *scene __attribute__((unused)), t_list *is, t_hit *hit)
 {
-	t_hit	rec;
 	double	cos_theta_max;
 	double	solid_angle;
 	t_ray	ray;

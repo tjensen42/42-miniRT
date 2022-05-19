@@ -48,72 +48,52 @@ double	intersec_sphere(t_list *obj, t_ray *ray, double t_min, double t_max)
 	return (t);
 }
 
-static double cylinder_caps(t_obj *cap, t_ray *ray, double t_min, double t_max, double radius)
+double	intersec_disc(t_list *obj, t_ray *ray, double t_min, double t_max)
 {
 	double	t;
 
-    double denom = vec3_scalar_product(cap->pl.dir, ray->dir);
+    double denom = vec3_scalar_product(obj_cont(obj)->di.dir, ray->dir);
     if (fabs(denom) > 1e-6) //1e-6
 	{
-        t_vec3	p0l0 = vec3_subtract(cap->pl.pos, ray->pos);
-        t = (double)vec3_scalar_product(p0l0, cap->pl.dir) / denom;
+        t_vec3	p0l0 = vec3_subtract(obj_cont(obj)->di.pos, ray->pos);
+        t = (double)vec3_scalar_product(p0l0, obj_cont(obj)->di.dir) / denom;
 		if (t > t_min && t < t_max)
 		{
-			if (vec3_distance(cap->pl.pos, vec3_linear_comb(1.0, ray->pos, t, ray->dir)) <= radius)
+			if (vec3_distance(obj_cont(obj)->di.pos, vec3_linear_comb(1.0, ray->pos, t, ray->dir)) <= obj_cont(obj)->di.radius)
         		return (t);
 		}
     }
 	return (-1);
 }
 
-static double	cylinder_lateral(t_list *obj, t_ray *ray, double t_min, double t_max)
+double	intersec_tube(t_list *obj, t_ray *ray, double t_min, double t_max)
 {
-	t_cylinder	*cy;
+	t_tube	*tb;
 	double	discriminant;
 	double	discriminant_sqrt;
 	double	a, b, c, t, h;
 	t_vec3	tmp, tmp2;
 
-	cy = &(obj_cont(obj)->cy);
-	tmp = vec3_vector_product(ray->dir, cy->dir);
+	tb = &(obj_cont(obj)->tb);
+	tmp = vec3_vector_product(ray->dir, tb->dir);
 	a = vec3_scalar_product(tmp, tmp);
-	tmp2 = vec3_vector_product(vec3_subtract(ray->pos, obj_cont(obj)->cy.pos), cy->dir);
+	tmp2 = vec3_vector_product(vec3_subtract(ray->pos, obj_cont(obj)->tb.pos), tb->dir);
 	b = 2.0 * vec3_scalar_product(tmp, tmp2);
-	c = vec3_scalar_product(tmp2, tmp2) - cy->radius * cy->radius;
+	c = vec3_scalar_product(tmp2, tmp2) - tb->radius * tb->radius;
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 		return (-1);
 	discriminant_sqrt = sqrt(discriminant);
 	t = (-b - discriminant_sqrt) / (2 * a);
-	h = vec3_scalar_product(vec3_subtract(vec3_linear_comb(1.0, ray->pos, t, ray->dir), obj_cont(obj)->cy.pos), cy->dir);
-	if (t < t_min || t > t_max || h < 0 || h > cy->height)
+	h = vec3_scalar_product(vec3_subtract(vec3_linear_comb(1.0, ray->pos, t, ray->dir), obj_cont(obj)->tb.pos), tb->dir);
+	if (t < t_min || t > t_max || fabs(h) > tb->height / 2.0)
 	{
 		t = (-b + discriminant_sqrt) / (2 * a);
-		h = vec3_scalar_product(vec3_subtract(vec3_linear_comb(1.0, ray->pos, t, ray->dir), obj_cont(obj)->cy.pos), cy->dir);
-		if (t < t_min || t > t_max || h < 0 || h > cy->height)
+		h = vec3_scalar_product(vec3_subtract(vec3_linear_comb(1.0, ray->pos, t, ray->dir), obj_cont(obj)->tb.pos), tb->dir);
+		if (t < t_min || t > t_max || fabs(h) > tb->height / 2.0)
 			return (-1);
 	}
 	return (t);
-}
-
-double	intersec_cylinder(t_list *obj, t_ray *ray, double t_min, double t_max)
-{
-	double	t_min_cy, t_cap_bottom, t_cap_top, t_lateral;
-	t_obj	cap;
-
-	cap.pl.pos = obj_cont(obj)->cy.pos;
-	cap.pl.dir = vec3_scale(-1.0, obj_cont(obj)->cy.dir);
-	t_cap_bottom = cylinder_caps(&cap, ray, t_min, t_max, obj_cont(obj)->cy.radius);
-	t_min_cy = t_cap_bottom;
-	cap.pl.pos = vec3_linear_comb(1.0, obj_cont(obj)->cy.pos, obj_cont(obj)->cy.height, obj_cont(obj)->cy.dir);
-	cap.pl.dir = obj_cont(obj)->cy.dir;
-	t_cap_top = cylinder_caps(&cap, ray, t_min, t_max, obj_cont(obj)->cy.radius);
-	if (t_cap_top > 0.0 && (t_cap_top < t_min_cy || t_min_cy == -1))
-		t_min_cy = t_cap_top;
-	t_lateral = cylinder_lateral(obj, ray, t_min, t_max);
-	if (t_lateral > 0.0 && (t_lateral < t_min_cy || t_min_cy == -1))
-		t_min_cy = t_lateral;
-	return (t_min_cy);
 }
 
 void	rotate_ray_x(t_ray *ray, double rot_x)
@@ -227,7 +207,7 @@ double	intersec_rectangle_y(t_list *obj, t_ray *ray, double t_min, double t_max)
 double	intersec_rectangle_x(t_list *obj, t_ray *ray, double t_min, double t_max)
 {
 	t_ray	tmp_ray;
-	
+
 	double		t;
 	double		y;
 	double		z;

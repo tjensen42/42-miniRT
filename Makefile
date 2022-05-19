@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hepple <hepple@student.42.fr>              +#+  +:+       +#+         #
+#    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 09:02:38 by tjensen           #+#    #+#              #
-#    Updated: 2022/05/18 12:56:21 by hepple           ###   ########.fr        #
+#    Updated: 2022/05/19 14:29:25 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,11 @@ CFLAGS			:= -Wall -Wextra -pthread -O3 #-L "/Users/$(USER)/.brew/opt/glfw/lib/" 
 SRCS			:= main.c mrt_color.c mrt_obj.c mrt_scene.c mrt_is.c
 SRCS_GRAPHIC	:= mrt_graphic_render.c
 SRCS_MATH		:= mrt_math_color.c mrt_math_vec3_1.c mrt_math_vec3_2.c
-SRCS_PARSE		:= mrt_parse_cam.c mrt_parse_material.c mrt_parse_obj_cuboid.c mrt_parse_obj_sphere.c mrt_parse_scene.c mrt_parse_obj_rectangle.c \
+SRCS_PARSE		:= mrt_parse_cam.c mrt_parse_material.c mrt_parse_obj_cuboid.c mrt_parse_obj_tube.c mrt_parse_obj_disc.c mrt_parse_obj_sphere.c mrt_parse_scene.c mrt_parse_obj_rectangle.c \
 				   mrt_parse_amb.c mrt_parse_color.c mrt_parse_obj_cylinder.c mrt_parse_ppm.c mrt_parse_utils.c \
 				   mrt_parse_bg.c mrt_parse_img.c mrt_parse_is.c mrt_parse_obj_plane.c mrt_parse_sampling.c mrt_parse_vec3.c
-SRCS_PRINT		:= mrt_print_error.c mrt_print_is.c mrt_print_obj_plane.c mrt_print_obj_rectangle.c mrt_print_scene.c \
-				   mrt_print_color.c mrt_print_obj_cylinder.c mrt_print_obj_sphere.c mrt_print_vec3.c mrt_print_material.c
+SRCS_PRINT		:= mrt_print_error.c mrt_print_is.c mrt_print_obj_plane.c mrt_print_obj_disc.c mrt_print_obj_tube.c mrt_print_obj_rectangle.c mrt_print_scene.c \
+				   mrt_print_color.c mrt_print_obj_sphere.c mrt_print_vec3.c mrt_print_material.c
 SRCS_TRACE		:= mrt_trace_dielectric.c mrt_trace_diffuse.c mrt_trace_onb.c mrt_trace_specular.c \
 				   mrt_trace.c mrt_trace_random.c mrt_trace_obj_normal.c mrt_trace_obj_intersec.c mrt_trace_obj_random.c mrt_trace_obj_pdf.c
 

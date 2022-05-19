@@ -40,6 +40,8 @@ void	graphic_loop(void *data)
 void	move(t_scene *scene, t_vec3 new_pos)
 {
 	scene->cam.pos = new_pos;
+	print_vec3(scene->cam.pos, "cam_pos", COLOR_BL);
+	print_vec3(scene->cam.dir, "cam_dir", COLOR_CY);
 	scene->sampling.samp = 0;
 	ft_bzero(scene->img.pixel, sizeof(t_color) * scene->img.width * scene->img.height);
 	scene_calc_img_pos(scene);
@@ -48,6 +50,19 @@ void	move(t_scene *scene, t_vec3 new_pos)
 void	rotate(t_scene *scene, t_vec3 new_dir)
 {
 	scene->cam.dir = new_dir;
+	print_vec3(scene->cam.pos, "cam_pos", COLOR_BL);
+	print_vec3(scene->cam.dir, "cam_dir", COLOR_CY);
+	scene->sampling.samp = 0;
+	ft_bzero(scene->img.pixel, sizeof(t_color) * scene->img.width * scene->img.height);
+	scene_calc_img_pos(scene);
+}
+
+void	reset_cam(t_scene *scene)
+{
+	scene->cam.pos = scene->cam.pos_initial;
+	scene->cam.dir = scene->cam.dir_initial;
+	print_vec3(scene->cam.pos, "cam_pos", COLOR_BL);
+	print_vec3(scene->cam.dir, "cam_dir", COLOR_CY);
 	scene->sampling.samp = 0;
 	ft_bzero(scene->img.pixel, sizeof(t_color) * scene->img.width * scene->img.height);
 	scene_calc_img_pos(scene);
@@ -69,6 +84,8 @@ void	graphic_key_hooks(t_graphic_data *graphic)
 		move(graphic->scene, vec3_subtract(graphic->scene->cam.pos, vec3_normalize(graphic->scene->img.py)));
 	if (mlx_is_key_down(graphic->mlx, MLX_KEY_E))
 		move(graphic->scene, vec3_add(graphic->scene->cam.pos, vec3_normalize(graphic->scene->img.py)));
+	if (mlx_is_key_down(graphic->mlx, MLX_KEY_R))
+		reset_cam(graphic->scene);
 	if (mlx_is_mouse_down(graphic->mlx, MLX_MOUSE_BUTTON_LEFT))
 	{
 		int mouse_x, mouse_y;

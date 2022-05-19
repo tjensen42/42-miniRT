@@ -71,6 +71,8 @@ struct s_cam
 	bool		set;
 	t_vec3		pos;
 	t_vec3		dir;
+	t_vec3		pos_initial;
+	t_vec3		dir_initial;
 	int			fov;
 };
 

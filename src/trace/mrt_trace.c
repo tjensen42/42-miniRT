@@ -42,6 +42,7 @@ t_vec3	random_dir_import_sampling(t_list *l_is, t_hit *hit)
 		}
 		l_is = l_is->next;
 	}
+	return (hit->normal); // kommt nie vor
 }
 
 t_color	trace(t_scene *scene, t_ray *ray, int depth)
@@ -65,7 +66,7 @@ t_color	trace(t_scene *scene, t_ray *ray, int depth)
 		{
 			// ray_recursion.dir = diffuse(hit_obj, ray, &hit);
 			rand_double = ft_rand_double_0_1();
-			if (rand_double < scene->sampling.import_samp)
+			if (scene->l_is && rand_double < scene->sampling.import_samp)
 			{
 				ray_recursion.dir = random_dir_import_sampling(scene->l_is, &hit);
 				// if (vec3_scalar_product(ray_recursion.dir, hit.normal) < 0)
