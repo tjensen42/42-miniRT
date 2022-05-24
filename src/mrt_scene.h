@@ -117,6 +117,6 @@ typedef struct s_scene
 int		scene_create(t_scene *scene, const char *file);
 int		scene_destroy(t_scene *scene);
 
-void	scene_calc_img_pos(t_scene *scene, bool update_px);
+void	scene_calc_img_pos(t_scene *scene);
 
 #endif // SCENE_H

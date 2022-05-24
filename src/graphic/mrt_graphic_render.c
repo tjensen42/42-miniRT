@@ -40,32 +40,93 @@ void	graphic_loop(void *data)
 void	move(t_scene *scene, t_vec3 new_pos)
 {
 	scene->cam.pos = new_pos;
+	scene->img.pos = vec3_add(vec3_add(scene->cam.pos, scene->cam.dir), vec3_add(scene->img.qx, scene->img.qy));
 	print_vec3(scene->cam.pos, "cam_pos", COLOR_BL);
 	print_vec3(scene->cam.dir, "cam_dir", COLOR_CY);
 	scene->sampling.samp = 0;
 	ft_bzero(scene->img.pixel, sizeof(t_color) * scene->img.width * scene->img.height);
-	scene_calc_img_pos(scene, false);
 }
 
-void	rotate(t_scene *scene, t_vec3 new_dir, bool update_px)
+// void	rotate(t_scene *scene, t_vec3 new_dir)
+// {
+// 	scene->cam.dir = new_dir;
+// 	scene_calc_img_pos(scene);
+// 	print_vec3(scene->cam.pos, "cam_pos", COLOR_BL);
+// 	print_vec3(scene->cam.dir, "cam_dir", COLOR_CY);
+// 	scene->sampling.samp = 0;
+// 	ft_bzero(scene->img.pixel, sizeof(t_color) * scene->img.width * scene->img.height);
+// }
+
+void	rotate_horizontal(t_scene *scene, bool right)
 {
-	scene->cam.dir = new_dir;
+	double	sine;
+	double	cosine;
+	double	tmp;
+
+	if (right == true)
+		sine = sin(10.0 * DEG2RAD);
+	else
+		sine = sin(-10.0 * DEG2RAD);
+	cosine = cos(10.0 * DEG2RAD);
+	tmp = cosine * scene->cam.dir.x + sine * scene->cam.dir.z;
+	scene->cam.dir.z = - sine * scene->cam.dir.x + cosine * scene->cam.dir.z;
+	scene->cam.dir.x = tmp;
+	scene->cam.dir = vec3_normalize(scene->cam.dir);
+	tmp = cosine * scene->img.qx.x + sine * scene->img.qx.z;
+	scene->img.qx.z = - sine * scene->img.qx.x + cosine * scene->img.qx.z;
+	scene->img.qx.x = tmp;
+	tmp = cosine * scene->img.qy.x + sine * scene->img.qy.z;
+	scene->img.qy.z = - sine * scene->img.qy.x + cosine * scene->img.qy.z;
+	scene->img.qy.x = tmp;
+	scene->img.px = vec3_scale(-2.0 / (scene->img.width - 1), scene->img.qx);
+	scene->img.py = vec3_scale(-2.0 / (scene->img.height - 1), scene->img.qy);
+	scene->img.pos = vec3_add(vec3_add(scene->cam.pos, scene->cam.dir), vec3_add(scene->img.qx, scene->img.qy));
 	print_vec3(scene->cam.pos, "cam_pos", COLOR_BL);
 	print_vec3(scene->cam.dir, "cam_dir", COLOR_CY);
 	scene->sampling.samp = 0;
 	ft_bzero(scene->img.pixel, sizeof(t_color) * scene->img.width * scene->img.height);
-	scene_calc_img_pos(scene, update_px);
 }
+
+void	rotate_vertical(t_scene *scene, bool up)
+{
+	if (up == true)
+	{
+		if (scene->cam.dir.y > 1.0 - 1e-4)
+			return ;
+		else if (vec3_scalar_product(scene->cam.dir, (t_vec3){0.0,1.0,0.0}) <= cos(10.0 * DEG2RAD))
+			scene->cam.dir = vec3_add(scene->cam.dir, vec3_scale(sin(10.0 * DEG2RAD), vec3_normalize(scene->img.py)));
+		else
+			scene->cam.dir = (t_vec3){0.0,1.0,0.0};
+	}
+	else
+	{
+		if (scene->cam.dir.y < -1.0 + 1e-4)
+			return ;
+		else if (vec3_scalar_product(scene->cam.dir, (t_vec3){0.0,1.0,0.0}) >= cos(170.0 * DEG2RAD))
+			scene->cam.dir = vec3_add(scene->cam.dir, vec3_scale(-sin(10.0 * DEG2RAD), vec3_normalize(scene->img.py)));
+		else
+			scene->cam.dir = (t_vec3){0.0,-1.0,0.0};
+	}
+	scene->cam.dir = vec3_normalize(scene->cam.dir);
+	scene->img.qy = vec3_scale(vec3_length(scene->img.qx) * scene->img.height / scene->img.width, vec3_normalize(vec3_vector_product(scene->img.qx, scene->cam.dir)));
+	scene->img.py = vec3_scale(-2.0 / (scene->img.height - 1), scene->img.qy);
+	scene->img.pos = vec3_add(vec3_add(scene->cam.pos, scene->cam.dir), vec3_add(scene->img.qx, scene->img.qy));
+	print_vec3(scene->cam.pos, "cam_pos", COLOR_BL);
+	print_vec3(scene->cam.dir, "cam_dir", COLOR_CY);
+	scene->sampling.samp = 0;
+	ft_bzero(scene->img.pixel, sizeof(t_color) * scene->img.width * scene->img.height);
+}
+
 
 void	reset_cam(t_scene *scene)
 {
 	scene->cam.pos = scene->cam.pos_initial;
 	scene->cam.dir = scene->cam.dir_initial;
+	scene_calc_img_pos(scene);
 	print_vec3(scene->cam.pos, "cam_pos", COLOR_BL);
 	print_vec3(scene->cam.dir, "cam_dir", COLOR_CY);
 	scene->sampling.samp = 0;
 	ft_bzero(scene->img.pixel, sizeof(t_color) * scene->img.width * scene->img.height);
-	scene_calc_img_pos(scene, true);
 }
 
 void	graphic_key_hooks(t_graphic_data *graphic)
@@ -86,72 +147,80 @@ void	graphic_key_hooks(t_graphic_data *graphic)
 		move(graphic->scene, vec3_add(graphic->scene->cam.pos, vec3_normalize(graphic->scene->img.py)));
 	if (mlx_is_key_down(graphic->mlx, MLX_KEY_R))
 		reset_cam(graphic->scene);
-	if (mlx_is_mouse_down(graphic->mlx, MLX_MOUSE_BUTTON_LEFT))
-	{
-		int mouse_x, mouse_y;
-		mlx_get_mouse_pos(graphic->mlx, &mouse_x, &mouse_y);
-		if (mouse_x < graphic->scene->img.width / 2)
-		{
-			double sine, cosine;
-			sine = sin(-10 * DEG2RAD);
-			cosine = cos(10 * DEG2RAD);
-			rotate(graphic->scene,
-				(t_vec3){cosine * graphic->scene->cam.dir.x - sine * graphic->scene->cam.dir.z,
-						graphic->scene->cam.dir.y,
-						sine * graphic->scene->cam.dir.x + cosine * graphic->scene->cam.dir.z}, true);
-		}
-		else
-		{
-			double sine, cosine;
-			sine = sin(10 * DEG2RAD);
-			cosine = cos(10 * DEG2RAD);
-			rotate(graphic->scene,
-				(t_vec3){cosine * graphic->scene->cam.dir.x - sine * graphic->scene->cam.dir.z,
-						graphic->scene->cam.dir.y,
-						sine * graphic->scene->cam.dir.x + cosine * graphic->scene->cam.dir.z}, true);
-		}
-	}
-	if (mlx_is_mouse_down(graphic->mlx, MLX_MOUSE_BUTTON_RIGHT))
-	{
-		int mouse_x, mouse_y;
-		mlx_get_mouse_pos(graphic->mlx, &mouse_x, &mouse_y);
-		if (mouse_y < graphic->scene->img.height / 2)
-		{
-			graphic->scene->cam.dir.y += 0.1;
-			graphic->scene->cam.dir = vec3_normalize(graphic->scene->cam.dir);
-			rotate(graphic->scene, graphic->scene->cam.dir, true);
-		}
-		else
-		{
-			graphic->scene->cam.dir.y -= 0.1;
-			graphic->scene->cam.dir = vec3_normalize(graphic->scene->cam.dir);
-			rotate(graphic->scene, graphic->scene->cam.dir, true);
-		}
-	}
 	if (mlx_is_key_down(graphic->mlx, MLX_KEY_UP))
-	{
-		graphic->scene->cam.dir = vec3_add(graphic->scene->cam.dir, vec3_scale(sin(10 * DEG2RAD), vec3_normalize(graphic->scene->img.py)));
-		graphic->scene->cam.dir = vec3_normalize(graphic->scene->cam.dir);
-		rotate(graphic->scene, graphic->scene->cam.dir, false);
-	}
+		rotate_vertical(graphic->scene, true);
 	if (mlx_is_key_down(graphic->mlx, MLX_KEY_DOWN))
-	{
-		graphic->scene->cam.dir = vec3_add(graphic->scene->cam.dir, vec3_scale(-sin(10 * DEG2RAD), vec3_normalize(graphic->scene->img.py)));
-		graphic->scene->cam.dir = vec3_normalize(graphic->scene->cam.dir);
-		rotate(graphic->scene, graphic->scene->cam.dir, false);
-	}
+		rotate_vertical(graphic->scene, false);
 	if (mlx_is_key_down(graphic->mlx, MLX_KEY_LEFT))
-	{
-		graphic->scene->cam.dir = vec3_add(graphic->scene->cam.dir, vec3_scale(-sin(10 * DEG2RAD), vec3_normalize(graphic->scene->img.px)));
-		graphic->scene->cam.dir = vec3_normalize(graphic->scene->cam.dir);
-		rotate(graphic->scene, graphic->scene->cam.dir, true);
-	}
+		rotate_horizontal(graphic->scene, true);
 	if (mlx_is_key_down(graphic->mlx, MLX_KEY_RIGHT))
-	{
-		graphic->scene->cam.dir = vec3_add(graphic->scene->cam.dir, vec3_scale(sin(10 * DEG2RAD), vec3_normalize(graphic->scene->img.px)));
-		graphic->scene->cam.dir = vec3_normalize(graphic->scene->cam.dir);
-		rotate(graphic->scene, graphic->scene->cam.dir, true);
-	}
+		rotate_horizontal(graphic->scene, false);
+	// if (mlx_is_mouse_down(graphic->mlx, MLX_MOUSE_BUTTON_LEFT))
+	// {
+	// 	int mouse_x, mouse_y;
+	// 	mlx_get_mouse_pos(graphic->mlx, &mouse_x, &mouse_y);
+	// 	if (mouse_x < graphic->scene->img.width / 2)
+	// 	{
+	// 		double sine, cosine;
+	// 		sine = sin(-10 * DEG2RAD);
+	// 		cosine = cos(10 * DEG2RAD);
+	// 		rotate(graphic->scene,
+	// 			(t_vec3){cosine * graphic->scene->cam.dir.x - sine * graphic->scene->cam.dir.z,
+	// 					graphic->scene->cam.dir.y,
+	// 					sine * graphic->scene->cam.dir.x + cosine * graphic->scene->cam.dir.z}, true);
+	// 	}
+	// 	else
+	// 	{
+	// 		double sine, cosine;
+	// 		sine = sin(10 * DEG2RAD);
+	// 		cosine = cos(10 * DEG2RAD);
+	// 		rotate(graphic->scene,
+	// 			(t_vec3){cosine * graphic->scene->cam.dir.x - sine * graphic->scene->cam.dir.z,
+	// 					graphic->scene->cam.dir.y,
+	// 					sine * graphic->scene->cam.dir.x + cosine * graphic->scene->cam.dir.z}, true);
+	// 	}
+	// }
+	// if (mlx_is_mouse_down(graphic->mlx, MLX_MOUSE_BUTTON_RIGHT))
+	// {
+	// 	int mouse_x, mouse_y;
+	// 	mlx_get_mouse_pos(graphic->mlx, &mouse_x, &mouse_y);
+	// 	if (mouse_y < graphic->scene->img.height / 2)
+	// 	{
+	// 		graphic->scene->cam.dir.y += 0.1;
+	// 		graphic->scene->cam.dir = vec3_normalize(graphic->scene->cam.dir);
+	// 		rotate(graphic->scene, graphic->scene->cam.dir, true);
+	// 	}
+	// 	else
+	// 	{
+	// 		graphic->scene->cam.dir.y -= 0.1;
+	// 		graphic->scene->cam.dir = vec3_normalize(graphic->scene->cam.dir);
+	// 		rotate(graphic->scene, graphic->scene->cam.dir, true);
+	// 	}
+	// }
+	// if (mlx_is_key_down(graphic->mlx, MLX_KEY_UP))
+	// {
+	// 	graphic->scene->cam.dir = vec3_add(graphic->scene->cam.dir, vec3_scale(sin(10.0 * DEG2RAD), vec3_normalize(graphic->scene->img.py)));
+	// 	graphic->scene->cam.dir = vec3_normalize(graphic->scene->cam.dir);
+	// 	rotate(graphic->scene, graphic->scene->cam.dir, false);
+	// }
+	// if (mlx_is_key_down(graphic->mlx, MLX_KEY_DOWN))
+	// {
+	// 	graphic->scene->cam.dir = vec3_add(graphic->scene->cam.dir, vec3_scale(-sin(10.0 * DEG2RAD), vec3_normalize(graphic->scene->img.py)));
+	// 	graphic->scene->cam.dir = vec3_normalize(graphic->scene->cam.dir);
+	// 	rotate(graphic->scene, graphic->scene->cam.dir, false);
+	// }
+	// if (mlx_is_key_down(graphic->mlx, MLX_KEY_LEFT))
+	// {
+	// 	graphic->scene->cam.dir = vec3_add(graphic->scene->cam.dir, vec3_scale(-sin(10 * DEG2RAD), vec3_normalize(graphic->scene->img.px)));
+	// 	graphic->scene->cam.dir = vec3_normalize(graphic->scene->cam.dir);
+	// 	rotate(graphic->scene, graphic->scene->cam.dir, true);
+	// }
+	// if (mlx_is_key_down(graphic->mlx, MLX_KEY_RIGHT))
+	// {
+	// 	graphic->scene->cam.dir = vec3_add(graphic->scene->cam.dir, vec3_scale(sin(10 * DEG2RAD), vec3_normalize(graphic->scene->img.px)));
+	// 	graphic->scene->cam.dir = vec3_normalize(graphic->scene->cam.dir);
+	// 	rotate(graphic->scene, graphic->scene->cam.dir, true);
+	// }
 }
 
 void	graphic_render(t_graphic_data *graphic)
