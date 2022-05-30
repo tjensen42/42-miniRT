@@ -10,7 +10,7 @@
 # include "mrt_vec3.h"
 # include "mrt_scene.h"
 # include "mrt_obj.h"
-# include "mrt_is.h"
+# include "mrt_light.h"
 # include "print/mrt_print.h"
 
 # include <errno.h>
@@ -47,7 +47,9 @@
 # define IDENT_BG			"B"
 # define IDENT_AMB			"A"
 
-# define IDENT_LIGHT		"l"
+# define IDENT_LIGHT_SP		"ls"
+# define IDENT_LIGHT_RT		"lr"
+# define IDENT_LIGHT_DI		"ld"
 # define IDENT_PLANE		"pl"
 # define IDENT_SPHERE		"sp"
 # define IDENT_CYLINDER		"cy"
@@ -61,31 +63,36 @@
 /* FUNCTION PROTOTYPES														  */
 /* ************************************************************************** */
 
-int		int_from_str(const char *str, int min, int max, int *res);
-int		double_from_str(const char *str, int before_point,
-				int after_point, double *res);
+int			int_from_str(const char *str, int min, int max, int *res);
+int			double_from_str(const char *str, int before_point,
+					int after_point, double *res);
 
-int		parse_color(const char *str, t_color *color);
-int		parse_vec3(const char *str, t_vec3 *vec3);
-int		parse_material(t_material *material, char **split, int line_num);
+int			parse_color(const char *str, t_color *color);
+int			parse_vec3(const char *str, t_vec3 *vec3);
+int			parse_material(t_material *material, char **split, int line_num);
 
-int		parse_amb(t_scene *scene, char **split, int line_num);
-int		parse_bg(t_scene *scene, char **split, int line_num);
-int		parse_sampling(t_scene *scene, char **split, int line_num);
-int		parse_cam(t_scene *scene, char **split, int line_num);
-int		parse_img(t_scene *scene, char **split, int line_num);
-int		parse_ppm(t_scene *scene, char **split, int line_num);
+int			parse_amb(t_scene *scene, char **split, int line_num);
+int			parse_bg(t_scene *scene, char **split, int line_num);
+int			parse_sampling(t_scene *scene, char **split, int line_num);
+int			parse_cam(t_scene *scene, char **split, int line_num);
+int			parse_img(t_scene *scene, char **split, int line_num);
+int			parse_ppm(t_scene *scene, char **split, int line_num);
 
-int		parse_obj_plane(t_scene *scene, char **split, int line_num);
-int		parse_obj_disc(t_scene *scene, char **split, int line_num);
-int		parse_obj_tube(t_scene *scene, char **split, int line_num);
-int		parse_obj_sphere(t_scene *scene, char **split, int line_num);
-int		parse_obj_cylinder(t_scene *scene, char **split, int line_num);
-int		parse_obj_rectangle(t_scene *scene, char **split, int line_num);
-int		parse_obj_cuboid(t_scene *scene, char **split, int line_num);
+int			parse_obj_rectangle_dir(t_obj *c_obj, const char *dir);
+f_intersec	parse_obj_rectangle_intersec(t_vec3 dir);
 
-int		parse_is(t_scene *scene, char **split, int line_num);
+int			parse_obj_plane(t_scene *scene, char **split, int line_num);
+int			parse_obj_disc(t_scene *scene, char **split, int line_num);
+int			parse_obj_tube(t_scene *scene, char **split, int line_num);
+int			parse_obj_sphere(t_scene *scene, char **split, int line_num);
+int			parse_obj_cylinder(t_scene *scene, char **split, int line_num);
+int			parse_obj_rectangle(t_scene *scene, char **split, int line_num);
+int			parse_obj_cuboid(t_scene *scene, char **split, int line_num);
 
-int		parse_scene(t_scene *scene, const char *file);
+int			parse_light_sphere(t_scene *scene, char **split, int line_num);
+int			parse_light_disc(t_scene *scene, char **split, int line_num);
+int			parse_light_rectangle(t_scene *scene, char **split, int line_num);
+
+int			parse_scene(t_scene *scene, const char *file);
 
 #endif // MRT_PARSE_H

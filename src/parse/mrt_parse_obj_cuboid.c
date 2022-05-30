@@ -1,7 +1,6 @@
 #include "mrt_parse.h"
 #include "print/mrt_print.h"
 
-static f_intersec	parse_obj_rectangle_intersec(t_vec3 dir);
 static int	parse_obj_cuboid_sides(t_scene *scene, t_vec3 size, t_obj *c_template);
 
 int	parse_obj_cuboid(t_scene *scene, char **split, int line_num)
@@ -115,15 +114,4 @@ static int	parse_obj_cuboid_sides(t_scene *scene, t_vec3 size, t_obj *c_template
 	c_obj->rt.rel_pos = (t_vec3){size.x / -2.0, 0.0, 0.0};
 	c_obj->intersec = parse_obj_rectangle_intersec(c_obj->rt.dir);
 	return (0);
-}
-
-static f_intersec	parse_obj_rectangle_intersec(t_vec3 dir)
-{
-	if (dir.x != 0.0)
-		return (&intersec_rectangle_x);
-	else if (dir.y != 0.0)
-		return (&intersec_rectangle_y);
-	else if (dir.z != 0.0)
-		return (&intersec_rectangle_z);
-	return (NULL);
 }

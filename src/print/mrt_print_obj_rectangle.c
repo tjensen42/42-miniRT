@@ -5,7 +5,7 @@ void	print_obj_rectangle(t_list *obj)
 	t_obj	*c_obj;
 
 	c_obj = obj_cont(obj);
-	printf("RECTANGLE: (%p)\n", obj);
+	printf("RECTANGLE: (%p)\n", c_obj);
 	print_vec3(c_obj->rt.pos, "pos:", COLOR_BL);
 	print_vec3(c_obj->rt.dir, "dir:", COLOR_CY);
 	print_scene_double(c_obj->rt.width, "width:", COLOR_NO);

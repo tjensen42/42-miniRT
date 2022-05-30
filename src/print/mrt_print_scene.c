@@ -14,10 +14,10 @@ int	print_scene(t_scene *scene)
 		obj_cont(iter)->print(iter);
 		iter = iter->next;
 	}
-	iter = scene->l_is;
+	iter = scene->l_light;
 	while (iter)
 	{
-		is_cont(iter)->print(iter);
+		light_cont(iter)->print(iter);
 		iter = iter->next;
 	}
 	return (0);
@@ -28,7 +28,7 @@ static void	print_scene_specs(t_scene *scene)
 	print_scene_img(&(scene->img));
 	printf("COUNTER:\n");
 	print_scene_int(ft_lstsize(scene->l_obj), "objects:", NULL);
-	print_scene_int(ft_lstsize(scene->l_is), "oversampl:", NULL);
+	print_scene_int(ft_lstsize(scene->l_light), "oversampl:", NULL);
 	printf("SAMPLING:\n");
 	print_scene_int(scene->sampling.max_samp, "samples:", NULL);
 	print_scene_int(scene->sampling.recursion_depth, "rec_depth:", NULL);

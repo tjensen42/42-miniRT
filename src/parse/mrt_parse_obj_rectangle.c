@@ -1,9 +1,6 @@
 #include "mrt_parse.h"
 #include "print/mrt_print.h"
 
-static int			parse_obj_rectangle_dir(t_obj *c_obj, const char *dir);
-static f_intersec	parse_obj_rectangle_intersec(t_vec3 dir);
-
 int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 {
 	t_list	*obj;
@@ -37,7 +34,7 @@ int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 	return (0);
 }
 
-static int parse_obj_rectangle_dir(t_obj *c_obj, const char *dir)
+int parse_obj_rectangle_dir(t_obj *c_obj, const char *dir)
 {
 	if (ft_strcmp(dir, "+X") == 0)
 		c_obj->rt.dir = (t_vec3){1.0, 0.0, 0.0};
@@ -56,7 +53,7 @@ static int parse_obj_rectangle_dir(t_obj *c_obj, const char *dir)
 	return (0);
 }
 
-static f_intersec parse_obj_rectangle_intersec(t_vec3 dir)
+f_intersec parse_obj_rectangle_intersec(t_vec3 dir)
 {
 	if (dir.x != 0.0)
 		return (&intersec_rectangle_x);

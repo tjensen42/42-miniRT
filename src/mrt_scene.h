@@ -105,7 +105,7 @@ typedef struct s_scene
 	struct s_bg				bg;
 	struct s_amb			amb;
 	t_list					*l_obj;
-	t_list					*l_is;
+	t_list					*l_light;
 	struct s_thread_data	thread[THREADS];
 }	t_scene;
 

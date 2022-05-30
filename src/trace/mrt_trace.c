@@ -16,31 +16,31 @@ double mixed_sampling_pdf(t_scene *scene, t_ray *ray, t_hit *hit)
 	else
 		cosine_pdf = fabs(cosine / M_PI);
 	import_pdf = 0;
-	iter = scene->l_is;
+	iter = scene->l_light;
 	while (iter)
 	{
-		import_pdf += is_cont(iter)->weight * is_cont(iter)->pdf_value(scene, iter, hit);
+		import_pdf += light_cont(iter)->weight * light_cont(iter)->pdf_value(scene, iter, hit);
 		iter = iter->next;
 	}
 	mixed_pdf = scene->sampling.cosine_samp * cosine_pdf + scene->sampling.import_samp * import_pdf;
 	return (mixed_pdf);
 }
 
-t_vec3	random_dir_import_sampling(t_list *l_is, t_hit *hit)
+t_vec3	random_dir_import_sampling(t_list *l_light, t_hit *hit)
 {
 	double	random;
 	double	weight_sum;
 
 	weight_sum = 0;
 	random = ft_rand_double_0_1();
-	while (l_is)
+	while (l_light)
 	{
-		weight_sum += is_cont(l_is)->weight;
+		weight_sum += light_cont(l_light)->weight;
 		if (random <= weight_sum)
 		{
-			return (is_cont(l_is)->random_dir(l_is, hit));
+			return (light_cont(l_light)->random_dir(l_light, hit));
 		}
-		l_is = l_is->next;
+		l_light = l_light->next;
 	}
 	return (hit->normal); // kommt nie vor
 }
@@ -66,9 +66,9 @@ t_color	trace(t_scene *scene, t_ray *ray, int depth)
 		{
 			// ray_recursion.dir = diffuse(hit_obj, ray, &hit);
 			rand_double = ft_rand_double_0_1();
-			if (scene->l_is && rand_double < scene->sampling.import_samp)
+			if (scene->l_light && rand_double < scene->sampling.import_samp)
 			{
-				ray_recursion.dir = random_dir_import_sampling(scene->l_is, &hit);
+				ray_recursion.dir = random_dir_import_sampling(scene->l_light, &hit);
 				// if (vec3_scalar_product(ray_recursion.dir, hit.normal) < 0)
 				// 	return ((t_color){0.0, 0.0, 1.0});
 			}
@@ -101,7 +101,12 @@ t_color	trace(t_scene *scene, t_ray *ray, int depth)
 		else if (rand_double < obj_cont(hit_obj)->material.surface[SURF_DIFFUSE] + obj_cont(hit_obj)->material.surface[SURF_SPECULAR] + obj_cont(hit_obj)->material.surface[SURF_DIELECTRIC])
 			ray_recursion.dir = dielectric(hit_obj, ray, &hit);
 		else
-			return (color_scale(obj_cont(hit_obj)->material.brightness, obj_cont(hit_obj)->material.color));
+		{
+			if (hit.side == INSIDE)
+				return ((t_color){0.0, 0.0, 0.0});
+			else
+				return (color_scale(obj_cont(hit_obj)->material.brightness, obj_cont(hit_obj)->material.color));
+		}
 		color = trace(scene, &ray_recursion, depth + 1);
 		return (color_multiply(obj_cont(hit_obj)->material.color, color));
 	}

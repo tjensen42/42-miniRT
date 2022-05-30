@@ -5,7 +5,7 @@
 # include "mrt_color.h"
 # include "mrt_vec3.h"
 # include "mrt_obj.h"
-# include "mrt_is.h"
+# include "mrt_light.h"
 # include "mrt_scene.h"
 # include "mrt_trace_onb.h"
 # include "math/mrt_math.h"
@@ -53,8 +53,13 @@ t_vec3	normal_sphere(t_list *obj, t_hit *hit);
 t_vec3	normal_tube(t_list *obj, t_hit *hit);
 t_vec3	normal_rectangle(t_list *obj, t_hit *hit);
 
-double	pdf_sphere(t_scene *scene, t_list *is, t_hit *hit);
-t_vec3	random_dir_to_sphere(t_list *is, t_hit *hit);
+double	pdf_sphere(t_scene *scene, t_list *light, t_hit *hit);
+double	pdf_disc(t_scene *scene, t_list *light, t_hit *hit);
+double	pdf_rectangle(t_scene *scene, t_list *light, t_hit *hit);
+
+t_vec3	random_dir_to_sphere(t_list *light, t_hit *hit);
+t_vec3	random_dir_to_disc(t_list *light, t_hit *hit);
+t_vec3	random_dir_to_rectangle(t_list *light, t_hit *hit);
 
 t_list	*calc_hit(t_list *l_obj, t_ray *ray, t_hit *hit);
 

@@ -1,5 +1,6 @@
 #include "mrt_trace_onb.h"
 
+// in must be normalized
 t_onb onb_build(t_vec3 in)
 {
 	t_onb	onb;

@@ -4,7 +4,7 @@
 
 static int	scene_setup(t_scene *scene);
 static int	scene_check(t_scene *scene);
-int			scene_check_is_weights(t_list *l_is);
+int			scene_check_is_weights(t_list *l_light);
 
 int scene_create(t_scene *scene, const char *file)
 {
@@ -24,8 +24,8 @@ int	scene_destroy(t_scene *scene)
 	free(scene->img.pixel);
 	if (scene->l_obj)
 		ft_lstclear(&(scene->l_obj), free);
-	if (scene->l_is)
-		ft_lstclear(&(scene->l_is), free);
+	if (scene->l_light)
+		ft_lstclear(&(scene->l_light), free);
 	if (scene->img.ppm)
 		fclose(scene->img.fp_ppm);
 	return (0);
@@ -45,7 +45,7 @@ static int	scene_check(t_scene *scene)
 		return (print_error_scene(-1, ERR_SCENE_INCOM, ERR_MISS_AMB, NULL));
 	if (scene->l_obj == NULL)
 		return (print_error_scene(-1, ERR_SCENE_INCOM, ERR_MISS_OBJ, NULL));
-	if (scene_check_is_weights(scene->l_is))
+	if (scene_check_is_weights(scene->l_light))
 		return (print_error_scene(-1, ERR_SCENE_INCOM, "Invalid is-weight sum", NULL));
 	return (0);
 }
@@ -69,26 +69,26 @@ static int	scene_setup(t_scene *scene)
 	return (0);
 }
 
-int scene_check_is_weights(t_list *l_is)
+int scene_check_is_weights(t_list *l_light)
 {
 	t_list	*iter;
 	double	weight_sum;
 
-	if (l_is == NULL)
+	if (l_light == NULL)
 		return (0);
 	weight_sum = 0;
-	iter = l_is;
+	iter = l_light;
 	while (iter)
 	{
-		weight_sum += is_cont(iter)->weight;
+		weight_sum += light_cont(iter)->weight;
 		iter = iter->next;
 	}
 	if (weight_sum <= 0)
 		return (-1);
-	iter = l_is;
+	iter = l_light;
 	while (iter)
 	{
-		is_cont(iter)->weight /= weight_sum;
+		light_cont(iter)->weight /= weight_sum;
 		iter = iter->next;
 	}
 	return (0);

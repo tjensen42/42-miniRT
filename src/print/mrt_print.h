@@ -9,7 +9,7 @@
 # include "mrt_vec3.h"
 # include "mrt_scene.h"
 # include "mrt_obj.h"
-# include "mrt_is.h"
+# include "mrt_light.h"
 
 # include <errno.h>
 # include <stdbool.h>
@@ -36,7 +36,9 @@ void	print_obj_sphere(t_list *obj);
 void	print_obj_tube(t_list *obj);
 void	print_obj_rectangle(t_list *obj);
 
-void	print_is(t_list *is);
+void	print_light_sphere(t_list *is);
+void	print_light_rectangle(t_list *light);
+void	print_light_disc(t_list *light);
 
 int		print_error(char *s1, char *s2, char *s3, char *s4);
 int		print_error_scene(int line_num, const char *msg1, const char *msg2, const char *msg3);
