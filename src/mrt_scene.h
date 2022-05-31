@@ -57,6 +57,7 @@ struct s_sampling
 	int		recursion_depth;
 	double	cosine_samp;
 	double	import_samp;
+	bool	gamma_correction;
 };
 
 struct s_amb

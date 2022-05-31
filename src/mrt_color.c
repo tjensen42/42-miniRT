@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:12:06 by tjensen           #+#    #+#             */
-/*   Updated: 2022/05/30 15:47:48 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/05/31 10:08:03 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ inline t_color	color_gamma_encode(t_color color)
 	return ((t_color){sqrt(color.r), sqrt(color.g), sqrt(color.b)});
 }
 
-int	color_to_rgba_int(t_color color)
+int	color_to_rgba_int(t_color color, bool gamma_correction)
 {
 	if (color.r != color.r)
 		color.r = 0;
@@ -52,7 +52,8 @@ int	color_to_rgba_int(t_color color)
 		color = color_scale(1.0 / color.g, color);
 	if (color.r > 1.0 && color.r >= color.g && color.r >= color.b)
 		color = color_scale(1.0 / color.r, color);
-	// color = color_gamma_encode(color);
+	if (gamma_correction)
+		color = color_gamma_encode(color);
 	return (
 		(int)(256.0 * color_clamp(color.r, 0.0, 0.999)) << 24 |
 		(int)(256.0 * color_clamp(color.g, 0.0, 0.999)) << 16 |

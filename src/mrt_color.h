@@ -6,12 +6,18 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 10:32:01 by tjensen           #+#    #+#             */
-/*   Updated: 2022/04/21 10:38:27 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/05/31 10:09:33 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
 # define COLOR_H
+
+/* ************************************************************************** */
+/* INCLUDES																	  */
+/* ************************************************************************** */
+
+#include <stdbool.h>
 
 /* ************************************************************************** */
 /* DEFINES																	  */
@@ -44,6 +50,6 @@ typedef struct s_color
 double	color_clamp(double color, double min, double max);
 t_color	color_blend(double f, t_color c1, t_color c2);
 t_color	color_gamma_encode(t_color color);
-int		color_to_rgba_int(t_color color);
+int		color_to_rgba_int(t_color color, bool gamma_correction);
 
 #endif // COLOR_H

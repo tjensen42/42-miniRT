@@ -299,7 +299,8 @@ void	img_to_mlx_img(t_scene *scene, mlx_image_t *mlx_img)
 		{
 			pixel_pos = y * mlx_img->width + x;
 			mlx_put_pixel(mlx_img, x, y,
-					color_to_rgba_int(color_scale(1.0 / scene->sampling.samp, scene->img.pixel[pixel_pos])));
+					color_to_rgba_int(color_scale(1.0 / scene->sampling.samp,
+							scene->img.pixel[pixel_pos]), scene->sampling.gamma_correction));
 			x++;
 		}
 		y++;
