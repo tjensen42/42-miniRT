@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:12:06 by tjensen           #+#    #+#             */
-/*   Updated: 2022/05/16 17:27:51 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/05/30 15:47:48 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	color_to_rgba_int(t_color color)
 		color = color_scale(1.0 / color.g, color);
 	if (color.r > 1.0 && color.r >= color.g && color.r >= color.b)
 		color = color_scale(1.0 / color.r, color);
-	color = color_gamma_encode(color);
+	// color = color_gamma_encode(color);
 	return (
 		(int)(256.0 * color_clamp(color.r, 0.0, 0.999)) << 24 |
 		(int)(256.0 * color_clamp(color.g, 0.0, 0.999)) << 16 |

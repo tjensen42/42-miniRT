@@ -15,6 +15,8 @@ double mixed_sampling_pdf(t_scene *scene, t_ray *ray, t_hit *hit)
 		return (0);
 	else
 		cosine_pdf = fabs(cosine / M_PI);
+	if (scene->l_light == NULL)
+		return (cosine_pdf);
 	import_pdf = 0;
 	iter = scene->l_light;
 	while (iter)

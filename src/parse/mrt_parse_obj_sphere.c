@@ -16,7 +16,7 @@ int	parse_obj_sphere(t_scene *scene, char **split, int line_num)
 	c_obj = obj_cont(obj);
 	if (parse_vec3(split[1], &(c_obj->pl.pos)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_POS, NULL));
-	if (double_from_str(split[2], 6, 2, &(c_obj->sp.radius)))
+	if (double_from_str(split[2], 6, 4, &(c_obj->sp.radius)))
 		return (print_error_scene(line_num, ERR_PARSE, "Invalid radius", NULL));
 	if (parse_material(&(c_obj->material), &split[3], line_num))
 		return (-1);
