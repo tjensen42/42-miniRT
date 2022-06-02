@@ -20,6 +20,7 @@ int	print_scene(t_scene *scene)
 		light_cont(iter)->print(iter);
 		iter = iter->next;
 	}
+	print_textures(scene->l_textures);
 	return (0);
 }
 

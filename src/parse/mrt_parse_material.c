@@ -25,6 +25,7 @@ int	parse_material(t_material *material, char **split, int line_num)
 	if (surf_sum != 1.0)
 		return (print_error_scene(line_num, ERR_PARSE, "surf_sum not equal to 1.0", NULL));
 	material->brightness = 1.0;
+	material->get_color = &obj_color;
 	return (0);
 }
 

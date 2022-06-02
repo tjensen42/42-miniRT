@@ -26,6 +26,8 @@ int	scene_destroy(t_scene *scene)
 		ft_lstclear(&(scene->l_obj), free);
 	if (scene->l_light)
 		ft_lstclear(&(scene->l_light), free);
+	if (scene->l_textures)
+		ft_lstclear(&(scene->l_textures), c_texture_destroy);
 	if (scene->img.ppm)
 		fclose(scene->img.fp_ppm);
 	return (0);

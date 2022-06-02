@@ -97,6 +97,7 @@ static int parse_sphere_obj(t_scene *scene, char **split, int line_num)
 	c_obj->print = &print_obj_sphere;
 	c_obj->intersec = &intersec_sphere;
 	c_obj->normal = &normal_sphere;
+	c_obj->material.get_color = &obj_color;
 	return (0);
 }
 
@@ -124,6 +125,7 @@ static int parse_disc_obj(t_scene *scene, char **split, int line_num)
 	c_obj->print = &print_obj_disc;
 	c_obj->intersec = &intersec_disc;
 	c_obj->normal = &normal_disc;
+	c_obj->material.get_color = &obj_color;
 	return (0);
 }
 
@@ -153,6 +155,7 @@ static int parse_rectangle_obj(t_scene *scene, char **split, int line_num)
 	c_obj->print = &print_obj_rectangle;
 	c_obj->intersec = parse_obj_rectangle_intersec(c_obj->rt.dir);
 	c_obj->normal = &normal_rectangle;
+	c_obj->material.get_color = &obj_color;
 	c_obj->rt.rel_pos = (t_vec3){0.0, 0.0, 0.0};
 	return (0);
 }

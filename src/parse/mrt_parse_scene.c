@@ -81,6 +81,7 @@ static const struct s_ident	g_ident[] = {
 {IDENT_CUBOID, &parse_obj_cuboid},
 {IDENT_DISC, &parse_obj_disc},
 {IDENT_TUBE, &parse_obj_tube},
+{IDENT_TEXTURE, &parse_texture},
 {NULL, NULL}
 };
 

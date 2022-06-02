@@ -98,7 +98,7 @@ int		sphere_overlap(t_sphere sp_a, t_sphere sp_b)
 }
 
 // 42 COLOR
-// rgb(89, 183, 186) - blau
+// rgb(089, 183, 186) - blau
 // rgb(188, 84, 185) - lila
 // rgb(234, 203, 86) - gelb
 t_color	gen_color_42(t_sphere sphere)

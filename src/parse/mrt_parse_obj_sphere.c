@@ -7,7 +7,7 @@ int	parse_obj_sphere(t_scene *scene, char **split, int line_num)
 	t_list	*obj;
 	t_obj	*c_obj;
 
-	if (ft_split_count_str(split) != 7)
+	if (ft_split_count_str(split) != 8)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
 	obj = obj_new(0);
 	if (obj == NULL)
@@ -23,5 +23,14 @@ int	parse_obj_sphere(t_scene *scene, char **split, int line_num)
 	c_obj->print = &print_obj_sphere;
 	c_obj->intersec = &intersec_sphere;
 	c_obj->normal = &normal_sphere;
+	if (ft_strcmp("cb", split[7]) == 0)
+		c_obj->material.get_color = &checkerboard_sphere;
+	else if (ft_strcmp("-", split[7]) != 0)
+	{
+		c_obj->material.c_texture = parse_c_texture_find(scene->l_textures, split[7]);
+		if (c_obj->material.c_texture == NULL)
+			return (print_error_scene(line_num, ERR_PARSE, "cannot find texture", split[7]));
+		c_obj->material.get_color = &texture_sphere;
+	}
 	return (0);
 }

@@ -8,10 +8,12 @@
 #define SIZE_X			750
 #define SIZE_Y			750
 
-#define SPHERES			1200
+#define SPHERES			1800
+
+#define SPHERE_RADIUS	2.0
 
 #define SPRIAL_DISTANCE	0.05
-#define SPHERE_DISTANCE	14000
+#define SPHERE_DISTANCE	15000
 
 #define SCATTERING		1.0
 #define REFLECTION		0.0
@@ -100,7 +102,7 @@ t_color	gen_color_i(int j)
 	int		rainbow_count;
 	t_color color;
 
-	rainbow_count = 12;
+	rainbow_count = 120;
 	int i = j % rainbow_count;
 	if (i < (rainbow_count) / 6)
 	{
@@ -198,9 +200,9 @@ t_sphere gen_sphere_on_archimedisch_spiral(int i)
 	t_sphere	sphere;
 
 	theta = sqrt((double)i / (double)(SPHERES - 1) * (SPHERES - 1) * SPHERE_DISTANCE);
-	sphere.radius = 1.8;
-	// sphere.radius = random_double(0.75, 2);
-	sphere.pos = (t_vec3){SPRIAL_DISTANCE * theta * cos(theta * DEG2RAD), sphere.radius, SPRIAL_DISTANCE * theta * sin(theta * DEG2RAD)};
+	sphere.radius = SPHERE_RADIUS;
+	// sphere.radius = random_double(0.5, 2.5);
+	sphere.pos = (t_vec3){SPRIAL_DISTANCE * theta * cos(theta * DEG2RAD), sphere.radius + 0.2 * i, SPRIAL_DISTANCE * theta * sin(theta * DEG2RAD)};
 	sphere.color = gen_color_i(i);
 	sphere.surface = gen_surface();
 	return (sphere);
@@ -219,7 +221,7 @@ int	main(int argc, char *argv[])
 	printf("B   128,179,255    255,255,255\n\n");
 
 	printf("## CAMERA #############################################################################################################\n# | look from         | look at           | fov | #####################################################################\n#######################################################################################################################\n");
-	printf("C   +0.00,+060.00,+200.00   +10.00,+0.00,+30.00   45\n\n");
+	printf("C   +0.00,+060.00,+220.00   +20.00,+100.00,+30.00   60\n\n");
 
 	printf("## AMBIENT LIGHT ######################################################################################################\n# | ratio | color       | #############################################################################################\n#######################################################################################################################\n");
 	printf("A   0.0     255,255,255\n\n");
@@ -228,8 +230,8 @@ int	main(int argc, char *argv[])
 	// printf("ls  +0.00,+100.0,+0.00   10      255,255,255   500.0        1\n\n");
 
 	printf("## SPHERE #############################################################################################################\n# | position          | radius | color       | material                  | ############################################\n#######################################################################################################################\n");
-	printf("sp  +0.00,+32.00,+0.00   32   250,250,250   0.0,0.0,1.0,0.0  0.0  1.5\n\n");
-	printf("sp  +130.00,+40.00,-200.00   40   250,250,250   0.0,1.0,0.0,0.0  0.0  1.5\n\n");
+	printf("sp  +0.00,+40.00,+0.00   40   250,250,250   0.0,0.0,1.0,0.0  0.0  1.5\n\n");
+	printf("sp  +160.00,+60.00,-200.00   60   210,210,210   0.0,1.0,0.0,0.0  0.0  1.5\n\n");
 
 	printf("## PLANE ##############################################################################################################\n# | position          | direction         | color       | material                  | #################################\n#######################################################################################################################\n");
 	printf("pl  +0.00,+0.00,+0.00   +0.00,+1.00,+0.00   010,010,010   0.8,0.2,0.0,0.0  0.0  1.5\n\n");

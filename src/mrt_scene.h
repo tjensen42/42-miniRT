@@ -18,7 +18,7 @@
 /* DEFINES																	  */
 /* ************************************************************************** */
 
-# define THREADS			12
+# define THREADS			1
 
 # define ERR_SCENE_INCOM	"Incomplete scene file"
 # define ERR_MISS_RES		""
@@ -107,6 +107,7 @@ typedef struct s_scene
 	struct s_amb			amb;
 	t_list					*l_obj;
 	t_list					*l_light;
+	t_list					*l_textures;
 	struct s_thread_data	thread[THREADS];
 }	t_scene;
 

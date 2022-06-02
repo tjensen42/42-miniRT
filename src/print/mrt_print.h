@@ -30,6 +30,8 @@ int		print_scene(t_scene *scene);
 void	print_scene_int(int num, const char *str, const char *color);
 void	print_scene_double(double num, const char *str, const char *color);
 
+void	print_textures(t_list *l_texture);
+
 void	print_obj_plane(t_list *obj);
 void	print_obj_disc(t_list *obj);
 void	print_obj_sphere(t_list *obj);

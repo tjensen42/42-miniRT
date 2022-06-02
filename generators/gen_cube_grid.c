@@ -8,14 +8,16 @@
 #define WIN_SIZE_X			1000
 #define WIN_SIZE_Y			1000
 
-#define GRID_CUBES_A		20
-#define GRID_CUBES_B		20
+#define GRID_CUBES_A		10
+#define GRID_CUBES_B		10
 #define GRID_CUBES_SUM		(GRID_CUBES_A * GRID_CUBES_B)
 
-#define CUBE_SIZE_A			1.0
+#define CUBE_SIZE_A			2.0
 #define CUBE_SIZE_B			1.0
 #define CUBE_SIZE_C_MIN		1.0
 #define CUBE_SIZE_C_MAX		3.0
+
+#define CUBE_PADDING		0.0
 
 #define SCATTERING			1.0
 #define REFLECTION			0.0
@@ -173,7 +175,7 @@ t_cuboid	gen_cuboid(int a, int b)
 	cube.width = CUBE_SIZE_A;
 	cube.height = random_double(CUBE_SIZE_C_MIN, CUBE_SIZE_C_MAX);
 	cube.depth = CUBE_SIZE_B;
-	cube.pos = (t_vec3){a + CUBE_SIZE_A / 2.0, cube.height / 2.0, b + CUBE_SIZE_B / 2.0};
+	cube.pos = (t_vec3){a * (CUBE_SIZE_A + CUBE_PADDING) + CUBE_SIZE_A / 2.0, cube.height / 2.0, b * (CUBE_SIZE_B + CUBE_PADDING) + CUBE_SIZE_B / 2.0 + CUBE_PADDING};
 	cube.rot_y = 0;
 	cube.color = gen_color();
 	cube.surface = gen_surface();
@@ -206,7 +208,7 @@ int	main(int argc, char *argv[])
 	static t_cuboid	grid[GRID_CUBES_SUM];
 
 	srand(time(NULL));
-	memset(grid, 0, GRID_CUBES_SUM * sizeof(t_sphere));
+	memset(grid, 0, GRID_CUBES_SUM * sizeof(t_cuboid));
 
 	b = 0;
 	while (b < GRID_CUBES_B)
