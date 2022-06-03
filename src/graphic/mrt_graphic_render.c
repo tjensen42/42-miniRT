@@ -93,19 +93,19 @@ void	rotate_vertical(t_scene *scene, bool up)
 	{
 		if (scene->cam.dir.y > 1.0 - 1e-4)
 			return ;
-		else if (vec3_scalar_product(scene->cam.dir, (t_vec3){0.0,1.0,0.0}) <= cos(10.0 * DEG2RAD))
+		else if (vec3_scalar_product(scene->cam.dir, (t_vec3){0.0, 1.0, 0.0}) <= cos(10.0 * DEG2RAD))
 			scene->cam.dir = vec3_add(scene->cam.dir, vec3_scale(sin(10.0 * DEG2RAD), vec3_normalize(scene->img.py)));
 		else
-			scene->cam.dir = (t_vec3){0.0,1.0,0.0};
+			scene->cam.dir = (t_vec3){0.0, 1.0, 0.0};
 	}
 	else
 	{
 		if (scene->cam.dir.y < -1.0 + 1e-4)
 			return ;
-		else if (vec3_scalar_product(scene->cam.dir, (t_vec3){0.0,1.0,0.0}) >= cos(170.0 * DEG2RAD))
+		else if (vec3_scalar_product(scene->cam.dir, (t_vec3){0.0, 1.0, 0.0}) >= cos(170.0 * DEG2RAD))
 			scene->cam.dir = vec3_add(scene->cam.dir, vec3_scale(-sin(10.0 * DEG2RAD), vec3_normalize(scene->img.py)));
 		else
-			scene->cam.dir = (t_vec3){0.0,-1.0,0.0};
+			scene->cam.dir = (t_vec3){0.0, -1.0, 0.0};
 	}
 	scene->cam.dir = vec3_normalize(scene->cam.dir);
 	scene->img.qy = vec3_scale(vec3_length(scene->img.qx) * scene->img.height / scene->img.width, vec3_normalize(vec3_vector_product(scene->img.qx, scene->cam.dir)));

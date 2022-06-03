@@ -152,7 +152,6 @@ double	intersec_rectangle_z(t_list *obj, t_ray *ray, double t_min, double t_max)
 	double	y;
 
 	tmp_ray = *ray;
-
 	tmp_ray.pos = vec3_subtract(tmp_ray.pos, obj_cont(obj)->rt.pos);
 	if (obj_cont(obj)->rt.rot.z != 0.0)
 		rotate_ray_z(&tmp_ray, obj_cont(obj)->rt.rot.z);
@@ -161,7 +160,6 @@ double	intersec_rectangle_z(t_list *obj, t_ray *ray, double t_min, double t_max)
 	if (obj_cont(obj)->rt.rot.x != 0.0)
 		rotate_ray_x(&tmp_ray, obj_cont(obj)->rt.rot.x);
 	tmp_ray.pos = vec3_subtract(tmp_ray.pos, obj_cont(obj)->rt.rel_pos);
-
 	if (fabs(tmp_ray.dir.z) < 1e-6)
 		return (-1);
 	t = - tmp_ray.pos.z / tmp_ray.dir.z;
@@ -230,7 +228,7 @@ double	intersec_rectangle_x(t_list *obj, t_ray *ray, double t_min, double t_max)
 		return (-1);
 	y = tmp_ray.pos.y + t * tmp_ray.dir.y;
 	z = tmp_ray.pos.z + t * tmp_ray.dir.z;
-	if (fabs(y) > obj_cont(obj)->rt.width / 2.0 || fabs(z) > obj_cont(obj)->rt.height / 2.0)
+	if (fabs(z) > obj_cont(obj)->rt.width / 2.0 || fabs(y) > obj_cont(obj)->rt.height / 2.0)
 		return (-1);
 	return (t);
 }

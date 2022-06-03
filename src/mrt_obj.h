@@ -64,6 +64,7 @@ typedef struct s_disc
 typedef struct s_sphere
 {
 	t_vec3		pos;
+	t_vec3		rot;
 	double		radius;
 }	t_sphere;
 
