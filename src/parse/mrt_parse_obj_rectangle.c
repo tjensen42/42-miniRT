@@ -1,12 +1,15 @@
 #include "mrt_parse.h"
 #include "print/mrt_print.h"
 
+f_color parse_obj_rectangle_get_color_texture(t_vec3 dir);
+f_color parse_obj_rectangle_get_color_checkerboard(t_vec3 dir);
+
 int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 {
 	t_list	*obj;
 	t_obj	*c_obj;
 
-	if (ft_split_count_str(split) != 10)
+	if (ft_split_count_str(split) != 12)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
 	obj = obj_new(0);
 	if (obj == NULL)
@@ -31,6 +34,17 @@ int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 	c_obj->intersec = parse_obj_rectangle_intersec(c_obj->rt.dir);
 	c_obj->normal = &normal_rectangle;
 	c_obj->rt.rel_pos = (t_vec3){0.0, 0.0, 0.0};
+	if (int_from_str(split[10], 0, 10000, &(c_obj->material.cb_factor)) || c_obj->material.cb_factor < 0)
+		return (print_error_scene(line_num, ERR_PARSE, "Invalid cb_factor", NULL));
+	if (c_obj->material.cb_factor > 0 && vec3_equal((t_vec3){0.0, 0.0, 0.0}, c_obj->rt.rot))
+		c_obj->material.get_color = parse_obj_rectangle_get_color_checkerboard(c_obj->rt.dir);
+	if (ft_strcmp("-", split[11]) != 0)
+	{
+		c_obj->material.c_texture = parse_c_texture_find(scene->l_textures, split[11]);
+		if (c_obj->material.c_texture == NULL)
+			return (print_error_scene(line_num, ERR_PARSE, "cannot find texture", split[11]));
+		c_obj->material.get_color = parse_obj_rectangle_get_color_texture(c_obj->rt.dir);
+	}
 	return (0);
 }
 
@@ -61,5 +75,27 @@ f_intersec parse_obj_rectangle_intersec(t_vec3 dir)
 		return (&intersec_rectangle_y);
 	else if (dir.z != 0.0)
 		return (&intersec_rectangle_z);
+	return (NULL);
+}
+
+f_color parse_obj_rectangle_get_color_texture(t_vec3 dir)
+{
+	if (dir.x != 0.0)
+		return (&texture_rectangle_x);
+	else if (dir.y != 0.0)
+		return (&texture_rectangle_y);
+	else if (dir.z != 0.0)
+		return (&texture_rectangle_z);
+	return (NULL);
+}
+
+f_color parse_obj_rectangle_get_color_checkerboard(t_vec3 dir)
+{
+	if (dir.x != 0.0)
+		return (&checkerboard_rectangle_x);
+	else if (dir.y != 0.0)
+		return (&checkerboard_rectangle_y);
+	else if (dir.z != 0.0)
+		return (&checkerboard_rectangle_z);
 	return (NULL);
 }

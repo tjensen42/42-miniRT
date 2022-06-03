@@ -41,6 +41,7 @@ typedef struct s_material
 	t_color			color;
 	t_texture		*c_texture;
 	f_color			get_color;
+	int				cb_factor;
 	double			surface[4];
 	double			fuzz;
 	double			refraction_index;
@@ -124,5 +125,12 @@ void	c_texture_destroy(void *in);
 
 t_color	checkerboard_sphere(t_list *obj, t_hit *hit);
 t_color	texture_sphere(t_list *obj, t_hit *hit);
+
+t_color	texture_rectangle_x(t_list *obj, t_hit *hit);
+t_color	texture_rectangle_y(t_list *obj, t_hit *hit);
+t_color	texture_rectangle_z(t_list *obj, t_hit *hit);
+t_color	checkerboard_rectangle_x(t_list *obj, t_hit *hit);
+t_color	checkerboard_rectangle_y(t_list *obj, t_hit *hit);
+t_color	checkerboard_rectangle_z(t_list *obj, t_hit *hit);
 
 #endif // OBJ_H

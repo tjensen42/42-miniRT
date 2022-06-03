@@ -18,7 +18,7 @@
 /* DEFINES																	  */
 /* ************************************************************************** */
 
-# define THREADS			1
+# define THREADS			12
 
 # define ERR_SCENE_INCOM	"Incomplete scene file"
 # define ERR_MISS_RES		""
