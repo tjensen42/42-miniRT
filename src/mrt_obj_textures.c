@@ -191,13 +191,3 @@ t_color	texture_rectangle_z(t_list *obj, t_hit *hit)
 	pixel = (size_t)(v * c_texture->height) * c_texture->width + u * c_texture->width;
 	return (c_texture->color[pixel]);
 }
-
-// t_color	checkerboard_rectangle_y(t_list *obj, t_hit *hit)
-// {
-
-// }
-
-// t_color	checkerboard_rectangle_z(t_list *obj, t_hit *hit)
-// {
-
-// }

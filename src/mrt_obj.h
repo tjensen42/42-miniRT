@@ -115,23 +115,26 @@ typedef struct	s_obj
 /* ************************************************************************** */
 
 // OBJECTS
-t_list	*obj_new(int type);
-int		obj_type(t_list *obj);
-t_obj	*obj_cont(t_list *obj);
-t_color	obj_color(t_list *obj, t_hit *hit __attribute__((unused)));
+t_list		*obj_new(int type);
+int			obj_type(t_list *obj);
+t_obj		*obj_cont(t_list *obj);
+t_color		obj_color(t_list *obj, t_hit *hit __attribute__((unused)));
 
 t_texture	*texture_cont(t_list *texture);
-t_list	*texture_new(void);
-void	c_texture_destroy(void *in);
+t_list		*texture_new(void);
+void		c_texture_destroy(void *in);
 
-t_color	checkerboard_sphere(t_list *obj, t_hit *hit);
-t_color	texture_sphere(t_list *obj, t_hit *hit);
+t_texture	*obj_texture(t_list *obj);
+t_material	*obj_material(t_list *obj);
 
-t_color	texture_rectangle_x(t_list *obj, t_hit *hit);
-t_color	texture_rectangle_y(t_list *obj, t_hit *hit);
-t_color	texture_rectangle_z(t_list *obj, t_hit *hit);
-t_color	checkerboard_rectangle_x(t_list *obj, t_hit *hit);
-t_color	checkerboard_rectangle_y(t_list *obj, t_hit *hit);
-t_color	checkerboard_rectangle_z(t_list *obj, t_hit *hit);
+t_color		checkerboard_sphere(t_list *obj, t_hit *hit);
+t_color		texture_sphere(t_list *obj, t_hit *hit);
+
+t_color		texture_rectangle_x(t_list *obj, t_hit *hit);
+t_color		texture_rectangle_y(t_list *obj, t_hit *hit);
+t_color		texture_rectangle_z(t_list *obj, t_hit *hit);
+t_color		checkerboard_rectangle_x(t_list *obj, t_hit *hit);
+t_color		checkerboard_rectangle_y(t_list *obj, t_hit *hit);
+t_color		checkerboard_rectangle_z(t_list *obj, t_hit *hit);
 
 #endif // OBJ_H

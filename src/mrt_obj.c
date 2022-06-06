@@ -37,6 +37,16 @@ void	c_texture_destroy(void *in)
 	free(texture);
 }
 
+inline t_material	*obj_material(t_list *obj)
+{
+	return (&(obj_cont(obj)->material));
+}
+
+inline t_texture	*obj_texture(t_list *obj)
+{
+	return (obj_cont(obj)->material.c_texture);
+}
+
 inline t_texture	*texture_cont(t_list *texture)
 {
 	return ((t_texture *)texture->content);

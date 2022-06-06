@@ -92,7 +92,10 @@ t_color	trace(t_scene *scene, t_ray *ray, int depth)
 			else
 				scattering_pdf = fabs(cosine / M_PI);
 			color = trace(scene, &ray_recursion, depth + 1);
-			return (color_multiply(obj_cont(hit_obj)->material.get_color(hit_obj, &hit), color_scale(scattering_pdf / mixed_sampling_pdf_value, color)));
+			if (depth == 0)
+				return (color_max(color_multiply(obj_cont(hit_obj)->material.get_color(hit_obj, &hit), color_scale(scattering_pdf / mixed_sampling_pdf_value, color)), scene->amb.color));
+			else
+				return (color_multiply(obj_cont(hit_obj)->material.get_color(hit_obj, &hit), color_scale(scattering_pdf / mixed_sampling_pdf_value, color)));
 		}
 		else if (rand_double < obj_cont(hit_obj)->material.surface[SURF_DIFFUSE] + obj_cont(hit_obj)->material.surface[SURF_SPECULAR])
 		{

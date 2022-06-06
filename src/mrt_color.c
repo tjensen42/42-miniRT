@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:12:06 by tjensen           #+#    #+#             */
-/*   Updated: 2022/05/31 10:08:03 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/06 11:51:21 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,25 @@
 #include "math/mrt_math.h"
 
 #include <math.h>
+
+inline t_color	color_max(t_color c1, t_color c2)
+{
+	t_color	color;
+
+	if (c1.r > c2.r)
+		color.r = c1.r;
+	else
+		color.r = c2.r;
+	if (c1.g > c2.g)
+		color.g = c1.g;
+	else
+		color.g = c2.g;
+	if (c1.b > c2.b)
+		color.b = c1.b;
+	else
+		color.b = c2.b;
+	return (color);
+}
 
 inline double	color_clamp(double color, double min, double max)
 {

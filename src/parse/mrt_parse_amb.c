@@ -10,6 +10,7 @@ int	parse_amb(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_BRIGHT, NULL));
 	if (parse_color(split[2], &(scene->amb.color)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_COLOR, NULL));
+	scene->amb.color = color_scale(scene->amb.brightness, scene->amb.color);
 	scene->amb.set = true;
 	return (0);
 }
