@@ -1,5 +1,5 @@
-#ifndef OBJ_H
-# define OBJ_H
+#ifndef MRT_OBJ_H
+# define MRT_OBJ_H
 
 /* ************************************************************************** */
 /* INCLUDES																	  */
@@ -89,15 +89,14 @@ typedef struct s_rectangle
 typedef struct s_ray t_ray;
 typedef struct s_hit t_hit;
 
-typedef void	(*f_print)(t_list *obj);
+typedef void	(*t_f_print)(t_list *obj);
 typedef double	(*f_intersec)(t_list *obj, t_ray *ray, double t_min, double t_max);
 typedef t_vec3	(*f_normal)(t_list *obj, t_hit *hit);
 
 typedef struct	s_obj
 {
-	int				type;
 	t_material		material;
-	f_print			print;
+	t_f_print			print;
 	f_intersec		intersec;
 	f_normal		normal;
 	union
@@ -115,7 +114,7 @@ typedef struct	s_obj
 /* ************************************************************************** */
 
 // OBJECTS
-t_list		*obj_new(int type);
+t_list		*obj_new(void);
 int			obj_type(t_list *obj);
 t_obj		*obj_cont(t_list *obj);
 t_color		obj_color(t_list *obj, t_hit *hit __attribute__((unused)));
@@ -137,4 +136,4 @@ t_color		checkerboard_rectangle_x(t_list *obj, t_hit *hit);
 t_color		checkerboard_rectangle_y(t_list *obj, t_hit *hit);
 t_color		checkerboard_rectangle_z(t_list *obj, t_hit *hit);
 
-#endif // OBJ_H
+#endif // MRT_OBJ_H

@@ -8,7 +8,7 @@ int	parse_obj_tube(t_scene *scene, char **split, int line_num)
 
 	if (ft_split_count_str(split) != 9)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
-	obj = obj_new(0);
+	obj = obj_new();
 	if (obj == NULL)
 		return (print_error_scene(line_num, ERR_PARSE, strerror(errno), NULL));
 	ft_lstadd_back(&(scene->l_obj), obj);

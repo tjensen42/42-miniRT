@@ -8,6 +8,7 @@ void	print_obj_sphere(t_list *obj)
 	printf("SPHERE: (%p)\n", c_obj);
 	print_vec3(c_obj->sp.pos, "pos:", COLOR_BL);
 	print_scene_double(c_obj->sp.radius, "radius:", COLOR_NO);
+	print_vec3(c_obj->sp.rot, "rot:", COLOR_NO);
 	print_material(&(c_obj->material));
 	printf("\n");
 }

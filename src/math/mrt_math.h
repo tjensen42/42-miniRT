@@ -7,8 +7,8 @@
 
 # include <math.h>
 
-# define RAD2DEG		(180.0/M_PI)
-# define DEG2RAD		(M_PI/180.0)
+# define RAD2DEG	(180.0/M_PI)
+# define DEG2RAD	(M_PI/180.0)
 
 t_color	color_add(t_color c1, t_color c2);
 t_color	color_scale(double f, t_color c1);

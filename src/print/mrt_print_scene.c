@@ -5,7 +5,7 @@ static void	print_scene_specs(t_scene *scene);
 
 int	print_scene(t_scene *scene)
 {
-	t_list *iter;
+	t_list	*iter;
 
 	print_scene_specs(scene);
 	iter = scene->l_obj;
@@ -54,10 +54,6 @@ static void	print_scene_specs(t_scene *scene)
 static void	print_scene_img(struct s_img *img)
 {
 	printf("IMAGE:\n");
-	if (img->ppm)
-		printf("\t%-10s %8s\n", "ppm:", "true");
-	else
-		printf("\t%-10s %8s\n", "ppm:", "false");
 	print_scene_int(img->width, "width:", NULL);
 	print_scene_int(img->height, "height:", NULL);
 	print_vec3(img->pos, "img-pos:", COLOR_BL);

@@ -6,18 +6,18 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 10:32:01 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/06 11:51:31 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/06 17:34:17 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#ifndef MRT_COLOR_H
+# define MRT_COLOR_H
 
 /* ************************************************************************** */
 /* INCLUDES																	  */
 /* ************************************************************************** */
 
-#include <stdbool.h>
+# include <stdbool.h>
 
 /* ************************************************************************** */
 /* DEFINES																	  */
@@ -53,4 +53,4 @@ t_color	color_gamma_encode(t_color color);
 int		color_to_rgba_int(t_color color, bool gamma_correction);
 t_color	color_max(t_color c1, t_color c2);
 
-#endif // COLOR_H
+#endif // MRT_COLOR_H

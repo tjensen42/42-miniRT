@@ -19,20 +19,20 @@
 /* STRUCTS																	  */
 /* ************************************************************************** */
 
-typedef struct s_obj t_obj;
-typedef struct s_scene t_scene;
-typedef struct s_hit t_hit;
+typedef struct s_obj	t_obj;
+typedef struct s_scene	t_scene;
+typedef struct s_hit	t_hit;
 
-typedef void	(*f_print)(t_list *is);
-typedef double	(*f_pdf_value)(t_scene *scene, t_list *is, t_hit *hit);
-typedef t_vec3	(*f_random_dir)(t_list *is, t_hit *hit);
+typedef void			(*t_f_print)(t_list *is);
+typedef double			(*t_f_pdf_val)(t_scene *scene, t_list *is, t_hit *hit);
+typedef t_vec3			(*t_f_random_dir)(t_list *is, t_hit *hit);
 
-typedef struct	s_light
+typedef struct s_light
 {
 	double			weight;
-	f_print			print;
-	f_pdf_value		pdf_value;
-	f_random_dir	random_dir;
+	t_f_print		print;
+	t_f_pdf_val		pdf_value;
+	t_f_random_dir	random_dir;
 	t_obj			*linked_c_obj;
 }	t_light;
 

@@ -1,5 +1,5 @@
-#ifndef SCENE_H
-# define SCENE_H
+#ifndef MRT_SCENE_H
+# define MRT_SCENE_H
 
 /* ************************************************************************** */
 /* INCLUDES																	  */
@@ -79,8 +79,6 @@ struct s_cam
 
 struct s_img
 {
-	bool	ppm;
-	FILE	*fp_ppm;
 	bool	res_set;
 	int		width;
 	int		height;
@@ -121,4 +119,4 @@ int		scene_destroy(t_scene *scene);
 
 void	scene_calc_img_pos(t_scene *scene);
 
-#endif // SCENE_H
+#endif // MRT_SCENE_H

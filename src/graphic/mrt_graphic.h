@@ -18,6 +18,17 @@ typedef struct s_graphic_data
 	t_scene		*scene;
 }	t_graphic_data;
 
-int	graphic(t_scene *scene);
+int		graphic(t_scene *scene);
+
+void	move(t_scene *scene, t_vec3 new_pos);
+void	rotate_horizontal(t_scene *scene, bool right);
+void	rotate_vertical(t_scene *scene, bool up);
+
+void	graphic_render(t_graphic_data *graphic);
+void	*draw_thread(void *thread_data);
+void	img_to_mlx_img(t_scene *scene, mlx_image_t *mlx_img);
+
+void	reset_cam(t_scene *scene);
+void	reset_sampling(t_scene *scene);
 
 #endif // MRT_GRAPHIC_H

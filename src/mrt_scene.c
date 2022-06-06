@@ -22,14 +22,9 @@ int scene_create(t_scene *scene, const char *file)
 int	scene_destroy(t_scene *scene)
 {
 	free(scene->img.pixel);
-	if (scene->l_obj)
-		ft_lstclear(&(scene->l_obj), free);
-	if (scene->l_light)
-		ft_lstclear(&(scene->l_light), free);
-	if (scene->l_textures)
-		ft_lstclear(&(scene->l_textures), c_texture_destroy);
-	if (scene->img.ppm)
-		fclose(scene->img.fp_ppm);
+	ft_lstclear(&(scene->l_obj), free);
+	ft_lstclear(&(scene->l_light), free);
+	ft_lstclear(&(scene->l_textures), c_texture_destroy);
 	return (0);
 }
 
@@ -95,21 +90,6 @@ int scene_check_is_weights(t_list *l_light)
 	}
 	return (0);
 }
-
-// void	scene_calc_img_pos(t_scene *scene, bool update_px)
-// {
-// 	if (update_px)
-// 	{
-// 		if (fabs(scene->cam.dir.y) > 1.0 - 1e-4)
-// 			scene->img.qx = vec3_scale(tan((double)scene->cam.fov / 2.0 * DEG2RAD), vec3_normalize(vec3_vector_product((t_vec3){1, 0, 0}, scene->cam.dir)));
-// 		else
-// 			scene->img.qx = vec3_scale(tan((double)scene->cam.fov / 2.0 * DEG2RAD), vec3_normalize(vec3_vector_product((t_vec3){0, 1, 0}, scene->cam.dir)));
-// 		scene->img.px = vec3_scale(-2.0 / (scene->img.width - 1), scene->img.qx);
-// 	}
-// 	scene->img.qy = vec3_scale(vec3_length(scene->img.qx) * scene->img.height / scene->img.width, vec3_normalize(vec3_vector_product(scene->img.qx, scene->cam.dir)));
-// 	scene->img.pos = vec3_add(vec3_add(scene->cam.pos, scene->cam.dir), vec3_add(scene->img.qx, scene->img.qy));
-// 	scene->img.py = vec3_scale(-2.0 / (scene->img.height - 1), scene->img.qy);
-// }
 
 void	scene_calc_img_pos(t_scene *scene)
 {

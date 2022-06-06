@@ -9,7 +9,7 @@ int	parse_obj_sphere(t_scene *scene, char **split, int line_num)
 
 	if (ft_split_count_str(split) != 10)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
-	obj = obj_new(0);
+	obj = obj_new();
 	if (obj == NULL)
 		return (print_error_scene(line_num, ERR_PARSE, strerror(errno), NULL));
 	ft_lstadd_back(&(scene->l_obj), obj);
@@ -25,7 +25,8 @@ int	parse_obj_sphere(t_scene *scene, char **split, int line_num)
 	c_obj->print = &print_obj_sphere;
 	c_obj->intersec = &intersec_sphere;
 	c_obj->normal = &normal_sphere;
-	if (int_from_str(split[8], 0, 10000, &(c_obj->material.cb_factor)) || c_obj->material.cb_factor < 0)
+	if (int_from_str(split[8], 0, 10000, &(c_obj->material.cb_factor))
+		|| c_obj->material.cb_factor < 0)
 		return (print_error_scene(line_num, ERR_PARSE, "Invalid cb_factor", NULL));
 	if (c_obj->material.cb_factor > 0)
 		c_obj->material.get_color = &checkerboard_sphere;

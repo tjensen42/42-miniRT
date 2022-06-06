@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:12:06 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/06 11:51:21 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/06 17:33:00 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	color_to_rgba_int(t_color color, bool gamma_correction)
 	return (
 		(int)(256.0 * color_clamp(color.r, 0.0, 0.999)) << 24 |
 		(int)(256.0 * color_clamp(color.g, 0.0, 0.999)) << 16 |
-		(int)(256.0 * color_clamp(color.b, 0.0, 0.999)) << 8  |
+		(int)(256.0 * color_clamp(color.b, 0.0, 0.999)) << 8 |
 		(int)(0xFF)
 			);
 }

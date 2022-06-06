@@ -6,12 +6,12 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 10:27:56 by tjensen           #+#    #+#             */
-/*   Updated: 2022/04/21 09:37:04 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/06 17:37:16 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VEC3_H
-# define VEC3_H
+#ifndef MRT_VEC3_H
+# define MRT_VEC3_H
 
 # include "lib/libft/inc/libft.h"
 
@@ -52,4 +52,4 @@ double	vec3_distance(t_vec3 a, t_vec3 b);
 double	vec3_scalar_product(t_vec3 a, t_vec3 b);
 t_vec3	vec3_vector_product(t_vec3 a, t_vec3 b);
 
-#endif // VEC3_H
+#endif // MRT_VEC3_H

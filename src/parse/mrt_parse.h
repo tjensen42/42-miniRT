@@ -41,6 +41,13 @@
 # define ERR_INVAL_HEIGHT	"Invalid height"
 # define ERR_INVAL_DEPTH	"Invalid depth"
 
+# define ERR_MAX_SAMP		"Invalid number of max_samp"
+# define ERR_REC_DEPTH		"Invalid import sampling"
+# define ERR_IMPORT_SAMP	"Invalid import sampling"
+# define ERR_COSINE_SAMP	"Invalid cosine sampling"
+# define ERR_SAMP_SUM		"Invalid: import + cosine != 1.0"
+# define ERR_INVAL_GAMMA	"Invalid gamma specification"
+
 # define ERR_INVAL_CAM		"Cam look-from and look-at cannot be equal"
 # define ERR_INVAL_LOOK		"Invalid look-at"
 # define ERR_INVAL_FOV		"Invalid camera FOV (range [1-179])"
@@ -53,6 +60,7 @@
 # define ERR_INVAL_FUZZ		"Invalid fuzz (range [])"
 # define ERR_INVAL_REFRAC	"Invalid refrac (range [])"
 # define ERR_INVAL_SURF		"Invalid surfaces"
+# define ERR_INVAL_DIEL		"Value for DIELECTRIC must be 0.0 for 2D Objects"
 
 // IDENTIFIERS
 # define IDENT_RES			"R"
@@ -73,14 +81,13 @@
 # define IDENT_DISC			"di"
 # define IDENT_TUBE			"tb"
 
-
 /* ************************************************************************** */
 /* FUNCTION PROTOTYPES														  */
 /* ************************************************************************** */
 
 int			int_from_str(const char *str, int min, int max, int *res);
 int			double_from_str(const char *str, int before_point,
-					int after_point, double *res);
+				int after_point, double *res);
 
 int			parse_color(const char *str, t_color *color);
 int			parse_vec3(const char *str, t_vec3 *vec3);
@@ -94,7 +101,7 @@ int			parse_img(t_scene *scene, char **split, int line_num);
 int			parse_ppm(t_scene *scene, char **split, int line_num);
 
 int			parse_obj_rectangle_dir(t_obj *c_obj, const char *dir);
-f_intersec	parse_obj_rectangle_intersec(t_vec3 dir);
+f_intersec	parse_obj_rt_intersec(t_vec3 dir);
 
 int			parse_texture(t_scene *scene, char **split, int line_num);
 t_texture	*parse_c_texture_find(t_list *l_texture, const char *name);

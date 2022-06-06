@@ -1,14 +1,14 @@
 #include "mrt_parse.h"
 #include "print/mrt_print.h"
 
-int parse_obj_plane(t_scene *scene, char **split, int line_num)
+int	parse_obj_plane(t_scene *scene, char **split, int line_num)
 {
 	t_list	*obj;
 	t_obj	*c_obj;
 
 	if (ft_split_count_str(split) != 7)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
-	obj = obj_new(0);
+	obj = obj_new();
 	if (obj == NULL)
 		return (print_error_scene(line_num, ERR_PARSE, strerror(errno), NULL));
 	ft_lstadd_back(&(scene->l_obj), obj);
@@ -21,7 +21,7 @@ int parse_obj_plane(t_scene *scene, char **split, int line_num)
 	if (parse_material(&(c_obj->material), &split[3], line_num))
 		return (-1);
 	if (c_obj->material.surface[SURF_DIELECTRIC] != 0.0)
-		return (print_error_scene(line_num, ERR_PARSE, "Value for DIELECTRIC must be 0.0 for 2D Objects", NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIEL, NULL));
 	c_obj->print = &print_obj_plane;
 	c_obj->intersec = &intersec_plane;
 	c_obj->normal = &normal_plane;

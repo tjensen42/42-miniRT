@@ -1,7 +1,7 @@
 #include "mrt_obj.h"
 #include "lib/libmlx/include/MLX42/MLX42.h"
 
-t_list	*obj_new(int type)
+t_list	*obj_new(void)
 {
 	t_obj	*c_obj;
 
@@ -9,7 +9,6 @@ t_list	*obj_new(int type)
 	if (c_obj == NULL)
 		return (NULL);
 	ft_bzero(c_obj, sizeof(t_obj));
-	c_obj->type = type;
 	return (ft_lstnew(c_obj));
 }
 

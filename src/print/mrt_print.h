@@ -43,6 +43,7 @@ void	print_light_rectangle(t_list *light);
 void	print_light_disc(t_list *light);
 
 int		print_error(char *s1, char *s2, char *s3, char *s4);
-int		print_error_scene(int line_num, const char *msg1, const char *msg2, const char *msg3);
+int		print_error_scene(int line_num, const char *msg1,
+			const char *msg2, const char *msg3);
 
 #endif // MRT_PRINT_H
