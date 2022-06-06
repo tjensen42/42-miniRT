@@ -34,6 +34,20 @@
 # define ERR_INVAL_OPTION	"Invalid option"
 # define ERR_INVAL_POS		"Invalid position"
 # define ERR_INVAL_DIR		"Invalid direction"
+
+# define ERR_INVAL_ROT		"Invalid rotation angles"
+# define ERR_INVAL_RAD		"Invalid radius"
+# define ERR_INVAL_WIDTH	"Invalid width"
+# define ERR_INVAL_HEIGHT	"Invalid height"
+# define ERR_INVAL_DEPTH	"Invalid depth"
+
+# define ERR_INVAL_CAM		"Cam look-from and look-at cannot be equal"
+# define ERR_INVAL_LOOK		"Invalid look-at"
+# define ERR_INVAL_FOV		"Invalid camera FOV (range [1-179])"
+
+# define ERR_INVAL_RES		"Invalid resolution (range [10-10000])"
+# define ERR_INVAL_LW		"Invalid light-weight"
+
 # define ERR_INVAL_COLOR	"Invalid color (range [0-255])"
 # define ERR_INVAL_BRIGHT	"Invalid brightness (range [0.0-9999.99])"
 # define ERR_INVAL_FUZZ		"Invalid fuzz (range [])"

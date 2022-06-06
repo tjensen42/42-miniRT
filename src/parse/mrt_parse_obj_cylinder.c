@@ -12,7 +12,7 @@ int	parse_obj_cylinder(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
 	obj = obj_new(0);
 	if (obj == NULL)
-		return (-1);
+		return (print_error_scene(line_num, ERR_PARSE, strerror(errno), NULL));
 	ft_lstadd_back(&(scene->l_obj), obj);
 	c_obj = obj_cont(obj);
 	if (parse_vec3(split[1], &(c_obj->tb.pos)))
@@ -20,10 +20,10 @@ int	parse_obj_cylinder(t_scene *scene, char **split, int line_num)
 	if (parse_vec3(split[2], &(c_obj->tb.dir)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIR, NULL));
 	c_obj->tb.dir = vec3_normalize(c_obj->tb.dir);
-	if (double_from_str(split[3], 6, 2, &(c_obj->tb.radius)) || c_obj->tb.radius <= 0)
-		return (print_error_scene(line_num, ERR_PARSE, "Invalid radius", NULL));
-	if (double_from_str(split[4], 6, 2, &(c_obj->tb.height)) || c_obj->tb.height <= 0)
-		return (print_error_scene(line_num, ERR_PARSE, "Invalid height", NULL));
+	if (double_from_str(split[3], 6, 3, &(c_obj->tb.radius)) || c_obj->tb.radius <= 0)
+		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_RAD, NULL));
+	if (double_from_str(split[4], 6, 3, &(c_obj->tb.height)) || c_obj->tb.height <= 0)
+		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_HEIGHT, NULL));
 	if (parse_material(&(c_obj->material), &split[5], line_num))
 		return (-1);
 	if (add_caps(scene, c_obj))
@@ -41,7 +41,7 @@ static int add_caps(t_scene *scene, t_obj *c_cy)
 
 	obj_top = obj_new(0);
 	if (obj_top == NULL)
-		return (-1);
+		return (print_error_scene(-1, ERR_PARSE, strerror(errno), NULL));
 	ft_lstadd_back(&(scene->l_obj), obj_top);
 	obj_bottom = obj_new(0);
 	if (obj_bottom == NULL)

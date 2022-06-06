@@ -10,7 +10,7 @@ int parse_obj_plane(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
 	obj = obj_new(0);
 	if (obj == NULL)
-		return (-1);
+		return (print_error_scene(line_num, ERR_PARSE, strerror(errno), NULL));
 	ft_lstadd_back(&(scene->l_obj), obj);
 	c_obj = obj_cont(obj);
 	if (parse_vec3(split[1], &(c_obj->pl.pos)))

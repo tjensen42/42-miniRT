@@ -21,8 +21,8 @@ int	int_from_str(const char *str, int min, int max, int *res)
 	return (0);
 }
 
-int	double_from_str(const char *str, int before_point,
-				int after_point, double *res)
+int	double_from_str(const char *str, int b_p,
+				int a_p, double *res)
 {
 	int	i;
 
@@ -40,13 +40,13 @@ int	double_from_str(const char *str, int before_point,
 		str = str + 1;
 	if (ft_strchr(str, '.') != ft_strrchr(str, '.'))
 		return (-1);
-	if (ft_strchr(str, '.') && (int)(ft_strchr(str, '.') - str) > before_point)
+	if (ft_strchr(str, '.') && (int)(ft_strchr(str, '.') - str) > b_p)
 		return (-1);
-	if (ft_strchr(str, '.') && (int)(ft_strlen(ft_strchr(str, '.') + 1)) > after_point)
+	if (ft_strchr(str, '.') && (int)(ft_strlen(ft_strchr(str, '.') + 1)) > a_p)
 		return (-1);
 	if (ft_strchr(str, '.') && !ft_isdigit(*(ft_strchr(str, '.') + 1)))
 		return (-1);
-	if (!ft_strchr(str, '.') && (int)(ft_strlen(str)) > before_point)
+	if (!ft_strchr(str, '.') && (int)(ft_strlen(str)) > b_p)
 		return (-1);
 	return (0);
 }

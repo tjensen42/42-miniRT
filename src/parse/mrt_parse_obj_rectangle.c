@@ -13,19 +13,19 @@ int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
 	obj = obj_new(0);
 	if (obj == NULL)
-		return (-1);
+		return (print_error_scene(line_num, ERR_PARSE, strerror(errno), NULL));
 	ft_lstadd_back(&(scene->l_obj), obj);
 	c_obj = obj_cont(obj);
 	if (parse_vec3(split[1], &(c_obj->rt.pos)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_POS, NULL));
 	if (parse_obj_rectangle_dir(c_obj, split[2]))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIR, NULL));
-	if (double_from_str(split[3], 6, 2, &(c_obj->rt.width)))
-		return (print_error_scene(line_num, ERR_PARSE, "Invalid width", NULL));
-	if (double_from_str(split[4], 6, 2, &(c_obj->rt.height)))
-		return (print_error_scene(line_num, ERR_PARSE, "Invalid height", NULL));
+	if (double_from_str(split[3], 6, 3, &(c_obj->rt.width)))
+		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_WIDTH, NULL));
+	if (double_from_str(split[4], 6, 3, &(c_obj->rt.height)))
+		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_HEIGHT, NULL));
 	if (parse_vec3(split[5], &(c_obj->rt.rot)))
-		return (print_error_scene(line_num, ERR_PARSE, "Invalid rotation angles", NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_ROT, NULL));
 	if (parse_material(&(c_obj->material), &split[6], line_num))
 		return (-1);
 	if (c_obj->material.surface[SURF_DIELECTRIC] != 0.0)

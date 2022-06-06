@@ -11,10 +11,7 @@ int	parse_scene(t_scene *scene, const char *file)
 	FILE	*fp;
 
 	if (file && ft_strncmp_rev(file, ".rt", 3) != 0)
-	{
-		print_error_scene(-1, file, ERR_INVAL_FILE, NULL);
-		return (-1);
-	}
+		return (print_error_scene(-1, file, ERR_INVAL_FILE, NULL));
 	fp = fopen(file, "r");
 	if (fp == NULL)
 		return (print_error_scene(-1, file, strerror(errno), NULL));
@@ -50,7 +47,7 @@ static int	parse_line(t_scene *scene, char *line, int line_num)
 
 	error = false;
 	if (ft_strchr(line, '\t'))
-		return (print_error_scene(line_num, ERR_FILE_TABS, NULL, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_FILE_TABS, NULL));
 	if (line[0] != '\0' && line[0] != '\n' && line[0] != '#')
 	{
 		if (line[ft_strlen(line) - 1] == '\n')
@@ -96,6 +93,6 @@ static int	parse_identifier(t_scene *scene, char **split, int line_num)
 			return (g_ident[i].process_ident(scene, split, line_num));
 		i++;
 	}
-	print_error_scene(line_num, ERR_INVAL_IDENT, split[0], NULL);
+	print_error_scene(line_num, ERR_PARSE, ERR_INVAL_IDENT, split[0]);
 	return (-1);
 }

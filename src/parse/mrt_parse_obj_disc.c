@@ -10,7 +10,7 @@ int	parse_obj_disc(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
 	obj = obj_new(0);
 	if (obj == NULL)
-		return (-1);
+		return (print_error_scene(line_num, ERR_PARSE, strerror(errno), NULL));
 	ft_lstadd_back(&(scene->l_obj), obj);
 	c_obj = obj_cont(obj);
 	if (parse_vec3(split[1], &(c_obj->di.pos)))
@@ -18,8 +18,8 @@ int	parse_obj_disc(t_scene *scene, char **split, int line_num)
 	if (parse_vec3(split[2], &(c_obj->di.dir)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIR, NULL));
 	c_obj->pl.dir = vec3_normalize(c_obj->di.dir);
-	if (double_from_str(split[3], 6, 4, &(c_obj->di.radius)) || c_obj->di.radius <= 0)
-		return (print_error_scene(line_num, ERR_PARSE, "Invalid Radius", NULL));
+	if (double_from_str(split[3], 6, 3, &(c_obj->di.radius)) || c_obj->di.radius <= 0)
+		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_RAD, NULL));
 	if (parse_material(&(c_obj->material), &split[4], line_num))
 		return (-1);
 	if (c_obj->material.surface[SURF_DIELECTRIC] != 0.0)

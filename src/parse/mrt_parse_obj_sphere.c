@@ -11,15 +11,15 @@ int	parse_obj_sphere(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
 	obj = obj_new(0);
 	if (obj == NULL)
-		return (-1);
+		return (print_error_scene(line_num, ERR_PARSE, strerror(errno), NULL));
 	ft_lstadd_back(&(scene->l_obj), obj);
 	c_obj = obj_cont(obj);
 	if (parse_vec3(split[1], &(c_obj->sp.pos)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_POS, NULL));
-	if (double_from_str(split[2], 6, 4, &(c_obj->sp.radius)))
-		return (print_error_scene(line_num, ERR_PARSE, "Invalid radius", NULL));
+	if (double_from_str(split[2], 6, 3, &(c_obj->sp.radius)))
+		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_RAD, NULL));
 	if (parse_vec3(split[3], &(c_obj->sp.rot)))
-		return (print_error_scene(line_num, ERR_PARSE, "Invalid rotation angles", NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_ROT, NULL));
 	if (parse_material(&(c_obj->material), &split[4], line_num))
 		return (-1);
 	c_obj->print = &print_obj_sphere;
