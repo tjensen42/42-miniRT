@@ -6,7 +6,7 @@
 #    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 09:02:38 by tjensen           #+#    #+#              #
-#    Updated: 2022/06/07 18:16:57 by tjensen          ###   ########.fr        #
+#    Updated: 2022/06/07 19:48:38 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ OBJS			:= $(addprefix $(ODIR)/, $(SRCS:.c=.o))
 IDIR			:= $(SDIR)
 
 LIBS			:= lib/libft/libft.a lib/libmlx/libmlx42.a
-LDFLAGS			:= $(LIBS) -lm -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+LDFLAGS			:= $(LIBS) -lm -lglfw
 CFLAGS			+= -I. -I$(IDIR)
 
 # **************************************************************************** #
@@ -50,7 +50,8 @@ CFLAGS			+= -I. -I$(IDIR)
 # **************************************************************************** #
 
 ifeq ($(shell uname -s), Linux)
-	CFLAGS += -D LINUX -Wno-unused-result
+	CFLAGS	+= -D LINUX -Wno-unused-result
+	LDFLAGS	:= $(LIBS) -lm -lglfw -ldl
 endif
 
 # **************************************************************************** #
