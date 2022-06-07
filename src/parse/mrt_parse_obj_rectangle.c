@@ -2,7 +2,6 @@
 #include "print/mrt_print.h"
 
 static f_color parse_obj_rectangle_get_color_texture(t_vec3 dir);
-static f_color parse_obj_rectangle_get_color_checkerboard(t_vec3 dir);
 
 int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 {
@@ -29,7 +28,7 @@ int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 	if (parse_material(&(c_obj->material), &split[6], line_num))
 		return (-1);
 	if (c_obj->material.surface[SURF_DIELECTRIC] != 0.0)
-		return (print_error_scene(line_num, ERR_PARSE, "Value for DIELECTRIC must be 0.0 for 2D Objects", NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIEL, NULL));
 	c_obj->print = &print_obj_rectangle;
 	c_obj->intersec = parse_obj_rt_intersec(c_obj->rt.dir);
 	c_obj->normal = &normal_rectangle;
@@ -37,7 +36,7 @@ int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 	if (int_from_str(split[10], 0, 10000, &(c_obj->material.cb_factor)))
 		return (print_error_scene(line_num, ERR_PARSE, "Invalid cb_factor", NULL));
 	if (c_obj->material.cb_factor > 0 && vec3_equal((t_vec3){0.0, 0.0, 0.0}, c_obj->rt.rot))
-		c_obj->material.get_color = parse_obj_rectangle_get_color_checkerboard(c_obj->rt.dir);
+		c_obj->material.get_color = &checkerboard_rectangle;
 	if (ft_strcmp("-", split[11]) != 0)
 	{
 		c_obj->material.c_texture = parse_c_texture_find(scene->l_textures, split[11]);
@@ -86,16 +85,5 @@ static f_color parse_obj_rectangle_get_color_texture(t_vec3 dir)
 		return (&texture_rectangle_y);
 	else if (dir.z != 0.0)
 		return (&texture_rectangle_z);
-	return (NULL);
-}
-
-static f_color parse_obj_rectangle_get_color_checkerboard(t_vec3 dir)
-{
-	if (dir.x != 0.0)
-		return (&checkerboard_rectangle_x);
-	else if (dir.y != 0.0)
-		return (&checkerboard_rectangle_y);
-	else if (dir.z != 0.0)
-		return (&checkerboard_rectangle_z);
 	return (NULL);
 }

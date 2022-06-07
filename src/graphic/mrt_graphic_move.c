@@ -4,7 +4,7 @@ void	move(t_scene *scene, t_vec3 new_pos)
 {
 	scene->cam.pos = new_pos;
 	scene->img.pos = vec3_add(vec3_add(scene->cam.pos, scene->cam.dir),
-						vec3_add(scene->img.qx, scene->img.qy));
+			vec3_add(scene->img.qx, scene->img.qy));
 	print_vec3(scene->cam.pos, "cam_pos", COLOR_BL);
 	print_vec3(scene->cam.dir, "cam_dir", COLOR_CY);
 	reset_sampling(scene);

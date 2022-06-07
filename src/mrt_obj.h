@@ -132,8 +132,6 @@ t_color		texture_sphere(t_list *obj, t_hit *hit);
 t_color		texture_rectangle_x(t_list *obj, t_hit *hit);
 t_color		texture_rectangle_y(t_list *obj, t_hit *hit);
 t_color		texture_rectangle_z(t_list *obj, t_hit *hit);
-t_color		checkerboard_rectangle_x(t_list *obj, t_hit *hit);
-t_color		checkerboard_rectangle_y(t_list *obj, t_hit *hit);
-t_color		checkerboard_rectangle_z(t_list *obj, t_hit *hit);
+t_color		checkerboard_rectangle(t_list *obj, t_hit *hit);
 
 #endif // MRT_OBJ_H

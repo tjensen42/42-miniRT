@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mrt_graphic.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/07 09:50:23 by tjensen           #+#    #+#             */
+/*   Updated: 2022/06/07 10:49:08 by tjensen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MRT_GRAPHIC_H
 # define MRT_GRAPHIC_H
 
@@ -21,8 +33,8 @@ typedef struct s_graphic_data
 int		graphic(t_scene *scene);
 
 void	move(t_scene *scene, t_vec3 new_pos);
-void	rotate_horizontal(t_scene *scene, bool right);
-void	rotate_vertical(t_scene *scene, bool up);
+void	rotate_horizontal(t_scene *scene, double rot);
+void	rotate_vertical(t_scene *scene, bool up, double rot);
 
 void	graphic_render(t_graphic_data *graphic);
 void	*draw_thread(void *thread_data);

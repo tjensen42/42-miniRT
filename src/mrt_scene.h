@@ -21,12 +21,14 @@
 # define THREADS			12
 
 # define ERR_SCENE_INCOM	"Incomplete scene file"
-# define ERR_MISS_RES		""
-# define ERR_MISS_SAM		""
-# define ERR_MISS_CAM		""
-# define ERR_MISS_BG		""
-# define ERR_MISS_AMB		""
-# define ERR_MISS_OBJ		""
+# define ERR_MISS_RES		"Missing resolution"
+# define ERR_MISS_SAM		"Missing sampling specifications"
+# define ERR_MISS_CAM		"Missing cam"
+# define ERR_MISS_BG		"Missing background"
+# define ERR_MISS_AMB		"Missing ambient light"
+# define ERR_MISS_OBJ		"Missing at least one object"
+
+# define ERR_WEIGHT_SUM		"Invalid weight sum for lights"
 
 /* ************************************************************************** */
 /* STRUCTS																	  */
@@ -115,8 +117,9 @@ typedef struct s_scene
 
 // SCENE
 int		scene_create(t_scene *scene, const char *file);
-int		scene_destroy(t_scene *scene);
+void	scene_destroy(t_scene *scene);
 
+int		scene_check_light_weights(t_list *l_light);
 void	scene_calc_img_pos(t_scene *scene);
 
 #endif // MRT_SCENE_H
