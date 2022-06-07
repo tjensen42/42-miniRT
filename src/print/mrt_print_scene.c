@@ -33,8 +33,8 @@ static void	print_scene_specs(t_scene *scene)
 	printf("SAMPLING:\n");
 	print_scene_int(scene->sampling.max_samp, "samples:", NULL);
 	print_scene_int(scene->sampling.recursion_depth, "rec_depth:", NULL);
-	print_scene_double(scene->sampling.cosine_samp, "cosine:", NULL);
-	print_scene_double(scene->sampling.import_samp, "import:", NULL);
+	print_scene_double(scene->sampling.cosine, "cosine:", NULL);
+	print_scene_double(scene->sampling.light, "import:", NULL);
 	printf("\n");
 	printf("CAMERA:\n");
 	print_vec3(scene->cam.pos, "pos:", COLOR_BL);

@@ -47,7 +47,7 @@ static int	parse_disc_obj(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_RAD, NULL));
 	if (parse_color(split[4], &(c_obj->material.color)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_COLOR, NULL));
-	c_obj->material.surface[SURF_EMISSION] = 1.0;
+	c_obj->material.surface[EMISSION] = 1.0;
 	if (double_from_str(split[5], 4, 2, &(c_obj->material.brightness))
 		|| c_obj->material.brightness <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_BRIGHT, NULL));

@@ -56,7 +56,7 @@ static void	graphic_key_hooks_move(t_graphic_data *gr)
 
 	shift = (mlx_is_key_down(gr->mlx, MLX_KEY_LEFT_SHIFT)
 			|| mlx_is_key_down(gr->mlx, MLX_KEY_RIGHT_SHIFT));
-	scale = 10.0 - (9.0 * shift);
+	scale = 1.0 - (0.8 * shift);
 	cam = &(gr->scene->cam);
 	if (mlx_is_key_down(gr->mlx, MLX_KEY_W))
 		move(gr->scene, vec3_add(cam->pos, vec3_scale(scale, cam->dir)));

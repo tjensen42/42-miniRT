@@ -45,7 +45,7 @@ static int	parse_sphere_obj(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_RAD, NULL));
 	if (parse_color(split[3], &(c_obj->material.color)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_COLOR, NULL));
-	c_obj->material.surface[SURF_EMISSION] = 1.0;
+	c_obj->material.surface[EMISSION] = 1.0;
 	if (double_from_str(split[4], 4, 2, &(obj_material(obj)->brightness))
 		|| obj_material(obj)->brightness <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_BRIGHT, NULL));

@@ -63,6 +63,11 @@ static int	scene_setup(t_scene *scene)
 		scene->thread[i].scene = scene;
 		i++;
 	}
+	if (scene->l_light == NULL)
+	{
+		scene->sampling.cosine = 1.0;
+		scene->sampling.light = 0.0;
+	}
 	scene_calc_img_pos(scene);
 	return (0);
 }

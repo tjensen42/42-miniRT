@@ -22,7 +22,7 @@ int	parse_obj_disc(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_RAD, NULL));
 	if (parse_material(obj_material(obj), &split[4], line_num))
 		return (-1);
-	if (obj_material(obj)->surface[SURF_DIELECTRIC] != 0.0)
+	if (obj_material(obj)->surface[DIELECTRIC] != 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIEL, NULL));
 	obj_cont(obj)->print = &print_obj_disc;
 	obj_cont(obj)->intersec = &intersec_disc;

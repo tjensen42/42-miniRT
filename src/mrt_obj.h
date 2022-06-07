@@ -15,10 +15,13 @@
 /* DEFINES																	  */
 /* ************************************************************************** */
 
-# define SURF_DIFFUSE		0
-# define SURF_SPECULAR		1
-# define SURF_DIELECTRIC	2
-# define SURF_EMISSION		3
+# define DIFFUSE		0
+# define SPECULAR		1
+# define DIELECTRIC		2
+# define EMISSION		3
+
+# define DIFFUSE_LIGHT	4
+# define DIFFUSE_COSINE	5
 
 /* ************************************************************************** */
 /* STRUCTS																	  */

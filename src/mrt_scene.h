@@ -57,8 +57,8 @@ struct s_sampling
 	int		samp;
 	int		max_samp;
 	int		recursion_depth;
-	double	cosine_samp;
-	double	import_samp;
+	double	cosine;
+	double	light;
 	bool	gamma_correction;
 };
 

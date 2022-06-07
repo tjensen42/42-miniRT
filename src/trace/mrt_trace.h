@@ -61,6 +61,10 @@ t_vec3	random_dir_to_sphere(t_list *light, t_hit *hit);
 t_vec3	random_dir_to_disc(t_list *light, t_hit *hit);
 t_vec3	random_dir_to_rectangle(t_list *light, t_hit *hit);
 
+t_vec3	diffuse_cosine_sampling(t_hit *hit);
+t_vec3	diffuse_light_sampling(t_list *l_light, t_hit *hit);
+double	get_scaling(t_scene *scene, t_ray *ray, t_hit *hit);
+
 t_list	*calc_hit(t_list *l_obj, t_ray *ray, t_hit *hit);
 
 #endif // MRT_TRACE_H

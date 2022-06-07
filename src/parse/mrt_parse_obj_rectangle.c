@@ -27,7 +27,7 @@ int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_ROT, NULL));
 	if (parse_material(&(c_obj->material), &split[6], line_num))
 		return (-1);
-	if (c_obj->material.surface[SURF_DIELECTRIC] != 0.0)
+	if (c_obj->material.surface[DIELECTRIC] != 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIEL, NULL));
 	c_obj->print = &print_obj_rectangle;
 	c_obj->intersec = parse_obj_rt_intersec(c_obj->rt.dir);

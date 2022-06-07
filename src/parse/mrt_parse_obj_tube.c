@@ -24,7 +24,7 @@ int	parse_obj_tube(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_HEIGHT, NULL));
 	if (parse_material(&(obj_cont(obj)->material), &split[5], line_num))
 		return (-1);
-	if (obj_material(obj)->surface[SURF_DIELECTRIC] != 0.0)
+	if (obj_material(obj)->surface[DIELECTRIC] != 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIEL, NULL));
 	obj_cont(obj)->print = &print_obj_tube;
 	obj_cont(obj)->intersec = &intersec_tube;

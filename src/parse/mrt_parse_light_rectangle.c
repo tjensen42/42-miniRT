@@ -50,7 +50,7 @@ static int	parse_rectangle_obj(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_HEIGHT, NULL));
 	if (parse_color(split[5], &(c_obj->material.color)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_COLOR, NULL));
-	obj_material(obj)->surface[SURF_EMISSION] = 1.0;
+	obj_material(obj)->surface[EMISSION] = 1.0;
 	if (double_from_str(split[6], 4, 2, &(obj_material(obj)->brightness))
 		|| obj_material(obj)->brightness <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_BRIGHT, NULL));

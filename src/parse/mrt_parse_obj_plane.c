@@ -20,7 +20,7 @@ int	parse_obj_plane(t_scene *scene, char **split, int line_num)
 	c_obj->pl.dir = vec3_normalize(c_obj->pl.dir);
 	if (parse_material(&(c_obj->material), &split[3], line_num))
 		return (-1);
-	if (c_obj->material.surface[SURF_DIELECTRIC] != 0.0)
+	if (c_obj->material.surface[DIELECTRIC] != 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIEL, NULL));
 	c_obj->print = &print_obj_plane;
 	c_obj->intersec = &intersec_plane;
