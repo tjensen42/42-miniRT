@@ -1,40 +1,53 @@
 #include "mrt_trace.h"
 
-static double	reflectance(double cos_theta, double refrac_ratio);
-static t_vec3	refract(t_list *obj, t_ray *ray, t_hit *hit, double refrac_ratio);
+static double	reflectance(double cos_theta, double ref_ratio);
+static t_vec3	refract(t_list *obj, t_ray *ray, t_hit *hit, double ref_ratio);
 
 t_vec3	dielectric(t_list *obj, t_ray *ray, t_hit *hit)
 {
-	// normal flipping???
+	double	ref_ratio;
+
 	if (hit->side == OUTSIDE)
-		return (refract(obj, ray, hit, 1.0 / obj_cont(obj)->material.refraction_index));
+		ref_ratio = 1.0 / obj_material(obj)->refraction_index;
 	else
-	{
-		hit->normal = vec3_scale(-1.0, hit->normal);
-		return (refract(obj, ray, hit, obj_cont(obj)->material.refraction_index));
-	}
+		ref_ratio = obj_material(obj)->refraction_index;
+	return (refract(obj, ray, hit, ref_ratio));
 }
 
-static double reflectance(double cos_theta, double refrac_ratio)
+static double	reflectance(double cos_theta, double ref_ratio)
 {
-	double r0 = (1 - refrac_ratio) / (1 + refrac_ratio);
+	double	r0;
+
+	r0 = (1.0 - ref_ratio) / (1.0 + ref_ratio);
 	r0 = r0 * r0;
-	return (r0 + (1 - r0) * pow((1 - cos_theta), 5));
+	return (r0 + (1.0 - r0) * pow((1.0 - cos_theta), 5.0));
 }
 
-static t_vec3	refract(t_list *obj, t_ray *ray, t_hit *hit, double refrac_ratio)
+static t_vec3	refract(t_list *obj, t_ray *ray, t_hit *hit, double ref_ratio)
 {
-    double	cos_theta;
+	t_vec3	normal;
+	double	cos_theta;
 	bool	cannot_refract;
+	t_vec3	r_out_perp;
+	t_vec3	r_out_parallel;
 
-	cos_theta = fmin(vec3_scalar_product(vec3_scale(-1.0, ray->dir), hit->normal), 1.0);
-	cannot_refract = (refrac_ratio * sqrt(1.0 - cos_theta*cos_theta) > 1.0);
-	if (cannot_refract || reflectance(cos_theta, refrac_ratio) > (rand() / (RAND_MAX + 1.0)))
+	if (hit->side == OUTSIDE)
+		normal = hit->normal;
+	else
+		normal = vec3_scale(-1.0, hit->normal);
+	cos_theta = fmin(
+			vec3_scalar_product(vec3_scale(-1.0, ray->dir), normal), 1.0);
+	cannot_refract = (ref_ratio * sqrt(1.0 - cos_theta * cos_theta) > 1.0);
+	if (cannot_refract
+		|| reflectance(cos_theta, ref_ratio) > ft_rand_double_0_1())
 		return (specular(obj, ray, hit));
 	else
 	{
-		t_vec3	r_out_perp = vec3_scale(refrac_ratio, vec3_add(ray->dir, vec3_scale(cos_theta, hit->normal)));
-		t_vec3	r_out_parallel = vec3_scale(-sqrt(fabs(1.0 - vec3_scalar_product(r_out_perp, r_out_perp))), hit->normal);
+		r_out_perp = vec3_scale(ref_ratio,
+				vec3_add(ray->dir, vec3_scale(cos_theta, normal)));
+		r_out_parallel = vec3_scale(
+				-sqrt(fabs(1.0 - vec3_scalar_product(r_out_perp, r_out_perp))),
+				normal);
 		return (vec3_normalize(vec3_add(r_out_perp, r_out_parallel)));
 	}
 }

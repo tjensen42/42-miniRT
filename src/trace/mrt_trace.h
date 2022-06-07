@@ -10,19 +10,17 @@
 # include "mrt_trace_onb.h"
 # include "math/mrt_math.h"
 
-
-#define INSIDE	false
-#define OUTSIDE	true
+# define INSIDE		0
+# define OUTSIDE	1
 
 typedef struct s_hit
 {
+	bool	side;
 	double	t;
 	t_vec3	p;
 	t_vec3	normal;
-	bool	side;
 }	t_hit;
 
-// RAY
 typedef struct s_ray
 {
 	t_vec3	pos;
@@ -43,9 +41,14 @@ double	intersec_plane(t_list *obj, t_ray *ray, double t_min, double t_max);
 double	intersec_disc(t_list *obj, t_ray *ray, double t_min, double t_max);
 double	intersec_sphere(t_list *obj, t_ray *ray, double t_min, double t_max);
 double	intersec_tube(t_list *obj, t_ray *ray, double t_min, double t_max);
-double	intersec_rectangle_z(t_list *obj, t_ray *ray, double t_min, double t_max);
-double	intersec_rectangle_y(t_list *obj, t_ray *ray, double t_min, double t_max);
-double	intersec_rectangle_x(t_list *obj, t_ray *ray, double t_min, double t_max);
+double	intersec_rectangle_z(t_list *obj, t_ray *ray, double t_min,
+			double t_max);
+double	intersec_rectangle_y(t_list *obj, t_ray *ray, double t_min,
+			double t_max);
+double	intersec_rectangle_x(t_list *obj, t_ray *ray, double t_min,
+			double t_max);
+
+void	intersec_rectangle_move_rotate_ray(t_ray *ray, t_list *obj);
 
 t_vec3	normal_plane(t_list *obj, t_hit *hit);
 t_vec3	normal_disc(t_list *obj, t_hit *hit);
@@ -53,17 +56,21 @@ t_vec3	normal_sphere(t_list *obj, t_hit *hit);
 t_vec3	normal_tube(t_list *obj, t_hit *hit);
 t_vec3	normal_rectangle(t_list *obj, t_hit *hit);
 
-double	pdf_sphere(t_scene *scene, t_list *light, t_hit *hit);
-double	pdf_disc(t_scene *scene, t_list *light, t_hit *hit);
-double	pdf_rectangle(t_scene *scene, t_list *light, t_hit *hit);
+double	pdf_sphere(t_list *light, t_hit *hit);
+double	pdf_disc(t_list *light, t_hit *hit);
+double	pdf_rectangle(t_list *light, t_hit *hit);
 
 t_vec3	random_dir_to_sphere(t_list *light, t_hit *hit);
 t_vec3	random_dir_to_disc(t_list *light, t_hit *hit);
 t_vec3	random_dir_to_rectangle(t_list *light, t_hit *hit);
 
+void	sphere_rotate_x(t_vec3 *p, double rot_x);
+void	sphere_rotate_y(t_vec3 *p, double rot_y);
+void	sphere_rotate_z(t_vec3 *p, double rot_z);
+
 t_vec3	diffuse_cosine_sampling(t_hit *hit);
 t_vec3	diffuse_light_sampling(t_list *l_light, t_hit *hit);
-double	get_scaling(t_scene *scene, t_ray *ray, t_hit *hit);
+double	pdf_scaling(t_scene *scene, t_ray *ray, t_hit *hit);
 
 t_list	*calc_hit(t_list *l_obj, t_ray *ray, t_hit *hit);
 

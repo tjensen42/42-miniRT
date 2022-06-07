@@ -6,7 +6,7 @@
 #    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 09:02:38 by tjensen           #+#    #+#              #
-#    Updated: 2022/06/07 09:47:48 by tjensen          ###   ########.fr        #
+#    Updated: 2022/06/07 18:16:57 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS_PARSE		:= mrt_parse_cam.c mrt_parse_light_sphere.c mrt_parse_light_disc.c m
 SRCS_PRINT		:= mrt_print_error.c mrt_print_light.c mrt_print_textures.c mrt_print_obj_plane.c mrt_print_obj_disc.c mrt_print_obj_tube.c mrt_print_obj_rectangle.c mrt_print_scene.c \
 				   mrt_print_color.c mrt_print_obj_sphere.c mrt_print_vec3.c mrt_print_material.c
 SRCS_TRACE		:= mrt_trace_dielectric.c mrt_trace_diffuse.c mrt_trace_onb.c mrt_trace_specular.c \
-				   mrt_trace.c mrt_trace_random.c mrt_trace_obj_normal.c mrt_trace_obj_intersec.c mrt_trace_light_random.c mrt_trace_light_pdf.c
+				   mrt_trace.c mrt_trace_random.c mrt_trace_obj_normal_1.c mrt_trace_obj_normal_2.c mrt_trace_obj_intersec_1.c mrt_trace_obj_intersec_2.c mrt_trace_obj_intersec_2_utils.c mrt_trace_light_random.c mrt_trace_light_pdf.c
 
 SRCS			+= $(addprefix graphic/, $(SRCS_GRAPHIC)) \
 				   $(addprefix math/, $(SRCS_MATH)) \

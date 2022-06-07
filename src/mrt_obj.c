@@ -41,7 +41,7 @@ inline t_material	*obj_material(t_list *obj)
 	return (&(obj_cont(obj)->material));
 }
 
-inline t_texture	*obj_texture(t_list *obj)
+inline t_texture	*obj_c_texture(t_list *obj)
 {
 	return (obj_cont(obj)->material.c_texture);
 }
@@ -49,11 +49,6 @@ inline t_texture	*obj_texture(t_list *obj)
 inline t_texture	*texture_cont(t_list *texture)
 {
 	return ((t_texture *)texture->content);
-}
-
-inline int obj_type(t_list *obj)
-{
-	return (*((int *)obj->content));
 }
 
 inline t_obj	*obj_cont(t_list *obj)

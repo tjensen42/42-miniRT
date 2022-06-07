@@ -99,7 +99,7 @@ typedef t_vec3	(*f_normal)(t_list *obj, t_hit *hit);
 typedef struct	s_obj
 {
 	t_material		material;
-	t_f_print			print;
+	t_f_print		print;
 	f_intersec		intersec;
 	f_normal		normal;
 	union
@@ -126,7 +126,7 @@ t_texture	*texture_cont(t_list *texture);
 t_list		*texture_new(void);
 void		c_texture_destroy(void *in);
 
-t_texture	*obj_texture(t_list *obj);
+t_texture	*obj_c_texture(t_list *obj);
 t_material	*obj_material(t_list *obj);
 
 t_color		checkerboard_sphere(t_list *obj, t_hit *hit);

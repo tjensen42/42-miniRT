@@ -22,17 +22,18 @@ t_vec3	random_cosine_direction_onb(t_vec3 normal)
 	return (onb_transform(uvw, random_cosine_direction()));
 }
 
-t_vec3 random_cosine_direction(void)
+t_vec3	random_cosine_direction(void)
 {
-	t_vec3 vec3;
+	double	r1;
+	double	r2;
+	double	phi;
+	t_vec3	vec3;
 
-	double r1 = ft_rand_double_0_1();
-	double r2 = ft_rand_double_0_1();
+	r1 = ft_rand_double_0_1();
+	r2 = ft_rand_double_0_1();
 	vec3.z = sqrt(1 - r2);
-
-	double phi = 2 * M_PI * r1;
+	phi = 2 * M_PI * r1;
 	vec3.x = cos(phi) * sqrt(r2);
 	vec3.y = sin(phi) * sqrt(r2);
-
 	return (vec3);
 }

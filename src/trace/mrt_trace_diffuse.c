@@ -1,33 +1,6 @@
 #include "mrt_trace.h"
 
-double mixed_sampling_pdf(t_scene *scene, t_ray *ray, t_hit *hit)
-{
-	double	cosine;
-	double	cosine_pdf;
-	double	import_pdf;
-	double	mixed_pdf;
-	t_list	*iter;
-
-	cosine = vec3_scalar_product(hit->normal, ray->dir);
-	if ((cosine < 0.0 && hit->side == OUTSIDE)
-		|| (cosine > 0.0 && hit->side == INSIDE))
-		return (0.0);
-	else
-		cosine_pdf = fabs(cosine / M_PI);
-	if (scene->l_light == NULL)
-		return (cosine_pdf);
-	import_pdf = 0.0;
-	iter = scene->l_light;
-	while (iter)
-	{
-		import_pdf += light_cont(iter)->weight
-				* light_cont(iter)->pdf_value(scene, iter, hit);
-		iter = iter->next;
-	}
-	mixed_pdf = scene->sampling.cosine * cosine_pdf
-		+ scene->sampling.light * import_pdf;
-	return (mixed_pdf);
-}
+static double	mixed_sampling_pdf(t_scene *scene, t_ray *ray, t_hit *hit);
 
 t_vec3	diffuse_light_sampling(t_list *l_light, t_hit *hit)
 {
@@ -54,7 +27,7 @@ t_vec3	diffuse_cosine_sampling(t_hit *hit)
 		return (random_cosine_direction_onb(hit->normal));
 }
 
-double	get_scaling(t_scene *scene, t_ray *ray, t_hit *hit)
+double	pdf_scaling(t_scene *scene, t_ray *ray, t_hit *hit)
 {
 	double	cosine;
 	double	mixed_sampling_pdf_value;
@@ -64,9 +37,37 @@ double	get_scaling(t_scene *scene, t_ray *ray, t_hit *hit)
 	if (mixed_sampling_pdf_value == 0.0)
 		return (0.0);
 	cosine = vec3_scalar_product(hit->normal, ray->dir);
-	if ((cosine < 0 && hit->side == OUTSIDE) || (cosine > 0 && hit->side == INSIDE))
+	if ((cosine < 0 && hit->side == OUTSIDE)
+		|| (cosine > 0 && hit->side == INSIDE))
 		scattering_pdf = 0;
 	else
 		scattering_pdf = fabs(cosine / M_PI);
 	return (scattering_pdf / mixed_sampling_pdf_value);
+}
+
+static double	mixed_sampling_pdf(t_scene *scene, t_ray *ray, t_hit *hit)
+{
+	double	cosine;
+	double	cosine_pdf;
+	double	import_pdf;
+	t_list	*iter;
+
+	cosine = vec3_scalar_product(hit->normal, ray->dir);
+	if ((cosine < 0.0 && hit->side == OUTSIDE)
+		|| (cosine > 0.0 && hit->side == INSIDE))
+		return (0.0);
+	else
+		cosine_pdf = fabs(cosine / M_PI);
+	if (scene->l_light == NULL)
+		return (cosine_pdf);
+	import_pdf = 0.0;
+	iter = scene->l_light;
+	while (iter)
+	{
+		import_pdf += light_cont(iter)->weight
+			* light_cont(iter)->pdf_value(iter, hit);
+		iter = iter->next;
+	}
+	return (scene->sampling.cosine * cosine_pdf
+		+ scene->sampling.light * import_pdf);
 }

@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 10:54:31 by hepple            #+#    #+#             */
-/*   Updated: 2022/04/20 11:55:30 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/07 18:49:34 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-
-# include "get_next_line_bonus.h"
-# include "ft_printf.h"
 
 /* ******************* */
 /*    D E F I N E S    */
