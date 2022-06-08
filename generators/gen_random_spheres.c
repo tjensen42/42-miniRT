@@ -9,17 +9,17 @@
 #define SIZE_X			1000
 #define SIZE_Y			1000
 
-#define FIELD_X			19.98
-#define FIELD_Z			19.98
+#define FIELD_X			44.0
+#define FIELD_Z			290.0
 
 #define SPHERES			200
-#define SPHERE_MIN_RAD	0.05
-#define SPHERE_MAX_RAD	0.75
+#define SPHERE_MIN_RAD	1.0
+#define SPHERE_MAX_RAD	3.0
 
-#define SCATTERING		0.0
-#define REFLECTION		0.5
-#define REFLECTION_FUZZ	0.4
-#define TRANSMISSION	0.1
+#define SCATTERING		1.0
+#define REFLECTION		0.0
+#define REFLECTION_FUZZ	0.0
+#define TRANSMISSION	0.0
 #define SCATTER_REFLEC	0.0
 
 typedef struct s_vec3
@@ -198,7 +198,7 @@ t_sphere gen_sphere_in_rectangle(t_sphere *spheres, int sphere_count)
 int	main(int argc, char *argv[])
 {
 	int			i;
-	t_sphere	spheres[SPHERES_SUM];
+	t_sphere	spheres[SPHERES];
 
 	printf("## RESOLUTION #########################################################################################################\n# | width  | height | #################################################################################################\n#######################################################################################################################\n");
 	printf("R   %d     %d\n\n", SIZE_X, SIZE_Y);
@@ -221,17 +221,17 @@ int	main(int argc, char *argv[])
 	printf("## SPHERE #############################################################################################################\n# | position          | radius | color       | material                  | ############################################\n#######################################################################################################################\n");
 
 	srand(time(NULL));
-	memset(spheres, 0, SPHERES_SUM * sizeof(t_sphere));
+	memset(spheres, 0, SPHERES * sizeof(t_sphere));
 	spheres[0] = (t_sphere){(t_vec3){0,SPHERE_MAX_RAD * 2,0}, SPHERE_MAX_RAD * 2, (t_color){220,220,220}, (t_surface){0,1,0,0}};
 	i = 1;
-	while (i < SPHERES_SUM)
+	while (i < SPHERES)
 	{
 		spheres[i] = gen_sphere_in_rectangle(spheres, i);
 		i++;
 	}
 
 	i = 0;
-	while (i < SPHERES_SUM)
+	while (i < SPHERES)
 	{
 		printf("sp  ");
 		printf("%+05.2f,%+05.2f,%+05.2f   ", spheres[i].pos.x, spheres[i].pos.y, spheres[i].pos.z);
