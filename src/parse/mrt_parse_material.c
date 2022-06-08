@@ -37,7 +37,7 @@ static int	str_to_surfaces(const char *str, double surf[4], int line_num)
 	split_surf = ft_split(str, ',');
 	if (split_surf == NULL)
 		return (print_error_scene(-1, ERR_PARSE, strerror(errno), NULL));
-	if (ft_split_count_str(split_surf) != 4)
+	if (ft_split_count_str(split_surf) != 3)
 		error = -1;
 	if (!error)
 		error = double_from_str(split_surf[0], 1, 2, &(surf[DIFFUSE]));
@@ -45,8 +45,6 @@ static int	str_to_surfaces(const char *str, double surf[4], int line_num)
 		error = double_from_str(split_surf[1], 1, 2, &(surf[SPECULAR]));
 	if (!error)
 		error = double_from_str(split_surf[2], 1, 2, &(surf[DIELECTRIC]));
-	if (!error)
-		error = double_from_str(split_surf[3], 1, 2, &(surf[EMISSION]));
 	if (error)
 		error = print_error_scene(line_num, ERR_PARSE, ERR_INVAL_SURF, NULL);
 	ft_free_split(&split_surf);
