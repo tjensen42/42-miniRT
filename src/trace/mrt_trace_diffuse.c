@@ -16,7 +16,7 @@ t_vec3	diffuse_light_sampling(t_list *l_light, t_hit *hit)
 			return (light_cont(l_light)->random_dir(l_light, hit));
 		l_light = l_light->next;
 	}
-	return (hit->normal); // kommt nie vor
+	return (hit->normal);
 }
 
 t_vec3	diffuse_cosine_sampling(t_hit *hit)

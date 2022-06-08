@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:50:04 by tjensen           #+#    #+#             */
-/*   Updated: 2022/04/19 15:56:33 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/08 15:11:12 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	ft_double_from_str(const char *str, int before_dec,
 		return (-1);
 	if (ft_strchr(str, '.') && (int)(ft_strchr(str, '.') - str) > before_dec)
 		return (-1);
-	if (ft_strchr(str, '.') && (int)(ft_strlen(ft_strchr(str, '.') + 1)) > after_dec)
+	if (ft_strchr(str, '.')
+		&& (int)(ft_strlen(ft_strchr(str, '.') + 1)) > after_dec)
 		return (-1);
 	if (ft_strchr(str, '.') && !ft_isdigit(*(ft_strchr(str, '.') + 1)))
 		return (-1);

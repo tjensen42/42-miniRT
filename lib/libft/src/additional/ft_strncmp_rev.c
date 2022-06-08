@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 10:53:55 by tjensen           #+#    #+#             */
-/*   Updated: 2022/04/18 11:19:39 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/08 15:10:43 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_strncmp_rev(const char *s1, const char *s2, size_t n)
 	{
 		if (s1[s1_len - 1 - i] != s2[s2_len - 1 - i])
 			return ((unsigned char)s1[s1_len - 1 - i]
-					- (unsigned char)s2[s2_len - 1 - i]);
+				- (unsigned char)s2[s2_len - 1 - i]);
 		i++;
 	}
 	if (i != n && i == s1_len && i < s2_len)
