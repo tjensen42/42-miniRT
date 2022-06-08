@@ -23,7 +23,7 @@ int	parse_obj_sphere(t_scene *scene, char **split, int line_num)
 	if (parse_material(&(c_obj->material), &split[4], line_num))
 		return (-1);
 	c_obj->print = &print_obj_sphere;
-	c_obj->intersec = &intersect_sphere;
+	c_obj->intersect = &intersect_sphere;
 	c_obj->normal = &normal_sphere;
 	if (int_from_str(split[8], 0, 10000, &(c_obj->material.cb_factor))
 		|| c_obj->material.cb_factor < 0)

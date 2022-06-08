@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hepple <hepple@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 10:54:31 by hepple            #+#    #+#             */
-/*   Updated: 2022/06/07 18:49:34 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/08 12:17:20 by hepple           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_gnl_without_buffer(int fd);
 int		ft_strncmp_rev(const char *s1, const char *s2, size_t n);
 int		ft_str_count_chr(const char *str, const char c);
-double	ft_rand_double(double min, double max);
-double	ft_rand_double_0_1(void);
+double	ft_rand_range(double min, double max);
+double	ft_rand(void);
 int		print_error(char *s1, char *s2, char *s3, char *s4);
 
 #endif

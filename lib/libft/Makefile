@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
+#    By: hepple <hepple@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/17 11:48:30 by hepple            #+#    #+#              #
-#    Updated: 2022/06/07 18:49:57 by tjensen          ###   ########.fr        #
+#    Updated: 2022/06/08 12:19:59 by hepple           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ SRC_BNS	=	ft_lstadd_back.c \
 			ft_lstsize.c
 SRC_ADD	=	ft_free_split.c ft_strcmp.c ft_gnl_without_buffer.c \
 			ft_split_count_str.c ft_strncmp_rev.c ft_str_count_chr.c \
-			ft_rand_double.c ft_double_from_str.c ft_int_from_str.c
+			ft_rand.c ft_double_from_str.c ft_int_from_str.c
 OBJ_DIR	=	obj
 OBJ_MDT	=	$(addprefix $(OBJ_DIR)/, $(SRC_MDT:.c=.o))
 OBJ_BNS	=	$(addprefix $(OBJ_DIR)/, $(SRC_BNS:.c=.o))

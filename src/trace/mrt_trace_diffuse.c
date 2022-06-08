@@ -8,7 +8,7 @@ t_vec3	diffuse_light_sampling(t_list *l_light, t_hit *hit)
 	double	weight_sum;
 
 	weight_sum = 0;
-	random = ft_rand_double_0_1();
+	random = ft_rand();
 	while (l_light)
 	{
 		weight_sum += light_cont(l_light)->weight;
@@ -47,10 +47,10 @@ double	pdf_scaling(t_scene *scene, t_ray *ray, t_hit *hit)
 
 static double	mixed_sampling_pdf(t_scene *scene, t_ray *ray, t_hit *hit)
 {
+	t_list	*iter;
 	double	cosine;
 	double	cosine_pdf;
 	double	import_pdf;
-	t_list	*iter;
 
 	cosine = vec3_dot(hit->normal, ray->dir);
 	if ((cosine < 0.0 && hit->side == OUTSIDE)

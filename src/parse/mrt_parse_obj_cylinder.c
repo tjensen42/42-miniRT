@@ -29,7 +29,7 @@ int	parse_obj_cylinder(t_scene *scene, char **split, int line_num)
 	if (add_caps(scene, obj_cont(obj)))
 		return (-1);
 	obj_cont(obj)->print = &print_obj_tube;
-	obj_cont(obj)->intersec = &intersect_tube;
+	obj_cont(obj)->intersect = &intersect_tube;
 	obj_cont(obj)->normal = &normal_tube;
 	return (0);
 }
@@ -49,7 +49,7 @@ static int add_caps(t_scene *scene, t_obj *c_cy)
 	ft_lstadd_back(&(scene->l_obj), obj_bottom);
 	obj_cont(obj_top)->material = c_cy->material;
 	obj_cont(obj_top)->print = &print_obj_disc;
-	obj_cont(obj_top)->intersec = &intersect_disc;
+	obj_cont(obj_top)->intersect = &intersect_disc;
 	obj_cont(obj_top)->normal = &normal_disc;
 	obj_cont(obj_top)->di.radius = c_cy->tb.radius;
 	*obj_cont(obj_bottom) = *obj_cont(obj_top);

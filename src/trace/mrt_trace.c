@@ -40,7 +40,7 @@ t_color	trace(t_scene *scene, t_ray *ray, int depth)
 	else
 		scaling = 1.0;
 	trace_color = color_scale(scaling, trace(scene, &ray_rec, depth + 1));
-	trace_color = color_multiply(obj_material(hit_obj)->get_color(hit_obj, &hit), trace_color);
+	trace_color = color_multi(obj_material(hit_obj)->get_color(hit_obj, &hit), trace_color);
 	return (color_max(trace_color, scene->amb.color));
 	// amb all
 }
@@ -58,10 +58,10 @@ int	surface_select(double surface[4], double light_sampling)
 {
 	double	random;
 
-	random = ft_rand_double_0_1();
+	random = ft_rand();
 	if (random < surface[DIFFUSE])
 	{
-		random = ft_rand_double_0_1();
+		random = ft_rand();
 		if (random < light_sampling)
 			return (DIFFUSE_LIGHT);
 		return (DIFFUSE_COSINE);
@@ -82,14 +82,14 @@ inline t_color	trace_bg_color(struct s_bg *bg, t_ray *ray)
 
 t_list	*calc_hit(t_list *l_obj, t_ray *ray, t_hit *hit)
 {
-	double	t;
 	t_list	*obj;
+	double	t;
 
 	obj = NULL;
 	hit->t = -1.0;
 	while (l_obj)
 	{
-		t = obj_cont(l_obj)->intersec(l_obj, ray, 0.001, DBL_MAX);
+		t = obj_cont(l_obj)->intersect(l_obj, ray, 0.001, DBL_MAX);
 		if (t > 0 && (t < hit->t || hit->t == -1.0))
 		{
 			obj = l_obj;

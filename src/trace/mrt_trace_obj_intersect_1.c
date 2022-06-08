@@ -4,16 +4,15 @@ static void	intersect_tube_quadratic(t_list *obj, t_ray *ray, double abc[3]);
 
 double	intersect_plane(t_list *obj, t_ray *ray, double t_min, double t_max)
 {
-	t_plane	*plane;
+	t_plane	*pl;
 	double	denominator;
 	double	t;
 
-	plane = &(obj_cont(obj)->pl);
-	denominator = vec3_dot(plane->dir, ray->dir);
+	pl = &(obj_cont(obj)->pl);
+	denominator = vec3_dot(pl->dir, ray->dir);
 	if (fabs(denominator) > 1e-6)
 	{
-		t = vec3_dot(vec3_sub(plane->pos, ray->pos), plane->dir)
-			/ denominator;
+		t = vec3_dot(vec3_sub(pl->pos, ray->pos), pl->dir) / denominator;
 		if (t > t_min && t < t_max)
 			return (t);
 	}
@@ -48,18 +47,17 @@ double	intersect_sphere(t_list *obj, t_ray *ray, double t_min, double t_max)
 
 double	intersect_disc(t_list *obj, t_ray *ray, double t_min, double t_max)
 {
-	t_disc	*disc;
+	t_disc	*di;
 	double	denominator;
 	double	t;
 
-	disc = &(obj_cont(obj)->di);
-	denominator = vec3_dot(disc->dir, ray->dir);
+	di = &(obj_cont(obj)->di);
+	denominator = vec3_dot(di->dir, ray->dir);
 	if (fabs(denominator) > 1e-6)
 	{
-		t = vec3_dot(vec3_sub(disc->pos, ray->pos), disc->dir)
-			/ denominator;
-		if (t > t_min && t < t_max && vec3_dist(disc->pos,
-				vec3_lin_comb(1.0, ray->pos, t, ray->dir)) <= disc->radius)
+		t = vec3_dot(vec3_sub(di->pos, ray->pos), di->dir) / denominator;
+		if (t > t_min && t < t_max && vec3_dist(di->pos,
+				vec3_lin_comb(1.0, ray->pos, t, ray->dir)) <= di->radius)
 			return (t);
 	}
 	return (-1.0);
@@ -104,6 +102,5 @@ static void	intersect_tube_quadratic(t_list *obj, t_ray *ray, double abc[3])
 	abc[0] = vec3_dot(ray_x_tube, ray_x_tube);
 	dif_x_dir = vec3_cross(vec3_sub(ray->pos, tb->pos), tb->dir);
 	abc[1] = 2.0 * vec3_dot(ray_x_tube, dif_x_dir);
-	abc[2] = vec3_dot(dif_x_dir, dif_x_dir)
-		- tb->radius * tb->radius;
+	abc[2] = vec3_dot(dif_x_dir, dif_x_dir) - tb->radius * tb->radius;
 }

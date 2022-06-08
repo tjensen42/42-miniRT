@@ -101,7 +101,7 @@ int			parse_img(t_scene *scene, char **split, int line_num);
 int			parse_ppm(t_scene *scene, char **split, int line_num);
 
 int			parse_obj_rectangle_dir(t_obj *c_obj, const char *dir);
-f_intersec	parse_obj_rt_intersec(t_vec3 dir);
+f_intersect	parse_obj_rt_intersec(t_vec3 dir);
 
 int			parse_texture(t_scene *scene, char **split, int line_num);
 t_texture	*parse_c_texture_find(t_list *l_texture, const char *name);

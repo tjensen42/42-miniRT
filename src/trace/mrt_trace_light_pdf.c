@@ -2,10 +2,10 @@
 
 double	pdf_sphere(t_list *light, t_hit *hit)
 {
+	t_sphere	*sp;
+	t_vec3		light_dir;
 	double		cos_theta_max;
 	double		solid_angle;
-	t_vec3		light_dir;
-	t_sphere	*sp;
 
 	sp = &(light_cont(light)->linked_c_obj->sp);
 	light_dir = vec3_sub(sp->pos, hit->p);
@@ -17,10 +17,10 @@ double	pdf_sphere(t_list *light, t_hit *hit)
 
 double	pdf_disc(t_list *light, t_hit *hit)
 {
+	t_disc	*di;
+	t_vec3	light_dir;
 	double	cosine;
 	double	length_squared;
-	t_vec3	light_dir;
-	t_disc	*di;
 
 	di = &(light_cont(light)->linked_c_obj->di);
 	light_dir = vec3_sub(di->pos, hit->p);
@@ -32,10 +32,10 @@ double	pdf_disc(t_list *light, t_hit *hit)
 
 double	pdf_rectangle(t_list *light, t_hit *hit)
 {
+	t_rectangle	*rt;
+	t_vec3		light_dir;
 	double		cosine;
 	double		length_squared;
-	t_vec3		light_dir;
-	t_rectangle	*rt;
 
 	rt = &(light_cont(light)->linked_c_obj->rt);
 	light_dir = vec3_sub(rt->pos, hit->p);

@@ -55,7 +55,7 @@ static int	parse_rectangle_obj(t_scene *scene, char **split, int line_num)
 		|| obj_material(obj)->brightness <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_BRIGHT, NULL));
 	c_obj->print = &print_obj_rectangle;
-	c_obj->intersec = parse_obj_rt_intersec(c_obj->rt.dir);
+	c_obj->intersect = parse_obj_rt_intersec(c_obj->rt.dir);
 	c_obj->normal = &normal_rectangle;
 	c_obj->material.get_color = &obj_color;
 	// c_obj->rt.rel_pos = (t_vec3){0.0, 0.0, 0.0};

@@ -23,7 +23,7 @@ int	parse_obj_plane(t_scene *scene, char **split, int line_num)
 	if (c_obj->material.surface[DIELECTRIC] != 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIEL, NULL));
 	c_obj->print = &print_obj_plane;
-	c_obj->intersec = &intersect_plane;
+	c_obj->intersect = &intersect_plane;
 	c_obj->normal = &normal_plane;
 	return (0);
 }

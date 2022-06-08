@@ -6,7 +6,7 @@
 /*   By: hepple <hepple@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 09:49:49 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/08 11:50:08 by hepple           ###   ########.fr       */
+/*   Updated: 2022/06/08 12:21:45 by hepple           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 t_color	color_add(t_color c1, t_color c2);
 t_color	color_scale(double f, t_color c1);
-t_color	color_multiply(t_color c1, t_color c2);
+t_color	color_multi(t_color c1, t_color c2);
 
 t_vec3	vec3_add(t_vec3 a, t_vec3 b);
 t_vec3	vec3_sub(t_vec3 a, t_vec3 b);

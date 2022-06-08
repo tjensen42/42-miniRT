@@ -30,7 +30,7 @@ int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 	if (c_obj->material.surface[DIELECTRIC] != 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIEL, NULL));
 	c_obj->print = &print_obj_rectangle;
-	c_obj->intersec = parse_obj_rt_intersec(c_obj->rt.dir);
+	c_obj->intersect = parse_obj_rt_intersec(c_obj->rt.dir);
 	c_obj->normal = &normal_rectangle;
 	c_obj->rt.rel_pos = (t_vec3){0.0, 0.0, 0.0};
 	if (int_from_str(split[10], 0, 10000, &(c_obj->material.cb_factor)))
@@ -66,7 +66,7 @@ int parse_obj_rectangle_dir(t_obj *c_obj, const char *dir)
 	return (0);
 }
 
-f_intersec parse_obj_rt_intersec(t_vec3 dir)
+f_intersect parse_obj_rt_intersec(t_vec3 dir)
 {
 	if (dir.x != 0.0)
 		return (&intersect_rectangle_x);

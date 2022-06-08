@@ -4,7 +4,7 @@ t_vec3	random_in_unit_sphere(void)
 {
 	t_vec3	vec3;
 
-	while (1)
+	while (true)
 	{
 		vec3.x = -1.0 + (rand() / (double)(RAND_MAX / 2.0));
 		vec3.y = -1.0 + (rand() / (double)(RAND_MAX / 2.0));
@@ -24,13 +24,13 @@ t_vec3	random_cosine_direction_onb(t_vec3 normal)
 
 t_vec3	random_cosine_direction(void)
 {
+	t_vec3	vec3;
 	double	r1;
 	double	r2;
 	double	phi;
-	t_vec3	vec3;
 
-	r1 = ft_rand_double_0_1();
-	r2 = ft_rand_double_0_1();
+	r1 = ft_rand();
+	r2 = ft_rand();
 	vec3.z = sqrt(1 - r2);
 	phi = 2 * M_PI * r1;
 	vec3.x = cos(phi) * sqrt(r2);

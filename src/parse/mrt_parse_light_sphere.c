@@ -50,7 +50,7 @@ static int	parse_sphere_obj(t_scene *scene, char **split, int line_num)
 		|| obj_material(obj)->brightness <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_BRIGHT, NULL));
 	c_obj->print = &print_obj_sphere;
-	c_obj->intersec = &intersect_sphere;
+	c_obj->intersect = &intersect_sphere;
 	c_obj->normal = &normal_sphere;
 	c_obj->material.get_color = &obj_color;
 	return (0);
