@@ -18,7 +18,9 @@
 /* DEFINES																	  */
 /* ************************************************************************** */
 
-# define THREADS			12
+# ifndef THREADS
+#  define THREADS			8
+# endif
 
 # define ERR_SCENE_INCOM	"Incomplete scene file"
 # define ERR_MISS_RES		"Missing resolution"
@@ -34,7 +36,7 @@
 /* STRUCTS																	  */
 /* ************************************************************************** */
 
-typedef struct s_scene t_scene;
+typedef struct s_scene	t_scene;
 
 struct s_ident
 {

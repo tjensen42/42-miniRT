@@ -6,7 +6,7 @@
 #    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 09:02:38 by tjensen           #+#    #+#              #
-#    Updated: 2022/06/08 10:48:59 by tjensen          ###   ########.fr        #
+#    Updated: 2022/06/08 12:10:52 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,9 @@
 NAME			:= miniRT
 
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -pthread -O3 #-L "/Users/$(USER)/.brew/opt/glfw/lib/" #-Werror
+CFLAGS			:= -Wall -Wextra -Werror -pthread -O3
 
+# ls -lR *.c | awk '{print $9}'
 SRCS			:= main.c mrt_color.c mrt_obj.c mrt_obj_texture.c mrt_obj_texture_utils.c mrt_obj_checkerboard.c mrt_scene.c mrt_scene_utils.c mrt_light.c
 SRCS_GRAPHIC	:= mrt_graphic.c mrt_graphic_rotate.c mrt_graphic_move.c mrt_graphic_render.c
 SRCS_MATH		:= mrt_math_color.c mrt_math_vec3_1.c mrt_math_vec3_2.c
@@ -28,7 +29,7 @@ SRCS_PARSE		:= mrt_parse_cam.c mrt_parse_light_sphere.c mrt_parse_light_disc.c m
 SRCS_PRINT		:= mrt_print_error.c mrt_print_light.c mrt_print_textures.c mrt_print_obj_plane.c mrt_print_obj_disc.c mrt_print_obj_tube.c mrt_print_obj_rectangle.c mrt_print_scene.c \
 				   mrt_print_color.c mrt_print_obj_sphere.c mrt_print_vec3.c mrt_print_material.c
 SRCS_TRACE		:= mrt_trace_dielectric.c mrt_trace_diffuse.c mrt_trace_onb.c mrt_trace_specular.c \
-				   mrt_trace.c mrt_trace_random.c mrt_trace_obj_normal_1.c mrt_trace_obj_normal_2.c mrt_trace_obj_intersec_1.c mrt_trace_obj_intersec_2.c mrt_trace_obj_intersec_2_utils.c mrt_trace_light_random.c mrt_trace_light_pdf.c
+				   mrt_trace.c mrt_trace_random.c mrt_trace_obj_normal_1.c mrt_trace_obj_normal_2.c mrt_trace_obj_intersect_1.c mrt_trace_obj_intersect_2.c mrt_trace_obj_intersect_2_utils.c mrt_trace_light_random.c mrt_trace_light_pdf.c
 
 SRCS			+= $(addprefix graphic/, $(SRCS_GRAPHIC)) \
 				   $(addprefix math/, $(SRCS_MATH)) \
@@ -49,9 +50,16 @@ CFLAGS			+= -I. -I$(IDIR)
 #	SYSTEM SPECIFIC SETTINGS							   					   #
 # **************************************************************************** #
 
-ifeq ($(shell uname -s), Linux)
-	CFLAGS	+= -D LINUX -Wno-unused-result
+UNAME	:= $(shell uname -s)
+NUMPROC	:= 8
+
+ifeq ($(UNAME), Linux)
+    NUMPROC := $(shell grep -c ^processor /proc/cpuinfo)
+	CFLAGS	+= -D LINUX -D THREADS=$(NUMPROC) -Wno-unused-result
 	LDFLAGS	:= $(LIBS) -lm -lglfw -ldl
+else ifeq ($(UNAME), Darwin)
+    NUMPROC := $(shell sysctl -n hw.ncpu)
+	CFLAGS	+= -D DARWIN -D THREADS=$(NUMPROC)
 endif
 
 # **************************************************************************** #
@@ -59,7 +67,7 @@ endif
 # **************************************************************************** #
 
 all:
-	@make $(NAME) -j10
+	@make $(NAME) -j$(NUMPROC)
 
 $(NAME): $(LIBS) $(ODIR) $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS)
