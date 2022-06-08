@@ -15,9 +15,9 @@ t_color	checkerboard_sphere(t_list *obj, t_hit *hit)
 	if (obj_cont(obj)->sp.rot.z != 0.0)
 		sphere_rotate_z(&p, obj_cont(obj)->sp.rot.z);
 	if (obj_cont(obj)->sp.rot.y != 0.0)
-		sphere_rotate_z(&p, obj_cont(obj)->sp.rot.y);
+		sphere_rotate_y(&p, obj_cont(obj)->sp.rot.y);
 	if (obj_cont(obj)->sp.rot.x != 0.0)
-		sphere_rotate_z(&p, obj_cont(obj)->sp.rot.x);
+		sphere_rotate_x(&p, obj_cont(obj)->sp.rot.x);
 	theta = acos(-p.y);
 	phi = atan2(-p.z, p.x) + M_PI;
 	if (sin(phi * obj_cont(obj)->material.cb_factor)

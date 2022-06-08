@@ -18,9 +18,9 @@ t_color	texture_sphere(t_list *obj, t_hit *hit)
 	if (obj_cont(obj)->sp.rot.z != 0.0)
 		sphere_rotate_z(&p, obj_cont(obj)->sp.rot.z);
 	if (obj_cont(obj)->sp.rot.y != 0.0)
-		sphere_rotate_z(&p, obj_cont(obj)->sp.rot.y);
+		sphere_rotate_y(&p, obj_cont(obj)->sp.rot.y);
 	if (obj_cont(obj)->sp.rot.x != 0.0)
-		sphere_rotate_z(&p, obj_cont(obj)->sp.rot.x);
+		sphere_rotate_x(&p, obj_cont(obj)->sp.rot.x);
 	u = (atan2(-p.z, p.x) + M_PI) / (2.0 * M_PI);
 	v = acos(p.y) / M_PI;
 	pixel = (size_t)(v * c_texture->height)
