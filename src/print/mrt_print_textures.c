@@ -4,6 +4,8 @@ void	print_textures(t_list *l_texture)
 {
 	t_texture	*c_texture;
 
+	if (l_texture == NULL)
+		return ;
 	printf("TEXTURES:\n");
 	while (l_texture)
 	{

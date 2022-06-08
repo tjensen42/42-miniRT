@@ -19,6 +19,7 @@ typedef struct s_hit
 	double	t;
 	t_vec3	p;
 	t_vec3	normal;
+	t_list	*obj;
 }	t_hit;
 
 typedef struct s_ray
@@ -71,7 +72,5 @@ void	sphere_rotate_z(t_vec3 *p, double rot_z);
 t_vec3	diffuse_cosine_sampling(t_hit *hit);
 t_vec3	diffuse_light_sampling(t_list *l_light, t_hit *hit);
 double	pdf_scaling(t_scene *scene, t_ray *ray, t_hit *hit);
-
-t_list	*calc_hit(t_list *l_obj, t_ray *ray, t_hit *hit);
 
 #endif // MRT_TRACE_H
