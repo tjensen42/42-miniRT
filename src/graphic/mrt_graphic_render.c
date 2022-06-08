@@ -1,34 +1,50 @@
 #include "mrt_graphic.h"
 
+static int	create_join_threads(t_graphic_data *graphic, t_scene *scene);
+
 void	graphic_render(t_graphic_data *graphic)
 {
-	int		i;
 	t_scene	*scene;
 
 	scene = graphic->scene;
 	if (scene->sampling.samp == scene->sampling.max_samp)
 		return ;
+	if (create_join_threads(graphic, scene))
+		mlx_close_window(graphic->mlx);
+	else
+	{
+		printf("sample %4d / %4d\n",
+			scene->sampling.samp + 1, scene->sampling.max_samp);
+		scene->sampling.samp++;
+		img_to_mlx_img(scene, graphic->mlx_img);
+	}
+}
+
+static int	create_join_threads(t_graphic_data *graphic, t_scene *scene)
+{
+	int		i;
+	bool	error;
+
+	error = false;
 	i = 0;
 	while (i < THREADS)
 	{
 		scene->thread[i].mlx_img = graphic->mlx_img;
-		if (pthread_create(&(scene->thread[i].id), NULL, draw_thread, &(scene->thread[i])))
+		if (pthread_create(&(scene->thread[i].id), NULL,
+				draw_thread, &(scene->thread[i])))
 		{
-			print_error("Error\n", "pthread_create() failed", NULL, NULL);
+			error = print_error("pthread_create() failed", NULL, NULL, NULL);
 			break ;
 		}
 		i++;
 	}
-	i = 0;
-	while (i < THREADS)
+	while (i > 0)
 	{
-		if (pthread_join(scene->thread[i].id, NULL))
-			print_error("Error\n", "pthread_join() failed", NULL, NULL);
-		i++;
+		if (pthread_join(scene->thread[i - 1].id, NULL))
+			error = print_error("pthread_join() failed", NULL, NULL, NULL);
+		i--;
 	}
-	printf("sample %4d / %4d\n", scene->sampling.samp + 1, scene->sampling.max_samp);
-	scene->sampling.samp++;
-	img_to_mlx_img(scene, graphic->mlx_img);
+	return (error);
 }
 
 void	*draw_thread(void *thread_data)

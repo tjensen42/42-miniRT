@@ -3,7 +3,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_scene	scene;
+	static t_scene	scene;
 
 	if (argc != 2 || !argv[1])
 	{

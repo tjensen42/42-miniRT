@@ -18,7 +18,7 @@
 /* DEFINES																	  */
 /* ************************************************************************** */
 
-# define THREADS			12
+# define THREADS			5000000
 
 # define ERR_SCENE_INCOM	"Incomplete scene file"
 # define ERR_MISS_RES		"Missing resolution"
@@ -100,15 +100,15 @@ struct s_bg
 
 typedef struct s_scene
 {
-	struct s_img			img;
-	struct s_sampling		sampling;
-	struct s_cam			cam;
-	struct s_bg				bg;
-	struct s_amb			amb;
-	t_list					*l_obj;
-	t_list					*l_light;
-	t_list					*l_textures;
-	struct s_thread_data	thread[THREADS];
+	struct s_img		img;
+	struct s_sampling	sampling;
+	struct s_cam		cam;
+	struct s_bg			bg;
+	struct s_amb		amb;
+	t_list				*l_obj;
+	t_list				*l_light;
+	t_list				*l_textures;
+	t_thread			thread[THREADS];
 }	t_scene;
 
 /* ************************************************************************** */
