@@ -60,12 +60,12 @@ double random_double(double min, double max)
     return (min + (rand() / div));
 }
 
-double	vec3_length(t_vec3 a)
+double	vec3_len(t_vec3 a)
 {
 	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
 
-t_vec3	vec3_subtract(t_vec3 a, t_vec3 b)
+t_vec3	vec3_sub(t_vec3 a, t_vec3 b)
 {
 	t_vec3	c;
 

@@ -37,18 +37,18 @@ t_vec3	specular(t_list *obj, t_ray *ray, t_hit *hit);
 
 t_color	trace(t_scene *scene, t_ray *ray, int depth);
 
-double	intersec_plane(t_list *obj, t_ray *ray, double t_min, double t_max);
-double	intersec_disc(t_list *obj, t_ray *ray, double t_min, double t_max);
-double	intersec_sphere(t_list *obj, t_ray *ray, double t_min, double t_max);
-double	intersec_tube(t_list *obj, t_ray *ray, double t_min, double t_max);
-double	intersec_rectangle_z(t_list *obj, t_ray *ray, double t_min,
+double	intersect_plane(t_list *obj, t_ray *ray, double t_min, double t_max);
+double	intersect_disc(t_list *obj, t_ray *ray, double t_min, double t_max);
+double	intersect_sphere(t_list *obj, t_ray *ray, double t_min, double t_max);
+double	intersect_tube(t_list *obj, t_ray *ray, double t_min, double t_max);
+double	intersect_rectangle_z(t_list *obj, t_ray *ray, double t_min,
 			double t_max);
-double	intersec_rectangle_y(t_list *obj, t_ray *ray, double t_min,
+double	intersect_rectangle_y(t_list *obj, t_ray *ray, double t_min,
 			double t_max);
-double	intersec_rectangle_x(t_list *obj, t_ray *ray, double t_min,
+double	intersect_rectangle_x(t_list *obj, t_ray *ray, double t_min,
 			double t_max);
 
-void	intersec_rectangle_move_rotate_ray(t_ray *ray, t_list *obj);
+void	intersect_rectangle_move_rotate_ray(t_ray *ray, t_list *obj);
 
 t_vec3	normal_plane(t_list *obj, t_hit *hit);
 t_vec3	normal_disc(t_list *obj, t_hit *hit);

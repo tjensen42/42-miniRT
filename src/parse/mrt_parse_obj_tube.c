@@ -17,7 +17,7 @@ int	parse_obj_tube(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_POS, NULL));
 	if (parse_vec3(split[2], &(tb->dir)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIR, NULL));
-	tb->dir = vec3_normalize(tb->dir);
+	tb->dir = vec3_norm(tb->dir);
 	if (double_from_str(split[3], 6, 3, &(tb->radius)) || tb->radius <= 0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_RAD, NULL));
 	if (double_from_str(split[4], 6, 3, &(tb->height)) || tb->height <= 0)
@@ -27,7 +27,7 @@ int	parse_obj_tube(t_scene *scene, char **split, int line_num)
 	if (obj_material(obj)->surface[DIELECTRIC] != 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIEL, NULL));
 	obj_cont(obj)->print = &print_obj_tube;
-	obj_cont(obj)->intersec = &intersec_tube;
+	obj_cont(obj)->intersec = &intersect_tube;
 	obj_cont(obj)->normal = &normal_tube;
 	return (0);
 }

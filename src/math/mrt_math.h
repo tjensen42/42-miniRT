@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mrt_math.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hepple <hepple@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 09:49:49 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/07 09:50:02 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/08 11:50:08 by hepple           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ t_color	color_scale(double f, t_color c1);
 t_color	color_multiply(t_color c1, t_color c2);
 
 t_vec3	vec3_add(t_vec3 a, t_vec3 b);
-t_vec3	vec3_subtract(t_vec3 a, t_vec3 b);
+t_vec3	vec3_sub(t_vec3 a, t_vec3 b);
 t_vec3	vec3_scale(double alpha, t_vec3 a);
-t_vec3	vec3_linear_comb(double alpha, t_vec3 a, double beta, t_vec3 b);
-t_vec3	vec3_normalize(t_vec3 a);
+t_vec3	vec3_lin_comb(double alpha, t_vec3 a, double beta, t_vec3 b);
+t_vec3	vec3_norm(t_vec3 a);
 
 bool	vec3_equal(t_vec3 a, t_vec3 b);
-double	vec3_length(t_vec3 a);
-double	vec3_distance(t_vec3 a, t_vec3 b);
-double	vec3_scalar_product(t_vec3 a, t_vec3 b);
-t_vec3	vec3_vector_product(t_vec3 a, t_vec3 b);
+double	vec3_len(t_vec3 a);
+double	vec3_dist(t_vec3 a, t_vec3 b);
+double	vec3_dot(t_vec3 a, t_vec3 b);
+t_vec3	vec3_cross(t_vec3 a, t_vec3 b);
 
 #endif // MRT_MATH_H

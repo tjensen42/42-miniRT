@@ -4,16 +4,16 @@ static void	rotate_ray_x(t_ray *ray, double rot_x);
 static void	rotate_ray_y(t_ray *ray, double rot_y);
 static void	rotate_ray_z(t_ray *ray, double rot_z);
 
-void	intersec_rectangle_move_rotate_ray(t_ray *ray, t_list *obj)
+void	intersect_rectangle_move_rotate_ray(t_ray *ray, t_list *obj)
 {
-	ray->pos = vec3_subtract(ray->pos, obj_cont(obj)->rt.pos);
+	ray->pos = vec3_sub(ray->pos, obj_cont(obj)->rt.pos);
 	if (obj_cont(obj)->rt.rot.z != 0.0)
 		rotate_ray_z(ray, obj_cont(obj)->rt.rot.z);
 	if (obj_cont(obj)->rt.rot.y != 0.0)
 		rotate_ray_y(ray, obj_cont(obj)->rt.rot.y);
 	if (obj_cont(obj)->rt.rot.x != 0.0)
 		rotate_ray_x(ray, obj_cont(obj)->rt.rot.x);
-	ray->pos = vec3_subtract(ray->pos, obj_cont(obj)->rt.rel_pos);
+	ray->pos = vec3_sub(ray->pos, obj_cont(obj)->rt.rel_pos);
 }
 
 static void	rotate_ray_x(t_ray *ray, double rot_x)

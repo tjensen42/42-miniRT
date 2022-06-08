@@ -15,7 +15,7 @@ int	parse_cam(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_LOOK, NULL));
 	if (vec3_equal(scene->cam.pos, look_at))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_CAM, NULL));
-	scene->cam.dir = vec3_normalize(vec3_subtract(look_at, scene->cam.pos));
+	scene->cam.dir = vec3_norm(vec3_sub(look_at, scene->cam.pos));
 	scene->cam.dir_initial = scene->cam.dir;
 	if (int_from_str(split[3], 1, 179, &(scene->cam.fov)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_FOV, NULL));

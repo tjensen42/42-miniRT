@@ -14,7 +14,7 @@ t_color	texture_sphere(t_list *obj, t_hit *hit)
 	t_texture	*c_texture;
 
 	c_texture = obj_cont(obj)->material.c_texture;
-	p = vec3_normalize(vec3_subtract(hit->p, obj_cont(obj)->sp.pos));
+	p = vec3_norm(vec3_sub(hit->p, obj_cont(obj)->sp.pos));
 	if (obj_cont(obj)->sp.rot.z != 0.0)
 		sphere_rotate_z(&p, obj_cont(obj)->sp.rot.z);
 	if (obj_cont(obj)->sp.rot.y != 0.0)
@@ -37,7 +37,7 @@ t_color	texture_rectangle_x(t_list *obj, t_hit *hit)
 	size_t		pixel;
 
 	c_texture = obj_cont(obj)->material.c_texture;
-	p = vec3_subtract(hit->p, obj_cont(obj)->rt.pos);
+	p = vec3_sub(hit->p, obj_cont(obj)->rt.pos);
 	if (obj_cont(obj)->rt.dir.x < 0.0)
 		u = p.z / obj_cont(obj)->rt.width + 0.5;
 	else
@@ -57,7 +57,7 @@ t_color	texture_rectangle_y(t_list *obj, t_hit *hit)
 	size_t		pixel;
 
 	c_texture = obj_cont(obj)->material.c_texture;
-	p = vec3_subtract(hit->p, obj_cont(obj)->rt.pos);
+	p = vec3_sub(hit->p, obj_cont(obj)->rt.pos);
 	if (obj_cont(obj)->rt.dir.y < 0.0)
 		u = -p.x / obj_cont(obj)->rt.width + 0.5;
 	else
@@ -77,7 +77,7 @@ t_color	texture_rectangle_z(t_list *obj, t_hit *hit)
 	size_t		pixel;
 
 	c_texture = obj_cont(obj)->material.c_texture;
-	p = vec3_subtract(hit->p, obj_cont(obj)->rt.pos);
+	p = vec3_sub(hit->p, obj_cont(obj)->rt.pos);
 	if (obj_cont(obj)->rt.dir.z < 0.0)
 		u = -p.x / obj_cont(obj)->rt.width + 0.5;
 	else

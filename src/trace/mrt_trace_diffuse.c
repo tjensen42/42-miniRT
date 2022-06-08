@@ -36,7 +36,7 @@ double	pdf_scaling(t_scene *scene, t_ray *ray, t_hit *hit)
 	mixed_sampling_pdf_value = mixed_sampling_pdf(scene, ray, hit);
 	if (mixed_sampling_pdf_value == 0.0)
 		return (0.0);
-	cosine = vec3_scalar_product(hit->normal, ray->dir);
+	cosine = vec3_dot(hit->normal, ray->dir);
 	if ((cosine < 0 && hit->side == OUTSIDE)
 		|| (cosine > 0 && hit->side == INSIDE))
 		scattering_pdf = 0;
@@ -52,7 +52,7 @@ static double	mixed_sampling_pdf(t_scene *scene, t_ray *ray, t_hit *hit)
 	double	import_pdf;
 	t_list	*iter;
 
-	cosine = vec3_scalar_product(hit->normal, ray->dir);
+	cosine = vec3_dot(hit->normal, ray->dir);
 	if ((cosine < 0.0 && hit->side == OUTSIDE)
 		|| (cosine > 0.0 && hit->side == INSIDE))
 		return (0.0);

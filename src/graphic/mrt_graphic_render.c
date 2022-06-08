@@ -64,8 +64,8 @@ void	*draw_thread(void *thread_data)
 		xy[0] = 0;
 		while (xy[0] < img->width)
 		{
-			pixel_pos = vec3_add(img->pos, vec3_linear_comb(xy[0] + ft_rand_double_0_1(), img->px, img->height - 1 - xy[1] + ft_rand_double_0_1(), img->py));
-			ray.dir = vec3_normalize(vec3_subtract(pixel_pos, ray.pos));
+			pixel_pos = vec3_add(img->pos, vec3_lin_comb(xy[0] + ft_rand_double_0_1(), img->px, img->height - 1 - xy[1] + ft_rand_double_0_1(), img->py));
+			ray.dir = vec3_norm(vec3_sub(pixel_pos, ray.pos));
 			img->pixel[xy[1] * img->width + xy[0]] = color_add(img->pixel[xy[1] * img->width + xy[0]], trace(thread->scene, &ray, 0));
 			xy[0]++;
 		}

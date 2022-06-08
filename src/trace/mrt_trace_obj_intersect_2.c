@@ -1,6 +1,6 @@
 #include "mrt_trace.h"
 
-double	intersec_rectangle_z(t_list *obj, t_ray *ray, double t_min,
+double	intersect_rectangle_z(t_list *obj, t_ray *ray, double t_min,
 			double t_max)
 {
 	t_ray	tmp_ray;
@@ -9,7 +9,7 @@ double	intersec_rectangle_z(t_list *obj, t_ray *ray, double t_min,
 	double	y;
 
 	tmp_ray = *ray;
-	intersec_rectangle_move_rotate_ray(&tmp_ray, obj);
+	intersect_rectangle_move_rotate_ray(&tmp_ray, obj);
 	if (fabs(tmp_ray.dir.z) < 1e-6)
 		return (-1);
 	t = -tmp_ray.pos.z / tmp_ray.dir.z;
@@ -23,7 +23,7 @@ double	intersec_rectangle_z(t_list *obj, t_ray *ray, double t_min,
 	return (t);
 }
 
-double	intersec_rectangle_y(t_list *obj, t_ray *ray, double t_min,
+double	intersect_rectangle_y(t_list *obj, t_ray *ray, double t_min,
 			double t_max)
 {
 	t_ray	tmp_ray;
@@ -32,7 +32,7 @@ double	intersec_rectangle_y(t_list *obj, t_ray *ray, double t_min,
 	double	z;
 
 	tmp_ray = *ray;
-	intersec_rectangle_move_rotate_ray(&tmp_ray, obj);
+	intersect_rectangle_move_rotate_ray(&tmp_ray, obj);
 	if (fabs(tmp_ray.dir.y) < 1e-6)
 		return (-1);
 	t = -tmp_ray.pos.y / tmp_ray.dir.y;
@@ -46,7 +46,7 @@ double	intersec_rectangle_y(t_list *obj, t_ray *ray, double t_min,
 	return (t);
 }
 
-double	intersec_rectangle_x(t_list *obj, t_ray *ray, double t_min,
+double	intersect_rectangle_x(t_list *obj, t_ray *ray, double t_min,
 			double t_max)
 {
 	t_ray	tmp_ray;
@@ -55,7 +55,7 @@ double	intersec_rectangle_x(t_list *obj, t_ray *ray, double t_min,
 	double	z;
 
 	tmp_ray = *ray;
-	intersec_rectangle_move_rotate_ray(&tmp_ray, obj);
+	intersect_rectangle_move_rotate_ray(&tmp_ray, obj);
 	if (fabs(tmp_ray.dir.x) < 1e-6)
 		return (-1);
 	t = -tmp_ray.pos.x / tmp_ray.dir.x;

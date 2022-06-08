@@ -52,7 +52,7 @@ static int	parse_disc_obj(t_scene *scene, char **split, int line_num)
 		|| c_obj->material.brightness <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_BRIGHT, NULL));
 	c_obj->print = &print_obj_disc;
-	c_obj->intersec = &intersec_disc;
+	c_obj->intersec = &intersect_disc;
 	c_obj->normal = &normal_disc;
 	c_obj->material.get_color = &obj_color;
 	return (0);

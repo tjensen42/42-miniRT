@@ -9,7 +9,7 @@ t_vec3	random_in_unit_sphere(void)
 		vec3.x = -1.0 + (rand() / (double)(RAND_MAX / 2.0));
 		vec3.y = -1.0 + (rand() / (double)(RAND_MAX / 2.0));
 		vec3.z = -1.0 + (rand() / (double)(RAND_MAX / 2.0));
-		if (vec3_scalar_product(vec3, vec3) < 1.0)
+		if (vec3_dot(vec3, vec3) < 1.0)
 			return (vec3);
 	}
 }

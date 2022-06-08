@@ -11,9 +11,9 @@ t_vec3	random_dir_to_sphere(t_list *light, t_hit *hit)
 	t_obj	*c_obj;
 
 	c_obj = light_cont(light)->linked_c_obj;
-	light_dir = vec3_subtract(c_obj->sp.pos, hit->p);
-	dist_squared = vec3_scalar_product(light_dir, light_dir);
-	uvw = onb_build(vec3_normalize(light_dir));
+	light_dir = vec3_sub(c_obj->sp.pos, hit->p);
+	dist_squared = vec3_dot(light_dir, light_dir);
+	uvw = onb_build(vec3_norm(light_dir));
 	return (onb_transform(uvw,
 			random_to_sphere(c_obj->sp.radius, dist_squared)));
 }
@@ -52,8 +52,8 @@ t_vec3	random_dir_to_disc(t_list *light, t_hit *hit)
 			break ;
 	}
 	rand_point = vec3_add(c_obj->di.pos,
-			vec3_linear_comb(r1, uvw.u, r2, uvw.v));
-	return (vec3_normalize(vec3_subtract(rand_point, hit->p)));
+			vec3_lin_comb(r1, uvw.u, r2, uvw.v));
+	return (vec3_norm(vec3_sub(rand_point, hit->p)));
 }
 
 t_vec3	random_dir_to_rectangle(t_list *light, t_hit *hit)
@@ -72,5 +72,5 @@ t_vec3	random_dir_to_rectangle(t_list *light, t_hit *hit)
 		rand_point = vec3_add(c_obj->rt.pos, (t_vec3){r1, 0.0, r2});
 	else
 		rand_point = vec3_add(c_obj->rt.pos, (t_vec3){r1, r2, 0.0});
-	return (vec3_normalize(vec3_subtract(rand_point, hit->p)));
+	return (vec3_norm(vec3_sub(rand_point, hit->p)));
 }

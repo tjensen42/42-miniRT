@@ -17,7 +17,7 @@ int	parse_obj_cylinder(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_POS, NULL));
 	if (parse_vec3(split[2], &(obj_cont(obj)->tb.dir)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIR, NULL));
-	obj_cont(obj)->tb.dir = vec3_normalize(obj_cont(obj)->tb.dir);
+	obj_cont(obj)->tb.dir = vec3_norm(obj_cont(obj)->tb.dir);
 	if (double_from_str(split[3], 6, 3, &(obj_cont(obj)->tb.radius))
 		|| obj_cont(obj)->tb.radius <= 0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_RAD, NULL));
@@ -29,7 +29,7 @@ int	parse_obj_cylinder(t_scene *scene, char **split, int line_num)
 	if (add_caps(scene, obj_cont(obj)))
 		return (-1);
 	obj_cont(obj)->print = &print_obj_tube;
-	obj_cont(obj)->intersec = &intersec_tube;
+	obj_cont(obj)->intersec = &intersect_tube;
 	obj_cont(obj)->normal = &normal_tube;
 	return (0);
 }
@@ -49,14 +49,14 @@ static int add_caps(t_scene *scene, t_obj *c_cy)
 	ft_lstadd_back(&(scene->l_obj), obj_bottom);
 	obj_cont(obj_top)->material = c_cy->material;
 	obj_cont(obj_top)->print = &print_obj_disc;
-	obj_cont(obj_top)->intersec = &intersec_disc;
+	obj_cont(obj_top)->intersec = &intersect_disc;
 	obj_cont(obj_top)->normal = &normal_disc;
 	obj_cont(obj_top)->di.radius = c_cy->tb.radius;
 	*obj_cont(obj_bottom) = *obj_cont(obj_top);
-	obj_cont(obj_top)->di.pos = vec3_linear_comb(1.0, c_cy->tb.pos,
+	obj_cont(obj_top)->di.pos = vec3_lin_comb(1.0, c_cy->tb.pos,
 									c_cy->tb.height / 2.0, c_cy->tb.dir);
 	obj_cont(obj_top)->di.dir = c_cy->tb.dir;
-	obj_cont(obj_bottom)->di.pos = vec3_linear_comb(1.0, c_cy->tb.pos,
+	obj_cont(obj_bottom)->di.pos = vec3_lin_comb(1.0, c_cy->tb.pos,
 										c_cy->tb.height / -2.0, c_cy->tb.dir);
 	obj_cont(obj_bottom)->di.dir = vec3_scale(-1.0, c_cy->tb.dir);
 	return (0);

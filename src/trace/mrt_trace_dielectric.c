@@ -36,7 +36,7 @@ static t_vec3	refract(t_list *obj, t_ray *ray, t_hit *hit, double ref_ratio)
 	else
 		normal = vec3_scale(-1.0, hit->normal);
 	cos_theta = fmin(
-			vec3_scalar_product(vec3_scale(-1.0, ray->dir), normal), 1.0);
+			vec3_dot(vec3_scale(-1.0, ray->dir), normal), 1.0);
 	cannot_refract = (ref_ratio * sqrt(1.0 - cos_theta * cos_theta) > 1.0);
 	if (cannot_refract
 		|| reflectance(cos_theta, ref_ratio) > ft_rand_double_0_1())
@@ -46,8 +46,8 @@ static t_vec3	refract(t_list *obj, t_ray *ray, t_hit *hit, double ref_ratio)
 		r_out_perp = vec3_scale(ref_ratio,
 				vec3_add(ray->dir, vec3_scale(cos_theta, normal)));
 		r_out_parallel = vec3_scale(
-				-sqrt(fabs(1.0 - vec3_scalar_product(r_out_perp, r_out_perp))),
+				-sqrt(fabs(1.0 - vec3_dot(r_out_perp, r_out_perp))),
 				normal);
-		return (vec3_normalize(vec3_add(r_out_perp, r_out_parallel)));
+		return (vec3_norm(vec3_add(r_out_perp, r_out_parallel)));
 	}
 }

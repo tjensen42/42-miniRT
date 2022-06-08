@@ -61,19 +61,19 @@ static void	graphic_key_hooks_move(t_graphic_data *gr)
 	if (mlx_is_key_down(gr->mlx, MLX_KEY_W))
 		move(gr->scene, vec3_add(cam->pos, vec3_scale(scale, cam->dir)));
 	if (mlx_is_key_down(gr->mlx, MLX_KEY_S))
-		move(gr->scene, vec3_subtract(cam->pos, vec3_scale(scale, cam->dir)));
+		move(gr->scene, vec3_sub(cam->pos, vec3_scale(scale, cam->dir)));
 	if (mlx_is_key_down(gr->mlx, MLX_KEY_A))
-		move(gr->scene, vec3_subtract(cam->pos,
-				vec3_scale(scale, vec3_normalize(gr->scene->img.px))));
+		move(gr->scene, vec3_sub(cam->pos,
+				vec3_scale(scale, vec3_norm(gr->scene->img.px))));
 	if (mlx_is_key_down(gr->mlx, MLX_KEY_D))
 		move(gr->scene, vec3_add(cam->pos,
-				vec3_scale(scale, vec3_normalize(gr->scene->img.px))));
+				vec3_scale(scale, vec3_norm(gr->scene->img.px))));
 	if (mlx_is_key_down(gr->mlx, MLX_KEY_Q))
-		move(gr->scene, vec3_subtract(cam->pos,
-				vec3_scale(scale, vec3_normalize(gr->scene->img.py))));
+		move(gr->scene, vec3_sub(cam->pos,
+				vec3_scale(scale, vec3_norm(gr->scene->img.py))));
 	if (mlx_is_key_down(gr->mlx, MLX_KEY_E))
 		move(gr->scene, vec3_add(cam->pos,
-				vec3_scale(scale, vec3_normalize(gr->scene->img.py))));
+				vec3_scale(scale, vec3_norm(gr->scene->img.py))));
 }
 
 static void	graphic_key_hooks_rotate(t_graphic_data *gr)

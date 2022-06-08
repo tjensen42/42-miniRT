@@ -99,9 +99,9 @@ t_list	*calc_hit(t_list *l_obj, t_ray *ray, t_hit *hit)
 	}
 	if (obj)
 	{
-		hit->p = vec3_linear_comb(1.0, ray->pos, hit->t, ray->dir);
+		hit->p = vec3_lin_comb(1.0, ray->pos, hit->t, ray->dir);
 		hit->normal = obj_cont(obj)->normal(obj, hit);
-		if (vec3_scalar_product(hit->normal, ray->dir) > 0.0)
+		if (vec3_dot(hit->normal, ray->dir) > 0.0)
 			hit->side = INSIDE;
 		else
 			hit->side = OUTSIDE;

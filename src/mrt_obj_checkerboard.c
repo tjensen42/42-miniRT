@@ -11,7 +11,7 @@ t_color	checkerboard_sphere(t_list *obj, t_hit *hit)
 	double	theta;
 	double	phi;
 
-	p = vec3_normalize(vec3_subtract(hit->p, obj_cont(obj)->sp.pos));
+	p = vec3_norm(vec3_sub(hit->p, obj_cont(obj)->sp.pos));
 	if (obj_cont(obj)->sp.rot.z != 0.0)
 		sphere_rotate_z(&p, obj_cont(obj)->sp.rot.z);
 	if (obj_cont(obj)->sp.rot.y != 0.0)
@@ -72,7 +72,7 @@ t_color	checkerboard_rectangle(t_list *obj, t_hit *hit)
 	double	u;
 	double	v;
 
-	p = vec3_subtract(hit->p, obj_cont(obj)->rt.pos);
+	p = vec3_sub(hit->p, obj_cont(obj)->rt.pos);
 	if (obj_cont(obj)->rt.dir.x == 1.0)
 	{
 		u = -p.y / obj_cont(obj)->rt.width + 0.5;
