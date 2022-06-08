@@ -93,15 +93,16 @@ typedef struct s_ray t_ray;
 typedef struct s_hit t_hit;
 
 typedef void	(*t_f_print)(t_list *obj);
-typedef double	(*f_intersect)(t_list *obj, t_ray *ray, double t_min, double t_max);
-typedef t_vec3	(*f_normal)(t_list *obj, t_hit *hit);
+typedef double	(*t_f_intersect)(t_list *obj, t_ray *ray, double t_min,
+	double t_max);
+typedef t_vec3	(*t_f_normal)(t_list *obj, t_hit *hit);
 
 typedef struct	s_obj
 {
 	t_material		material;
 	t_f_print		print;
-	f_intersect		intersect;
-	f_normal		normal;
+	t_f_intersect	intersect;
+	t_f_normal		normal;
 	union
 	{
 		t_plane 	pl;

@@ -1,79 +1,68 @@
-#include "mrt_print.h"
+#include "mrt_scene.h"
+#include "parse/mrt_parse.h"
+#include "print/mrt_print.h"
 
-static void	print_scene_img(struct s_img *img);
-static void	print_scene_specs(t_scene *scene);
+static void	stats_objects(t_scene *scene);
+static void	stats_lights(t_scene *scene);
 
-int	print_scene(t_scene *scene)
+void	scene_print(t_scene *scene)
+{
+	printf("%s%-11s %-4d%s   -->   ", COLOR_BL_1, "OBJECTS:",
+		ft_lstsize(scene->l_obj), COLOR_NO);
+	stats_objects(scene);
+	printf("%s%-11s %-4d%s   -->   ", COLOR_CY_1, "LIGHTS:",
+		ft_lstsize(scene->l_light), COLOR_NO);
+	stats_lights(scene);
+	printf("%s%-11s %-4d%s\n", COLOR_BL_1, "TEXTURES:",
+		ft_lstsize(scene->l_textures), COLOR_NO);
+}
+
+static void	stats_objects(t_scene *scene)
 {
 	t_list	*iter;
+	int		obj_counter[5];
 
-	print_scene_specs(scene);
+	ft_bzero(obj_counter, sizeof(int) * 5);
 	iter = scene->l_obj;
 	while (iter)
 	{
-		obj_cont(iter)->print(iter);
+		if (obj_cont(iter)->print == &print_obj_plane)
+			obj_counter[0]++;
+		else if (obj_cont(iter)->print == &print_obj_sphere)
+			obj_counter[1]++;
+		else if (obj_cont(iter)->print == &print_obj_tube)
+			obj_counter[2]++;
+		else if (obj_cont(iter)->print == &print_obj_disc)
+			obj_counter[3]++;
+		else if (obj_cont(iter)->print == &print_obj_rectangle)
+			obj_counter[4]++;
 		iter = iter->next;
 	}
+	printf("%s%-11s %-4d   ", COLOR_BL, "PLANES:", obj_counter[0]);
+	printf("%-11s %-4d   ", "SPHERES:", obj_counter[1]);
+	printf("%-11s %-4d   ", "TUBES:", obj_counter[2]);
+	printf("%-11s %-4d   ", "DISCS:", obj_counter[3]);
+	printf("%-11s %-4d%s\n", "RECTANGLES:", obj_counter[4], COLOR_NO);
+}
+
+static void	stats_lights(t_scene *scene)
+{
+	t_list	*iter;
+	int		light_counter[3];
+
+	ft_bzero(light_counter, sizeof(int) * 3);
 	iter = scene->l_light;
 	while (iter)
 	{
-		light_cont(iter)->print(iter);
+		if (light_cont(iter)->print == &print_light_sphere)
+			light_counter[0]++;
+		else if (light_cont(iter)->print == &print_light_disc)
+			light_counter[1]++;
+		else if (light_cont(iter)->print == &print_light_rectangle)
+			light_counter[2]++;
 		iter = iter->next;
 	}
-	print_textures(scene->l_textures);
-	return (0);
-}
-
-static void	print_scene_specs(t_scene *scene)
-{
-	print_scene_img(&(scene->img));
-	printf("COUNTER:\n");
-	print_scene_int(ft_lstsize(scene->l_obj), "objects:", NULL);
-	print_scene_int(ft_lstsize(scene->l_light), "oversampl:", NULL);
-	printf("SAMPLING:\n");
-	print_scene_int(scene->sampling.max_samp, "samples:", NULL);
-	print_scene_int(scene->sampling.recursion_depth, "rec_depth:", NULL);
-	print_scene_double(scene->sampling.cosine, "cosine:", NULL);
-	print_scene_double(scene->sampling.light, "import:", NULL);
-	printf("\n");
-	printf("CAMERA:\n");
-	print_vec3(scene->cam.pos, "pos:", COLOR_BL);
-	print_vec3(scene->cam.dir, "dir:", COLOR_CY);
-	print_scene_int(scene->cam.fov, "fov:", NULL);
-	printf("\n");
-	printf("BACKGROUND:\n");
-	print_color(scene->bg.color[0]);
-	print_color(scene->bg.color[1]);
-	printf("\n");
-	printf("AMBIENT:\n");
-	print_color(scene->amb.color);
-	print_scene_double(scene->amb.brightness, "bright", NULL);
-	printf("\n");
-}
-
-static void	print_scene_img(struct s_img *img)
-{
-	printf("IMAGE:\n");
-	print_scene_int(img->width, "width:", NULL);
-	print_scene_int(img->height, "height:", NULL);
-	print_vec3(img->pos, "img-pos:", COLOR_BL);
-	print_vec3(img->px, "img-x:", COLOR_CY);
-	print_vec3(img->py, "img-y:", COLOR_CY);
-	printf("\n");
-}
-
-void	print_scene_int(int num, const char *str, const char *color)
-{
-	if (color)
-		printf("\t%s%-10s %8d%s\n", color, str, num, COLOR_NO);
-	else
-		printf("\t%-10s %8d\n", str, num);
-}
-
-void	print_scene_double(double num, const char *str, const char *color)
-{
-	if (color)
-		printf("\t%s%-10s %8.3f%s\n", color, str, num, COLOR_NO);
-	else
-		printf("\t%-10s %8.3f\n", str, num);
+	printf("%s%-11s %-4d   ", COLOR_CY, "SPHERES:", light_counter[0]);
+	printf("%-11s %-4d   ", "DISCS:", light_counter[1]);
+	printf("%-11s %-4d%s\n", "RECTANGLE:", light_counter[2], COLOR_NO);
 }

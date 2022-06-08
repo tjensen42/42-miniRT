@@ -2,6 +2,26 @@
 
 static int	create_join_threads(t_graphic_data *graphic, t_scene *scene);
 
+void	print_status(int sample, int max_sample)
+{
+	int	i;
+
+	printf("\r%s%s %4d / %4d ", COLOR_YE_1, "SAMPLE:", sample, max_sample);
+	i = 0;
+	while (i < (int)((double)sample / max_sample * 100))
+	{
+		printf("\u2593");
+		i++;
+	}
+	while (i < 100)
+	{
+		printf("\u2591");
+		i++;
+	}
+	printf("%s", COLOR_NO);
+	fflush(stdout);
+}
+
 void	graphic_render(t_graphic_data *graphic)
 {
 	t_scene	*scene;
@@ -13,9 +33,14 @@ void	graphic_render(t_graphic_data *graphic)
 		mlx_close_window(graphic->mlx);
 	else
 	{
-		printf("sample %4d / %4d\n",
-			scene->sampling.samp + 1, scene->sampling.max_samp);
+
+		// printf("\r%sSAMPLE %4d / %4d%s", COLOR_YE_1,
+		// 	scene->sampling.samp + 1, scene->sampling.max_samp, COLOR_NO);
+		// fflush(stdout);
 		scene->sampling.samp++;
+		print_status(scene->sampling.samp, scene->sampling.max_samp);
+		if (scene->sampling.samp == scene->sampling.max_samp)
+			printf("\n");
 		img_to_mlx_img(scene, graphic->mlx_img);
 	}
 }

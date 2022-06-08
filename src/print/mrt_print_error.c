@@ -2,7 +2,8 @@
 
 int	print_error(char *s1, char *s2, char *s3, char *s4)
 {
-	ft_putendl_fd("Error", STDERR_FILENO);
+	fprintf(stderr, "%sError%s\n", COLOR_RE_1, COLOR_NO);
+	fflush(stderr);
 	if (s1)
 		ft_putstr_fd(s1, STDERR_FILENO);
 	if (s2)
@@ -30,7 +31,8 @@ int	print_error(char *s1, char *s2, char *s3, char *s4)
 int	print_error_scene(int line_num, const char *msg1,
 		const char *msg2, const char *msg3)
 {
-	write(STDERR_FILENO, "Error\n", 6);
+	fprintf(stderr, "%sError%s\n", COLOR_RE_1, COLOR_NO);
+	fflush(stderr);
 	if (line_num > 0)
 	{
 		write(STDERR_FILENO, "line ", 5);

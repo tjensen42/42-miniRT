@@ -121,6 +121,8 @@ typedef struct s_scene
 int		scene_create(t_scene *scene, const char *file);
 void	scene_destroy(t_scene *scene);
 
+void	scene_print(t_scene *scene);
+
 int		scene_check_light_weights(t_list *l_light);
 void	scene_calc_img_pos(t_scene *scene);
 

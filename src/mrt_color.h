@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 10:32:01 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/06 17:34:17 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/08 17:41:22 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,17 @@
 
 # define COLOR_NO		"\033[m"
 # define COLOR_RE		"\033[0;31m"
+# define COLOR_RE_1		"\033[1;31m"
 # define COLOR_YE		"\033[0;33m"
+# define COLOR_YE_1		"\033[1;33m"
 # define COLOR_GR		"\033[0;32m"
+# define COLOR_GR_1		"\033[1;32m"
 # define COLOR_BL		"\033[0;34m"
+# define COLOR_BL_1		"\033[1;34m"
 # define COLOR_PL		"\033[0;35m"
+# define COLOR_PL_1		"\033[1;35m"
 # define COLOR_CY		"\033[0;36m"
+# define COLOR_CY_1		"\033[1;36m"
 
 /* ************************************************************************** */
 /* STRUCTS																	  */

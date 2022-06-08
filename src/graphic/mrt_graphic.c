@@ -1,4 +1,5 @@
 #include "mrt_graphic.h"
+#include "print/mrt_print.h"
 
 static void	graphic_loop(void *data);
 static void	graphic_key_hooks(t_graphic_data *gr);
@@ -9,6 +10,7 @@ int	graphic(t_scene *scene)
 {
 	t_graphic_data	gr;
 
+	printf("%s\nRENDERING SCENE:%s\n", COLOR_GR_1, COLOR_NO);
 	gr.scene = scene;
 	gr.mlx = mlx_init(scene->img.width, scene->img.height, WIN_NAME, false);
 	if (gr.mlx == NULL)
@@ -44,6 +46,8 @@ static void	graphic_key_hooks(t_graphic_data *gr)
 		mlx_close_window(gr->mlx);
 	if (mlx_is_key_down(gr->mlx, MLX_KEY_R))
 		reset_cam(gr->scene);
+	if (mlx_is_key_down(gr->mlx, MLX_KEY_P))
+		print_scene_debug(gr->scene);
 	graphic_key_hooks_move(gr);
 	graphic_key_hooks_rotate(gr);
 }

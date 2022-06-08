@@ -26,7 +26,7 @@ void	print_vec3(t_vec3 vec3, const char *str, const char *color);
 
 void	print_material(t_material *material);
 
-int		print_scene(t_scene *scene);
+int		print_scene_debug(t_scene *scene);
 void	print_scene_int(int num, const char *str, const char *color);
 void	print_scene_double(double num, const char *str, const char *color);
 

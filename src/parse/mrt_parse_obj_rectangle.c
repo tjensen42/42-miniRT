@@ -66,7 +66,7 @@ int parse_obj_rectangle_dir(t_obj *c_obj, const char *dir)
 	return (0);
 }
 
-f_intersect parse_obj_rt_intersec(t_vec3 dir)
+t_f_intersect parse_obj_rt_intersec(t_vec3 dir)
 {
 	if (dir.x != 0.0)
 		return (&intersect_rectangle_x);

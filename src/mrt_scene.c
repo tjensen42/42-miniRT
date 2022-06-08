@@ -9,13 +9,14 @@ int			scene_check_light_weights(t_list *l_light);
 int	scene_create(t_scene *scene, const char *file)
 {
 	ft_bzero(scene, sizeof(t_scene));
+	printf("%sPARSING FILE: %s%s\n", COLOR_GR_1, file, COLOR_NO);
 	if (parse_scene(scene, file))
 		return (-1);
 	if (scene_check(scene))
 		return (-1);
 	if (scene_setup(scene))
 		return (-1);
-	print_scene(scene);
+	scene_print(scene);
 	return (0);
 }
 
