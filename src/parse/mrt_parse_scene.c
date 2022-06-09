@@ -11,10 +11,10 @@ int	parse_scene(t_scene *scene, const char *file)
 	FILE	*fp;
 
 	if (file && ft_strncmp_rev(file, ".rt", 3) != 0)
-		return (print_error_scene(-1, file, ERR_INVAL_FILE, NULL));
+		return (print_error_scene(-1, ERR_PARSE, ERR_FILE, file));
 	fp = fopen(file, "r");
 	if (fp == NULL)
-		return (print_error_scene(-1, file, strerror(errno), NULL));
+		return (print_error_scene(-1, ERR_PARSE, strerror(errno), file));
 	error = parse_file(scene, fp);
 	fclose(fp);
 	return (error);
@@ -63,22 +63,22 @@ static int	parse_line(t_scene *scene, char *line, int line_num)
 }
 
 static const struct s_ident	g_ident[] = {
-{IDENT_RES, &parse_img},
-{IDENT_SAMPLING, &parse_sampling},
-{IDENT_CAM, &parse_cam},
-{IDENT_BG, &parse_bg},
-{IDENT_AMB, &parse_amb},
-{IDENT_LIGHT_SP, &parse_light_sphere},
-{IDENT_LIGHT_DI, &parse_light_disc},
-{IDENT_LIGHT_RT, &parse_light_rectangle},
-{IDENT_PLANE, &parse_obj_plane},
-{IDENT_SPHERE, &parse_obj_sphere},
-{IDENT_CYLINDER, &parse_obj_cylinder},
-{IDENT_RECTANGLE, &parse_obj_rectangle},
-{IDENT_CUBOID, &parse_obj_cuboid},
-{IDENT_DISC, &parse_obj_disc},
-{IDENT_TUBE, &parse_obj_tube},
-{IDENT_TEXTURE, &parse_texture},
+{ID_RES, &parse_res},
+{ID_SAMPLING, &parse_sampling},
+{ID_CAM, &parse_cam},
+{ID_BG, &parse_bg},
+{ID_AMB, &parse_amb},
+{ID_LIGHT_SP, &parse_light_sphere},
+{ID_LIGHT_DI, &parse_light_disc},
+{ID_LIGHT_RT, &parse_light_rectangle},
+{ID_PLANE, &parse_obj_plane},
+{ID_SPHERE, &parse_obj_sphere},
+{ID_CYLINDER, &parse_obj_cylinder},
+{ID_RECTANGLE, &parse_obj_rectangle},
+{ID_CUBOID, &parse_obj_cuboid},
+{ID_DISC, &parse_obj_disc},
+{ID_TUBE, &parse_obj_tube},
+{ID_TEXTURE, &parse_texture},
 {NULL, NULL}
 };
 
@@ -93,6 +93,6 @@ static int	parse_identifier(t_scene *scene, char **split, int line_num)
 			return (g_ident[i].process_ident(scene, split, line_num));
 		i++;
 	}
-	print_error_scene(line_num, ERR_PARSE, ERR_INVAL_IDENT, split[0]);
+	print_error_scene(line_num, ERR_PARSE, ERR_ID, split[0]);
 	return (-1);
 }

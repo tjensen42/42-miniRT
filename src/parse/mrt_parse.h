@@ -21,65 +21,69 @@
 /* ************************************************************************** */
 
 // ERRORS
-# define ERR_FILE_EMPTY		"Empty scene file"
-# define ERR_FILE_TABS		"Tabs are not valid in a scene file"
+# define ERR_FILE_TABS		"Tabs are not allowed"
 
-# define ERR_PARSE			"Parsing failure"
-# define ERR_PARSE_DUP		"This object cannot be defined twice"
+# define ERR_PARSE			"Parsing error"
+# define ERR_DUPLICATE		"Duplicate identifier"
 
-# define ERR_INVAL_NUM		"Invalid number of arguments for identifier"
-# define ERR_INVAL_FILE		"Is not a valid scene (<name>.rt) file"
-# define ERR_INVAL_LINE		"Invalid line in scene file"
-# define ERR_INVAL_IDENT	"Invalid identifier in scene file"
-# define ERR_INVAL_OPTION	"Invalid option"
-# define ERR_INVAL_POS		"Invalid position"
-# define ERR_INVAL_DIR		"Invalid direction"
+# define ERR_NUM_PARA		"Wrong number of parameters"
+# define ERR_FILE			"Invalid scene file (<scene>.rt)"
+# define ERR_ID				"Invalid identifier"
 
-# define ERR_INVAL_ROT		"Invalid rotation angles"
-# define ERR_INVAL_RAD		"Invalid radius"
-# define ERR_INVAL_WIDTH	"Invalid width"
-# define ERR_INVAL_HEIGHT	"Invalid height"
-# define ERR_INVAL_DEPTH	"Invalid depth"
+# define VEC3_RANGE			"3x <double> [-999999.9999,+999999.9999]"
 
-# define ERR_MAX_SAMP		"Invalid number of max_samp"
-# define ERR_REC_DEPTH		"Invalid import sampling"
-# define ERR_IMPORT_SAMP	"Invalid import sampling"
-# define ERR_COSINE_SAMP	"Invalid cosine sampling"
-# define ERR_SAMP_SUM		"Invalid: import + cosine != 1.0"
-# define ERR_INVAL_GAMMA	"Invalid gamma specification"
+# define ERR_POS			"Invalid position"
+# define ERR_DIR			"Invalid direction"
 
-# define ERR_INVAL_CAM		"Cam look-from and look-at cannot be equal"
-# define ERR_INVAL_LOOK		"Invalid look-at"
-# define ERR_INVAL_FOV		"Invalid camera FOV (range [1-179])"
+# define ERR_ROT			"Invalid rotation angles"
+# define ERR_RAD			"Invalid radius"
+# define ERR_WIDTH			"Invalid width"
+# define ERR_HEIGHT			"Invalid height"
+# define ERR_DEPTH			"Invalid depth"
 
-# define ERR_INVAL_RES		"Invalid resolution (range [10-10000])"
-# define ERR_INVAL_LW		"Invalid light-weight"
+# define ERR_CB				"Invalid checkerboard factor"
+# define ERR_TEXTURE		"Invalid texture"
 
-# define ERR_INVAL_COLOR	"Invalid color (range [0-255])"
-# define ERR_INVAL_BRIGHT	"Invalid brightness (range [0.0-9999.99])"
-# define ERR_INVAL_FUZZ		"Invalid fuzz (range [])"
-# define ERR_INVAL_REFRAC	"Invalid refrac (range [])"
-# define ERR_INVAL_SURF		"Invalid surfaces"
-# define ERR_INVAL_DIEL		"Value for DIELECTRIC must be 0.0 for 2D Objects"
+# define ERR_MAX_SAMP		"Invalid number of samples: <int> [1,9999]"
+# define ERR_REC_DEPTH		"Invalid bounces: <int> [1,1000]"
+# define ERR_IMPORT_SAMP	"Invalid light sampling: <double> [0.0,9.9999]"
+# define ERR_COSINE_SAMP	"Invalid cosine sampling: <double> [0.0,9.9999]"
+# define ERR_SAMP_SUM		"Invalid sampling: light + cosine = 1.0"
+# define ERR_GAMMA			"Invalid gamma: <bool> true/false"
+
+# define ERR_CAM_LOOK		"Cam look-from and look-at cannot be equal"
+# define ERR_LOOK_AT		"Invalid look-at"
+# define ERR_FOV			"Invalid camera FOV (range [1,179])"
+
+# define ERR_RES			"Invalid resolution: <int> [10,10000]"
+# define ERR_LIGHT_SF		"Invalid sampling factor"
+
+# define ERR_COLOR			"Invalid color: 3x <int> [0,255]"
+# define ERR_BRIGHT			"Invalid brightness: <double> [0.0,9999.99]"
+# define ERR_FUZZ			"Invalid fuzz: <double> [0.0,9.99]"
+# define ERR_REFRACTION		"Invalid refraction index: <double> [1.00,2.00]"
+# define ERR_SURF			"Invalid surfaces: 3x <double> [0.0,1.00]"
+# define ERR_SURF_SUM		"Surface parameters must add up to 1.0"
+# define ERR_DIELECTRIC		"2D objects cannot be dielectric"
 
 // IDENTIFIERS
-# define IDENT_RES			"R"
-# define IDENT_SAMPLING		"S"
-# define IDENT_CAM			"C"
-# define IDENT_BG			"B"
-# define IDENT_AMB			"A"
+# define ID_RES				"R"
+# define ID_SAMPLING		"S"
+# define ID_CAM				"C"
+# define ID_BG				"B"
+# define ID_AMB				"A"
 
-# define IDENT_TEXTURE		"t"
-# define IDENT_LIGHT_SP		"ls"
-# define IDENT_LIGHT_RT		"lr"
-# define IDENT_LIGHT_DI		"ld"
-# define IDENT_PLANE		"pl"
-# define IDENT_SPHERE		"sp"
-# define IDENT_CYLINDER		"cy"
-# define IDENT_RECTANGLE	"rt"
-# define IDENT_CUBOID		"cu"
-# define IDENT_DISC			"di"
-# define IDENT_TUBE			"tb"
+# define ID_TEXTURE			"tx"
+# define ID_LIGHT_SP		"ls"
+# define ID_LIGHT_RT		"lr"
+# define ID_LIGHT_DI		"ld"
+# define ID_PLANE			"pl"
+# define ID_SPHERE			"sp"
+# define ID_CYLINDER		"cy"
+# define ID_RECTANGLE		"rt"
+# define ID_CUBOID			"cu"
+# define ID_DISC			"di"
+# define ID_TUBE			"tb"
 
 /* ************************************************************************** */
 /* FUNCTION PROTOTYPES														  */
@@ -97,7 +101,7 @@ int			parse_amb(t_scene *scene, char **split, int line_num);
 int			parse_bg(t_scene *scene, char **split, int line_num);
 int			parse_sampling(t_scene *scene, char **split, int line_num);
 int			parse_cam(t_scene *scene, char **split, int line_num);
-int			parse_img(t_scene *scene, char **split, int line_num);
+int			parse_res(t_scene *scene, char **split, int line_num);
 int			parse_ppm(t_scene *scene, char **split, int line_num);
 
 int			parse_obj_rectangle_dir(t_obj *c_obj, const char *dir);

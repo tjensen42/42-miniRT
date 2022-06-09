@@ -9,39 +9,41 @@ int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 	t_obj	*c_obj;
 
 	if (ft_split_count_str(split) != 12)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_NUM_PARA, NULL));
 	obj = obj_new();
 	if (obj == NULL)
 		return (print_error_scene(line_num, ERR_PARSE, strerror(errno), NULL));
 	ft_lstadd_back(&(scene->l_obj), obj);
 	c_obj = obj_cont(obj);
 	if (parse_vec3(split[1], &(c_obj->rt.pos)))
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_POS, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_POS, VEC3_RANGE));
 	if (parse_obj_rectangle_dir(c_obj, split[2]))
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIR, NULL));
-	if (double_from_str(split[3], 6, 3, &(c_obj->rt.width)) || c_obj->rt.width <= 0.0)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_WIDTH, NULL));
-	if (double_from_str(split[4], 6, 3, &(c_obj->rt.height)) || c_obj->rt.height <= 0.0)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_HEIGHT, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_DIR, NULL));
+	if (double_from_str(split[3], 6, 3, &(c_obj->rt.width))
+		|| c_obj->rt.width <= 0.0)
+		return (print_error_scene(line_num, ERR_PARSE, ERR_WIDTH, NULL));
+	if (double_from_str(split[4], 6, 3, &(c_obj->rt.height))
+		|| c_obj->rt.height <= 0.0)
+		return (print_error_scene(line_num, ERR_PARSE, ERR_HEIGHT, NULL));
 	if (parse_vec3(split[5], &(c_obj->rt.rot)))
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_ROT, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_ROT, VEC3_RANGE));
 	if (parse_material(&(c_obj->material), &split[6], line_num))
 		return (-1);
 	if (c_obj->material.surface[DIELECTRIC] != 0.0)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DIEL, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_DIELECTRIC, NULL));
 	c_obj->print = &print_obj_rectangle;
 	c_obj->intersect = parse_obj_rt_intersec(c_obj->rt.dir);
 	c_obj->normal = &normal_rectangle;
 	c_obj->rt.rel_pos = (t_vec3){0.0, 0.0, 0.0};
 	if (int_from_str(split[10], 0, 10000, &(c_obj->material.cb_factor)))
-		return (print_error_scene(line_num, ERR_PARSE, "Invalid cb_factor", NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_CB, NULL));
 	if (c_obj->material.cb_factor > 0 && vec3_equal((t_vec3){0.0, 0.0, 0.0}, c_obj->rt.rot))
 		c_obj->material.get_color = &checkerboard_rectangle;
 	if (ft_strcmp("-", split[11]) != 0)
 	{
 		c_obj->material.c_texture = parse_c_texture_find(scene->l_textures, split[11]);
 		if (c_obj->material.c_texture == NULL)
-			return (print_error_scene(line_num, ERR_PARSE, "cannot find texture", split[11]));
+			return (print_error_scene(line_num, ERR_PARSE, ERR_TEXTURE, split[11]));
 		c_obj->material.get_color = parse_obj_rectangle_get_color_texture(c_obj->rt.dir);
 	}
 	return (0);

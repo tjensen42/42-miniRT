@@ -12,21 +12,21 @@ int	parse_obj_cuboid(t_scene *scene, char **split, int line_num)
 	t_vec3	size;
 
 	if (ft_split_count_str(split) != 10)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_NUM_PARA, NULL));
 	obj = obj_new();
 	if (obj == NULL)
 		return (print_error_scene(line_num, ERR_PARSE, strerror(errno), NULL));
 	ft_lstadd_back(&(scene->l_obj), obj);
 	if (parse_vec3(split[1], &(obj_cont(obj)->rt.pos)))
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_POS, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_POS, VEC3_RANGE));
 	if (double_from_str(split[2], 6, 3, &size.x) || size.x <= 0.0)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_WIDTH, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_WIDTH, NULL));
 	if (double_from_str(split[3], 6, 3, &size.y) || size.y <= 0.0)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_HEIGHT, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_HEIGHT, NULL));
 	if (double_from_str(split[4], 6, 3, &size.z) || size.z <= 0.0)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_DEPTH, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_DEPTH, NULL));
 	if (parse_vec3(split[5], &(obj_cont(obj)->rt.rot)))
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_ROT, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_ROT, VEC3_RANGE));
 	if (parse_material(&(obj_cont(obj)->material), &split[6], line_num))
 		return (-1);
 	if (obj_cuboid_sides(&(scene->l_obj), size, obj_cont(obj)))

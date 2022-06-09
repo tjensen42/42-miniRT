@@ -4,7 +4,7 @@
 
 static int	scene_setup(t_scene *scene);
 static int	scene_check(t_scene *scene);
-int			scene_check_light_weights(t_list *l_light);
+int			scene_norm_light_weights(t_list *l_light);
 
 int	scene_create(t_scene *scene, const char *file)
 {
@@ -31,19 +31,17 @@ void	scene_destroy(t_scene *scene)
 static int	scene_check(t_scene *scene)
 {
 	if (scene->img.res_set == false)
-		return (print_error_scene(-1, ERR_SCENE_INCOM, ERR_MISS_RES, NULL));
+		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE_INCOM, ERR_MISS_RES));
 	if (scene->sampling.set == false)
-		return (print_error_scene(-1, ERR_SCENE_INCOM, ERR_MISS_SAM, NULL));
-	if (scene->cam.set == false)
-		return (print_error_scene(-1, ERR_SCENE_INCOM, ERR_MISS_CAM, NULL));
+		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE_INCOM, ERR_MISS_SAM));
 	if (scene->bg.set == false)
-		return (print_error_scene(-1, ERR_SCENE_INCOM, ERR_MISS_BG, NULL));
+		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE_INCOM, ERR_MISS_BG));
 	if (scene->amb.set == false)
-		return (print_error_scene(-1, ERR_SCENE_INCOM, ERR_MISS_AMB, NULL));
+		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE_INCOM, ERR_MISS_AMB));
+	if (scene->cam.set == false)
+		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE_INCOM, ERR_MISS_CAM));
 	if (scene->l_obj == NULL)
-		return (print_error_scene(-1, ERR_SCENE_INCOM, ERR_MISS_OBJ, NULL));
-	if (scene_check_light_weights(scene->l_light))
-		return (print_error_scene(-1, ERR_SCENE_INCOM, ERR_WEIGHT_SUM, NULL));
+		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE_INCOM, ERR_MISS_OBJ));
 	return (0);
 }
 
@@ -69,6 +67,7 @@ static int	scene_setup(t_scene *scene)
 		scene->sampling.cosine = 1.0;
 		scene->sampling.light = 0.0;
 	}
+	scene_norm_light_weights(scene->l_light);
 	scene_calc_img_pos(scene);
 	return (0);
 }

@@ -35,7 +35,7 @@ int	print_error_scene(int line_num, const char *msg1,
 	fflush(stderr);
 	if (line_num > 0)
 	{
-		write(STDERR_FILENO, "line ", 5);
+		write(STDERR_FILENO, "Line ", 5);
 		ft_putnbr_fd(line_num, STDERR_FILENO);
 		write(STDERR_FILENO, ": ", 2);
 	}

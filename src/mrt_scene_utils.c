@@ -2,7 +2,7 @@
 #include "parse/mrt_parse.h"
 #include "print/mrt_print.h"
 
-int	scene_check_light_weights(t_list *l_light)
+int	scene_norm_light_weights(t_list *l_light)
 {
 	t_list	*iter;
 	double	weight_sum;

@@ -12,7 +12,7 @@ int	parse_texture(t_scene *scene, char **split, int line_num)
 	mlx_texture_t	*mlx_texture;
 
 	if (ft_split_count_str(split) != 3)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_INVAL_NUM, NULL));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_NUM_PARA, NULL));
 	texture = texture_new();
 	if (texture == NULL)
 		return (print_error_scene(line_num, ERR_PARSE, strerror(errno), NULL));

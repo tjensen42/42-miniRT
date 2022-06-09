@@ -23,14 +23,14 @@
 # endif
 
 # define ERR_SCENE_INCOM	"Incomplete scene file"
-# define ERR_MISS_RES		"Missing resolution"
-# define ERR_MISS_SAM		"Missing sampling specifications"
-# define ERR_MISS_CAM		"Missing cam"
-# define ERR_MISS_BG		"Missing background"
-# define ERR_MISS_AMB		"Missing ambient light"
-# define ERR_MISS_OBJ		"Missing at least one object"
+# define ERR_MISS_RES		"No resolution"
+# define ERR_MISS_SAM		"No sampling specifications"
+# define ERR_MISS_CAM		"No camera"
+# define ERR_MISS_BG		"No background"
+# define ERR_MISS_AMB		"No ambient light"
+# define ERR_MISS_OBJ		"No objects or lights"
 
-# define ERR_WEIGHT_SUM		"Invalid weight sum for lights"
+# define ERR_WEIGHT_SUM		"Invalid sampling factor sum for lights"
 
 /* ************************************************************************** */
 /* STRUCTS																	  */
@@ -123,7 +123,7 @@ void	scene_destroy(t_scene *scene);
 
 void	scene_print(t_scene *scene);
 
-int		scene_check_light_weights(t_list *l_light);
+int		scene_norm_light_weights(t_list *l_light);
 void	scene_calc_img_pos(t_scene *scene);
 
 #endif // MRT_SCENE_H
