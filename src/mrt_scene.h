@@ -22,7 +22,7 @@
 #  define THREADS			8
 # endif
 
-# define ERR_SCENE_INCOM	"Incomplete scene file"
+# define ERR_SCENE			"Incomplete scene file"
 # define ERR_MISS_RES		"No resolution"
 # define ERR_MISS_SAM		"No sampling specifications"
 # define ERR_MISS_CAM		"No camera"

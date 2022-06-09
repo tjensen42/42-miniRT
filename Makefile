@@ -6,7 +6,7 @@
 #    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 09:02:38 by tjensen           #+#    #+#              #
-#    Updated: 2022/06/09 11:03:17 by tjensen          ###   ########.fr        #
+#    Updated: 2022/06/09 13:26:46 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,6 +95,8 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+bonus: all
 
 debug: CFLAGS += -O0 -DDEBUG -g
 debug: all

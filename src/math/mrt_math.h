@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mrt_math.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepple <hepple@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 09:49:49 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/08 12:21:45 by hepple           ###   ########.fr       */
+/*   Updated: 2022/06/09 13:19:14 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 # include "mrt_scene.h"
 
 # include <math.h>
-
-# define RAD2DEG	(180.0/M_PI)
-# define DEG2RAD	(M_PI/180.0)
 
 t_color	color_add(t_color c1, t_color c2);
 t_color	color_scale(double f, t_color c1);

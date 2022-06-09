@@ -30,12 +30,14 @@ int	scene_norm_light_weights(t_list *l_light)
 void	scene_calc_img_pos(t_scene *scene)
 {
 	if (fabs(scene->cam.dir.y) > 1.0 - 1e-4)
-		scene->img.qx = vec3_scale(tan((double)scene->cam.fov / 2.0 * DEG2RAD),
+		scene->img.qx = vec3_scale(
+				tan((double)scene->cam.fov / 2.0 * (M_PI / 180.0)),
 				vec3_norm(
 					vec3_cross((t_vec3){0, 0, -1.0},
 						scene->cam.dir)));
 	else
-		scene->img.qx = vec3_scale(tan((double)scene->cam.fov / 2.0 * DEG2RAD),
+		scene->img.qx = vec3_scale(
+				tan((double)scene->cam.fov / 2.0 * (M_PI / 180.0)),
 				vec3_norm(
 					vec3_cross((t_vec3){0, 1.0, 0},
 						scene->cam.dir)));

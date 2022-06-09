@@ -21,7 +21,8 @@ int	parse_material(t_material *material, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_FUZZ, NULL));
 	if (double_from_str(split[3], 1, 2, &(material->refraction_index))
 		|| (material->surface[DIELECTRIC] > 0.0
-		&& (material->refraction_index < 1.0 || material->refraction_index > 2.0)))
+			&& (material->refraction_index < 1.0
+				|| material->refraction_index > 2.0)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_REFRACTION, NULL));
 	material->brightness = 1.0;
 	material->get_color = &obj_color;

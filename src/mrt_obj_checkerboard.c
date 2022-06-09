@@ -33,8 +33,8 @@ void	sphere_rotate_x(t_vec3 *p, double rot_x)
 	double	sine;
 	double	cosine;
 
-	sine = sin(rot_x * DEG2RAD);
-	cosine = cos(rot_x * DEG2RAD);
+	sine = sin(rot_x * (M_PI / 180.0));
+	cosine = cos(rot_x * (M_PI / 180.0));
 	tmp = cosine * p->y - sine * p->z;
 	p->z = sine * p->y + cosine * p->z;
 	p->y = tmp;
@@ -46,8 +46,8 @@ void	sphere_rotate_y(t_vec3 *p, double rot_y)
 	double	sine;
 	double	cosine;
 
-	sine = sin(rot_y * DEG2RAD);
-	cosine = cos(rot_y * DEG2RAD);
+	sine = sin(rot_y * (M_PI / 180.0));
+	cosine = cos(rot_y * (M_PI / 180.0));
 	tmp = cosine * p->x + sine * p->z;
 	p->z = -sine * p->x + cosine * p->z;
 	p->x = tmp;
@@ -59,8 +59,8 @@ void	sphere_rotate_z(t_vec3 *p, double rot_z)
 	double	sine;
 	double	cosine;
 
-	sine = sin(rot_z * DEG2RAD);
-	cosine = cos(rot_z * DEG2RAD);
+	sine = sin(rot_z * (M_PI / 180.0));
+	cosine = cos(rot_z * (M_PI / 180.0));
 	tmp = cosine * p->x - sine * p->y;
 	p->y = sine * p->x + cosine * p->y;
 	p->x = tmp;
