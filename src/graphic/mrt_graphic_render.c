@@ -6,7 +6,7 @@ void	print_status(int sample, int max_sample)
 {
 	int	i;
 
-	printf("\r%s%s %4d / %4d ", COLOR_YE_1, "SAMPLE:", sample, max_sample);
+	printf("\r\r%s%s %4d / %4d ", COLOR_YE_1, "SAMPLE:", sample, max_sample);
 	i = 0;
 	while (i < (int)((double)sample / max_sample * 100))
 	{
@@ -33,10 +33,6 @@ void	graphic_render(t_graphic_data *graphic)
 		mlx_close_window(graphic->mlx);
 	else
 	{
-
-		// printf("\r%sSAMPLE %4d / %4d%s", COLOR_YE_1,
-		// 	scene->sampling.samp + 1, scene->sampling.max_samp, COLOR_NO);
-		// fflush(stdout);
 		scene->sampling.samp++;
 		print_status(scene->sampling.samp, scene->sampling.max_samp);
 		if (scene->sampling.samp == scene->sampling.max_samp)
@@ -75,7 +71,7 @@ static int	create_join_threads(t_graphic_data *graphic, t_scene *scene)
 void	*draw_thread(void *thread_data)
 {
 	int				xy[2];
-	t_vec3 			pixel_pos;
+	t_vec3			pixel_pos;
 	t_ray			ray;
 	struct s_img	*img;
 	t_thread		*thread;
@@ -89,9 +85,11 @@ void	*draw_thread(void *thread_data)
 		xy[0] = 0;
 		while (xy[0] < img->width)
 		{
-			pixel_pos = vec3_add(img->pos, vec3_lin_comb(xy[0] + ft_rand(), img->px, img->height - 1 - xy[1] + ft_rand(), img->py));
+			pixel_pos = vec3_add(img->pos, vec3_lin_comb(xy[0] + ft_rand(),
+						img->px, img->height - 1 - xy[1] + ft_rand(), img->py));
 			ray.dir = vec3_norm(vec3_sub(pixel_pos, ray.pos));
-			img->pixel[xy[1] * img->width + xy[0]] = color_add(img->pixel[xy[1] * img->width + xy[0]], trace(thread->scene, &ray, 0));
+			img->pixel[xy[1] * img->width + xy[0]] = color_add(img->pixel[xy[1]
+					* img->width + xy[0]], trace(thread->scene, &ray, 0));
 			xy[0]++;
 		}
 		xy[1] += THREADS;

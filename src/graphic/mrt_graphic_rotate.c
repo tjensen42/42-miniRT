@@ -25,8 +25,6 @@ void	rotate_horizontal(t_scene *scene, double rot)
 	scene->img.py = vec3_scale(-2.0 / (scene->img.height - 1), scene->img.qy);
 	scene->img.pos = vec3_add(vec3_add(scene->cam.pos, scene->cam.dir),
 			vec3_add(scene->img.qx, scene->img.qy));
-	print_vec3(scene->cam.pos, "cam_pos", COLOR_BL);
-	print_vec3(scene->cam.dir, "cam_dir", COLOR_CY);
 	reset_sampling(scene);
 }
 
@@ -44,8 +42,6 @@ void	rotate_vertical(t_scene *scene, bool up, double rot)
 				scene->img.qy);
 		scene->img.pos = vec3_add(vec3_add(scene->cam.pos, scene->cam.dir),
 				vec3_add(scene->img.qx, scene->img.qy));
-		print_vec3(scene->cam.pos, "cam_pos", COLOR_BL);
-		print_vec3(scene->cam.dir, "cam_dir", COLOR_CY);
 		reset_sampling(scene);
 	}
 }

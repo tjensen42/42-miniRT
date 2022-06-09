@@ -1,7 +1,7 @@
 #include "mrt_parse.h"
 #include "print/mrt_print.h"
 
-static f_color parse_obj_rectangle_get_color_texture(t_vec3 dir);
+static t_f_color parse_obj_rectangle_get_color_texture(t_vec3 dir);
 
 int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 {
@@ -77,7 +77,7 @@ t_f_intersect parse_obj_rt_intersec(t_vec3 dir)
 	return (NULL);
 }
 
-static f_color parse_obj_rectangle_get_color_texture(t_vec3 dir)
+static t_f_color parse_obj_rectangle_get_color_texture(t_vec3 dir)
 {
 	if (dir.x != 0.0)
 		return (&texture_rectangle_x);

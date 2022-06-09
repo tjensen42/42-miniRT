@@ -27,9 +27,9 @@
 /* STRUCTS																	  */
 /* ************************************************************************** */
 
-typedef struct s_hit t_hit;
+typedef struct s_hit	t_hit;
 
-typedef t_color	(*f_color)(t_list *obj, t_hit *hit);
+typedef t_color			(*t_f_color)(t_list *obj, t_hit *hit);
 
 typedef struct s_texture
 {
@@ -43,7 +43,7 @@ typedef struct s_material
 {
 	t_color			color;
 	t_texture		*c_texture;
-	f_color			get_color;
+	t_f_color		get_color;
 	int				cb_factor;
 	double			surface[4];
 	double			fuzz;
@@ -89,15 +89,15 @@ typedef struct s_rectangle
 	t_vec3		rel_pos;
 }	t_rectangle;
 
-typedef struct s_ray t_ray;
-typedef struct s_hit t_hit;
+typedef struct s_ray	t_ray;
+typedef struct s_hit	t_hit;
 
-typedef void	(*t_f_print)(t_list *obj);
-typedef double	(*t_f_intersect)(t_list *obj, t_ray *ray, double t_min,
+typedef void			(*t_f_print)(t_list *obj);
+typedef double			(*t_f_intersect)(t_list *obj, t_ray *ray, double t_min,
 	double t_max);
-typedef t_vec3	(*t_f_normal)(t_list *obj, t_hit *hit);
+typedef t_vec3			(*t_f_normal)(t_list *obj, t_hit *hit);
 
-typedef struct	s_obj
+typedef struct s_obj
 {
 	t_material		material;
 	t_f_print		print;
@@ -105,7 +105,7 @@ typedef struct	s_obj
 	t_f_normal		normal;
 	union
 	{
-		t_plane 	pl;
+		t_plane		pl;
 		t_disc		di;
 		t_sphere	sp;
 		t_tube		tb;

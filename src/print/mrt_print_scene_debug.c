@@ -7,6 +7,7 @@ int	print_scene_debug(t_scene *scene)
 {
 	t_list	*iter;
 
+	printf("\n\n");
 	print_scene_specs(scene);
 	iter = scene->l_obj;
 	while (iter)
@@ -36,6 +37,7 @@ static void	print_scene_specs(t_scene *scene)
 	printf("CAMERA:\n");
 	print_vec3(scene->cam.pos, "pos:", COLOR_BL);
 	print_vec3(scene->cam.dir, "dir:", COLOR_CY);
+	print_vec3(vec3_add(scene->cam.pos, scene->cam.dir), "look-at:", COLOR_NO);
 	print_scene_int(scene->cam.fov, "fov:", NULL);
 	printf("\n");
 	printf("BACKGROUND:\n");
