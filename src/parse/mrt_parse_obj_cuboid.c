@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:42 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 15:35:19 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/09 18:36:46 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,60 +88,56 @@ static int	obj_cuboid_sides_z(t_list **l_obj, t_vec3 size, t_obj *c_templ)
 
 static int	obj_cuboid_sides_y(t_list **l_obj, t_vec3 size, t_obj *c_templ)
 {
-	t_list	*obj;
+	t_list	*obj_plus;
+	t_list	*obj_minus;
 	t_obj	*c_obj;
 
-	obj = obj_new();
-	if (obj == NULL)
+	obj_plus = obj_new();
+	if (obj_plus == NULL)
 		return (print_error_scene(-1, ERR_PARSE, strerror(errno), NULL));
-	ft_lstadd_back(l_obj, obj);
-	c_obj = obj_cont(obj);
+	ft_lstadd_back(l_obj, obj_plus);
+	c_obj = obj_cont(obj_plus);
 	*c_obj = *c_templ;
 	c_obj->rt.dir = (t_vec3){0.0, 1.0, 0.0};
 	c_obj->rt.width = size.x;
 	c_obj->rt.height = size.z;
 	c_obj->rt.rel_pos = (t_vec3){0.0, size.y / 2.0, 0.0};
 	c_obj->intersect = parse_obj_rt_intersect(c_obj->rt.dir);
-	obj = obj_new();
-	if (obj == NULL)
+	obj_minus = obj_new();
+	if (obj_minus == NULL)
 		return (print_error_scene(-1, ERR_PARSE, strerror(errno), NULL));
-	ft_lstadd_back(l_obj, obj);
-	c_obj = obj_cont(obj);
-	*c_obj = *c_templ;
+	ft_lstadd_back(l_obj, obj_minus);
+	c_obj = obj_cont(obj_minus);
+	*c_obj = *obj_cont(obj_plus);
 	c_obj->rt.dir = (t_vec3){0.0, -1.0, 0.0};
-	c_obj->rt.width = size.x;
-	c_obj->rt.height = size.z;
 	c_obj->rt.rel_pos = (t_vec3){0.0, size.y / -2.0, 0.0};
-	c_obj->intersect = parse_obj_rt_intersect(c_obj->rt.dir);
 	return (0);
 }
 
 static int	obj_cuboid_sides_x(t_list **l_obj, t_vec3 size, t_obj *c_templ)
 {
-	t_list	*obj;
+	t_list	*obj_plus;
+	t_list	*obj_minus;
 	t_obj	*c_obj;
 
-	obj = obj_new();
-	if (obj == NULL)
+	obj_plus = obj_new();
+	if (obj_plus == NULL)
 		return (print_error_scene(-1, ERR_PARSE, strerror(errno), NULL));
-	ft_lstadd_back(l_obj, obj);
-	c_obj = obj_cont(obj);
+	ft_lstadd_back(l_obj, obj_plus);
+	c_obj = obj_cont(obj_plus);
 	*c_obj = *c_templ;
 	c_obj->rt.dir = (t_vec3){1.0, 0.0, 0.0};
 	c_obj->rt.width = size.z;
 	c_obj->rt.height = size.y;
 	c_obj->rt.rel_pos = (t_vec3){size.x / 2.0, 0.0, 0.0};
 	c_obj->intersect = parse_obj_rt_intersect(c_obj->rt.dir);
-	obj = obj_new();
-	if (obj == NULL)
+	obj_minus = obj_new();
+	if (obj_minus == NULL)
 		return (print_error_scene(-1, ERR_PARSE, strerror(errno), NULL));
-	ft_lstadd_back(l_obj, obj);
-	c_obj = obj_cont(obj);
-	*c_obj = *c_templ;
+	ft_lstadd_back(l_obj, obj_minus);
+	c_obj = obj_cont(obj_minus);
+	*c_obj = *obj_cont(obj_plus);
 	c_obj->rt.dir = (t_vec3){-1.0, 0.0, 0.0};
-	c_obj->rt.width = size.z;
-	c_obj->rt.height = size.y;
 	c_obj->rt.rel_pos = (t_vec3){size.x / -2.0, 0.0, 0.0};
-	c_obj->intersect = parse_obj_rt_intersect(c_obj->rt.dir);
 	return (0);
 }
