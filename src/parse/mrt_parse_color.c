@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:52 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 17:04:33 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/09 17:44:13 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	parse_color(const char *str, t_color *color)
 	split = ft_split(str, ',');
 	if (split == NULL)
 		return (-1);
+	primary = 0;
 	error = (ft_split_count_str(split) != 3);
 	if (!error)
 		error = int_from_str(split[0], 0, 255, &primary);
