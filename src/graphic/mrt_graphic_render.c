@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:55:45 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 15:04:11 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/09 16:15:13 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,10 @@ void	*draw_thread(void *thread_data)
 
 void	img_to_mlx_img(t_scene *scene, mlx_image_t *mlx_img)
 {
-	size_t		x;
-	size_t		y;
-	size_t		pixel_pos;
-	uint8_t		*mlx_pixel;
+	size_t	x;
+	size_t	y;
+	size_t	pixel_pos;
 
-	mlx_pixel = mlx_img->pixels;
 	y = 0;
 	while (y < mlx_img->height)
 	{
