@@ -6,7 +6,7 @@
 #    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 09:02:38 by tjensen           #+#    #+#              #
-#    Updated: 2022/06/09 15:38:53 by tjensen          ###   ########.fr        #
+#    Updated: 2022/06/09 16:13:19 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -127,7 +127,7 @@ $(NAME): $(LIBS) $(ODIR) $(OBJS)
 
 $(ODIR)/%.o: $(SDIR)/%.c $(INCLUDES)
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(addprefix -I, $(IDIR)) -c $< -o $@
+	$(CC) $(CFLAGS) -I. $(addprefix -I, $(IDIR)) -c $< -o $@
 
 $(ODIR):
 	mkdir -p $(ODIR)
