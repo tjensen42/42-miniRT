@@ -1,4 +1,4 @@
-#include "miniRT.h"
+#include "mrt_scene.h"
 #include "graphic/mrt_graphic.h"
 
 static void	print_header(void);
