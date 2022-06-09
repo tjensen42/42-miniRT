@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mrt_scene.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 14:54:44 by tjensen           #+#    #+#             */
+/*   Updated: 2022/06/09 14:54:45 by tjensen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MRT_SCENE_H
 # define MRT_SCENE_H
 
@@ -22,7 +34,7 @@
 #  define THREADS			8
 # endif
 
-# define ERR_SCENE_INCOM	"Incomplete scene file"
+# define ERR_SCENE			"Incomplete scene file"
 # define ERR_MISS_RES		"No resolution"
 # define ERR_MISS_SAM		"No sampling specifications"
 # define ERR_MISS_CAM		"No camera"

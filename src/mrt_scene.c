@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mrt_scene.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 14:54:41 by tjensen           #+#    #+#             */
+/*   Updated: 2022/06/09 14:54:42 by tjensen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mrt_scene.h"
 #include "parse/mrt_parse.h"
 #include "print/mrt_print.h"
@@ -31,17 +43,17 @@ void	scene_destroy(t_scene *scene)
 static int	scene_check(t_scene *scene)
 {
 	if (scene->img.res_set == false)
-		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE_INCOM, ERR_MISS_RES));
+		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE, ERR_MISS_RES));
 	if (scene->sampling.set == false)
-		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE_INCOM, ERR_MISS_SAM));
+		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE, ERR_MISS_SAM));
 	if (scene->bg.set == false)
-		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE_INCOM, ERR_MISS_BG));
+		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE, ERR_MISS_BG));
 	if (scene->amb.set == false)
-		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE_INCOM, ERR_MISS_AMB));
+		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE, ERR_MISS_AMB));
 	if (scene->cam.set == false)
-		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE_INCOM, ERR_MISS_CAM));
+		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE, ERR_MISS_CAM));
 	if (scene->l_obj == NULL)
-		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE_INCOM, ERR_MISS_OBJ));
+		return (print_error_scene(-1, ERR_PARSE, ERR_SCENE, ERR_MISS_OBJ));
 	return (0);
 }
 

@@ -21,7 +21,7 @@
 #define TRANSMISSION	0.0
 #define SCATTER_REFLEC	0.0
 
-#define DEG2RAD			(M_PI/180.0)
+#define (M_PI / 180.0)			(M_PI / 180.0)
 
 typedef struct s_vec3
 {
@@ -202,7 +202,7 @@ t_sphere gen_sphere_on_archimedisch_spiral(int i)
 	theta = sqrt((double)i / (double)(SPHERES - 1) * (SPHERES - 1) * SPHERE_DISTANCE);
 	sphere.radius = SPHERE_RADIUS;
 	// sphere.radius = random_double(0.5, 2.5);
-	sphere.pos = (t_vec3){SPRIAL_DISTANCE * theta * cos(theta * DEG2RAD), sphere.radius + 0.2 * i, SPRIAL_DISTANCE * theta * sin(theta * DEG2RAD)};
+	sphere.pos = (t_vec3){SPRIAL_DISTANCE * theta * cos(theta * (M_PI / 180.0)), sphere.radius + 0.2 * i, SPRIAL_DISTANCE * theta * sin(theta * (M_PI / 180.0))};
 	sphere.color = gen_color_i(i);
 	sphere.surface = gen_surface();
 	return (sphere);

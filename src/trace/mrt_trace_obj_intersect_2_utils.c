@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mrt_trace_obj_intersect_2_utils.c                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 14:55:30 by tjensen           #+#    #+#             */
+/*   Updated: 2022/06/09 14:55:31 by tjensen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mrt_trace.h"
 
 static void	rotate_ray_x(t_ray *ray, double rot_x);
@@ -22,8 +34,8 @@ static void	rotate_ray_x(t_ray *ray, double rot_x)
 	double	cosine;
 	double	tmp;
 
-	sine = sin(rot_x * DEG2RAD);
-	cosine = cos(rot_x * DEG2RAD);
+	sine = sin(rot_x * (M_PI / 180.0));
+	cosine = cos(rot_x * (M_PI / 180.0));
 	tmp = cosine * ray->pos.y - sine * ray->pos.z;
 	ray->pos.z = sine * ray->pos.y + cosine * ray->pos.z;
 	ray->pos.y = tmp;
@@ -38,8 +50,8 @@ static void	rotate_ray_y(t_ray *ray, double rot_y)
 	double	cosine;
 	double	tmp;
 
-	sine = sin(rot_y * DEG2RAD);
-	cosine = cos(rot_y * DEG2RAD);
+	sine = sin(rot_y * (M_PI / 180.0));
+	cosine = cos(rot_y * (M_PI / 180.0));
 	tmp = cosine * ray->pos.x + sine * ray->pos.z;
 	ray->pos.z = -sine * ray->pos.x + cosine * ray->pos.z;
 	ray->pos.x = tmp;
@@ -54,8 +66,8 @@ static void	rotate_ray_z(t_ray *ray, double rot_z)
 	double	cosine;
 	double	tmp;
 
-	sine = sin(rot_z * DEG2RAD);
-	cosine = cos(rot_z * DEG2RAD);
+	sine = sin(rot_z * (M_PI / 180.0));
+	cosine = cos(rot_z * (M_PI / 180.0));
 	tmp = cosine * ray->pos.x - sine * ray->pos.y;
 	ray->pos.y = sine * ray->pos.x + cosine * ray->pos.y;
 	ray->pos.x = tmp;

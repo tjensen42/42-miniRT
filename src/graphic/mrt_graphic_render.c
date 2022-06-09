@@ -1,8 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mrt_graphic_render.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 14:55:45 by tjensen           #+#    #+#             */
+/*   Updated: 2022/06/09 15:04:11 by tjensen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mrt_graphic.h"
 
+static void	print_render_status(int sample, int max_sample);
 static int	create_join_threads(t_graphic_data *graphic, t_scene *scene);
 
-void	print_status(int sample, int max_sample)
+void	graphic_render(t_graphic_data *graphic)
+{
+	t_scene	*scene;
+
+	scene = graphic->scene;
+	if (scene->sampling.samp == scene->sampling.max_samp)
+		return ;
+	if (create_join_threads(graphic, scene))
+		mlx_close_window(graphic->mlx);
+	else
+	{
+		scene->sampling.samp++;
+		print_render_status(scene->sampling.samp, scene->sampling.max_samp);
+		img_to_mlx_img(scene, graphic->mlx_img);
+	}
+}
+
+static void	print_render_status(int sample, int max_sample)
 {
 	int	i;
 
@@ -20,25 +50,6 @@ void	print_status(int sample, int max_sample)
 	}
 	printf("%s", COLOR_NO);
 	fflush(stdout);
-}
-
-void	graphic_render(t_graphic_data *graphic)
-{
-	t_scene	*scene;
-
-	scene = graphic->scene;
-	if (scene->sampling.samp == scene->sampling.max_samp)
-		return ;
-	if (create_join_threads(graphic, scene))
-		mlx_close_window(graphic->mlx);
-	else
-	{
-		scene->sampling.samp++;
-		print_status(scene->sampling.samp, scene->sampling.max_samp);
-		if (scene->sampling.samp == scene->sampling.max_samp)
-			printf("\n");
-		img_to_mlx_img(scene, graphic->mlx_img);
-	}
 }
 
 static int	create_join_threads(t_graphic_data *graphic, t_scene *scene)

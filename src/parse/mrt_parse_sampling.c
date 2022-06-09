@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mrt_parse_sampling.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 14:56:27 by tjensen           #+#    #+#             */
+/*   Updated: 2022/06/09 14:56:28 by tjensen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mrt_parse.h"
 
 int	parse_sampling(t_scene *scene, char **split, int line_num)
 {
 	if (scene->sampling.set == true)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_DUPLICATE, ID_SAMPLING));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_DUPLICATE,
+				ID_SAMPLING));
 	if (ft_split_count_str(split) != 6)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_NUM_PARA, NULL));
 	if (int_from_str(split[1], 1, 9999, &(scene->sampling.max_samp)))

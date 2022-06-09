@@ -1,7 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mrt_parse_obj_cylinder.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 14:56:41 by tjensen           #+#    #+#             */
+/*   Updated: 2022/06/09 14:56:41 by tjensen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mrt_parse.h"
 #include "print/mrt_print.h"
 
-static int add_caps(t_scene *scene, t_obj *c_cy);
+static void	parse_obj_cylinder_function_ptr(t_list *obj);
+static int	add_caps(t_scene *scene, t_obj *c_cy);
+static int	add_cap_bottom(t_scene *scene, t_obj *c_cy, t_obj *c_obj_top);
 
 int	parse_obj_cylinder(t_scene *scene, char **split, int line_num)
 {
@@ -28,36 +42,53 @@ int	parse_obj_cylinder(t_scene *scene, char **split, int line_num)
 		return (-1);
 	if (add_caps(scene, obj_cont(obj)))
 		return (-1);
-	obj_cont(obj)->print = &print_obj_tube;
-	obj_cont(obj)->intersect = &intersect_tube;
-	obj_cont(obj)->normal = &normal_tube;
+	parse_obj_cylinder_function_ptr(obj);
 	return (0);
 }
 
-static int add_caps(t_scene *scene, t_obj *c_cy)
+static void	parse_obj_cylinder_function_ptr(t_list *obj)
+{
+	obj_cont(obj)->print = &print_obj_tube;
+	obj_cont(obj)->intersect = &intersect_tube;
+	obj_cont(obj)->normal = &normal_tube;
+}
+
+static int	add_caps(t_scene *scene, t_obj *c_cy)
 {
 	t_list	*obj_top;
-	t_list	*obj_bottom;
+	t_obj	*c_obj_top;
 
 	obj_top = obj_new();
 	if (obj_top == NULL)
 		return (print_error_scene(-1, ERR_PARSE, strerror(errno), NULL));
 	ft_lstadd_back(&(scene->l_obj), obj_top);
+	c_obj_top = obj_cont(obj_top);
+	c_obj_top->material = c_cy->material;
+	c_obj_top->print = &print_obj_disc;
+	c_obj_top->intersect = &intersect_disc;
+	c_obj_top->normal = &normal_disc;
+	c_obj_top->di.radius = c_cy->tb.radius;
+	c_obj_top->di.pos = vec3_lin_comb(1.0, c_cy->tb.pos,
+			c_cy->tb.height / 2.0, c_cy->tb.dir);
+	c_obj_top->di.dir = c_cy->tb.dir;
+	if (add_cap_bottom(scene, c_cy, c_obj_top))
+		return (-1);
+	return (0);
+}
+
+static int	add_cap_bottom(t_scene *scene, t_obj *c_cy, t_obj *c_obj_top)
+{
+	t_list	*obj_bottom;
+	t_obj	*c_obj_bottom;
+
 	obj_bottom = obj_new();
 	if (obj_bottom == NULL)
 		return (print_error_scene(-1, ERR_PARSE, strerror(errno), NULL));
+	c_obj_bottom = obj_cont(obj_bottom);
 	ft_lstadd_back(&(scene->l_obj), obj_bottom);
-	obj_cont(obj_top)->material = c_cy->material;
-	obj_cont(obj_top)->print = &print_obj_disc;
-	obj_cont(obj_top)->intersect = &intersect_disc;
-	obj_cont(obj_top)->normal = &normal_disc;
-	obj_cont(obj_top)->di.radius = c_cy->tb.radius;
-	*obj_cont(obj_bottom) = *obj_cont(obj_top);
-	obj_cont(obj_top)->di.pos = vec3_lin_comb(1.0, c_cy->tb.pos,
-									c_cy->tb.height / 2.0, c_cy->tb.dir);
-	obj_cont(obj_top)->di.dir = c_cy->tb.dir;
-	obj_cont(obj_bottom)->di.pos = vec3_lin_comb(1.0, c_cy->tb.pos,
-										c_cy->tb.height / -2.0, c_cy->tb.dir);
-	obj_cont(obj_bottom)->di.dir = vec3_scale(-1.0, c_cy->tb.dir);
+	*c_obj_bottom = *c_obj_top;
+	c_obj_bottom->di.pos = vec3_lin_comb(1.0, c_cy->tb.pos,
+			c_cy->tb.height / -2.0, c_cy->tb.dir);
+	c_obj_bottom->di.dir = vec3_scale(-1.0, c_cy->tb.dir);
 	return (0);
 }
