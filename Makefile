@@ -6,7 +6,7 @@
 #    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 09:02:38 by tjensen           #+#    #+#              #
-#    Updated: 2022/06/09 18:43:11 by tjensen          ###   ########.fr        #
+#    Updated: 2022/06/09 22:50:13 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME			:= miniRT
 
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -Werror -pthread -O3 #-g -fsanitize=address
+CFLAGS			:= -Wall -Wextra -Werror -pthread -O3#-g -fsanitize=address
 
 SRCS			:= main.c								\
 				   mrt_color.c							\
@@ -97,7 +97,7 @@ IDIR			:= $(SDIR)
 INCLUDES		:= $(wildcard $(IDIR)/*.h) $(wildcard $(IDIR)/**/*.h)
 
 LIBS			:= lib/libft/libft.a lib/libmlx/libmlx42.a
-LDFLAGS			:= $(LIBS) -lm -lglfw
+LDFLAGS			:= $(LIBS) -lm
 
 # **************************************************************************** #
 #	SYSTEM SPECIFIC SETTINGS							   					   #
@@ -109,10 +109,11 @@ NUMPROC	:= 8
 ifeq ($(UNAME), Linux)
     NUMPROC := $(shell grep -c ^processor /proc/cpuinfo)
 	CFLAGS	+= -D LINUX -D THREADS=$(NUMPROC) -Wno-unused-result
-	LDFLAGS	:= $(LIBS) -lm -lglfw -ldl
+	LDFLAGS	+= -lglfw -ldl
 else ifeq ($(UNAME), Darwin)
     NUMPROC := $(shell sysctl -n hw.ncpu)
 	CFLAGS	+= -D DARWIN -D THREADS=$(NUMPROC)
+	LDFLAGS += lib/libmlx/libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
 endif
 
 # **************************************************************************** #
@@ -120,7 +121,7 @@ endif
 # **************************************************************************** #
 
 all:
-	@make $(NAME) -j$(NUMPROC)
+	@$(MAKE) $(NAME) -j$(NUMPROC)
 
 $(NAME): $(LIBS) $(ODIR) $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS)
@@ -130,17 +131,17 @@ $(ODIR)/%.o: $(SDIR)/%.c $(INCLUDES)
 	$(CC) $(CFLAGS) -I. $(addprefix -I, $(IDIR)) -c $< -o $@
 
 $(ODIR):
-	mkdir -p $(ODIR)
+	@mkdir -p $(ODIR)
 
 lib/libft/libft.a:
-	make -C lib/libft/
+	@$(MAKE) -C lib/libft/
 
 lib/libmlx/libmlx42.a:
-	make -C lib/libmlx/
+	@$(MAKE) -C lib/libmlx/
 
 clean:
-	make -C lib/libft fclean
-	make -C lib/libmlx fclean
+	@$(MAKE) -C lib/libft fclean
+	@$(MAKE) -C lib/libmlx fclean
 	$(RM) -r $(ODIR)
 
 fclean: clean

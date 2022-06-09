@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: W2Wizard <w2.wizzard@gmail.com>              +#+                      #
-#                                                    +#+                       #
-#    Created: 2022/02/26 21:32:49 by W2Wizard      #+#    #+#                  #
-#    Updated: 2022/03/29 18:08:51 by W2Wizard      ########   odam.nl          #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/02/26 21:32:49 by W2Wizard          #+#    #+#              #
+#    Updated: 2022/06/09 22:33:40 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,6 @@ else
 				override HEADERS += -I $(BREW_GLFW_PREFIX)/include
 			endif
 		endif
-
 		include Makefile_Unix.mk
 	else
 $(error OS: $(OS) - Is not supported!)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hepple <hepple@student.42.fr>              +#+  +:+       +#+         #
+#    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/17 11:48:30 by hepple            #+#    #+#              #
-#    Updated: 2022/06/08 12:19:59 by hepple           ###   ########.fr        #
+#    Updated: 2022/06/09 22:04:44 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,8 +88,7 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@ar -rcs $(NAME) $(OBJ)
-	@echo "ar create libft (libft.a)"
+	ar -rcs $(NAME) $(OBJ)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/*/%.c
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
