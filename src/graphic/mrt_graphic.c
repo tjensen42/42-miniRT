@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:55:42 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 14:55:42 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/09 16:22:57 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	graphic(t_scene *scene)
 	mlx_image_to_window(gr.mlx, gr.mlx_img, 0, 0);
 	mlx_loop_hook(gr.mlx, &graphic_loop, &gr);
 	mlx_loop(gr.mlx);
+	printf("\n");
 	mlx_delete_image(gr.mlx, gr.mlx_img);
 	mlx_terminate(gr.mlx);
 	return (0);
