@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:35 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 14:56:36 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/09 15:34:55 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 	return (0);
 }
 
-t_f_intersect	parse_obj_rt_intersec(t_vec3 dir)
+t_f_intersect	parse_obj_rt_intersect(t_vec3 dir)
 {
 	if (dir.x != 0.0)
 		return (&intersect_rectangle_x);
@@ -98,7 +98,7 @@ static int	parse_obj_rectangle_2(t_scene *scene, t_obj *c_obj,
 		c_obj->material.get_color = rectangle_get_color_texture(c_obj->rt.dir);
 	}
 	c_obj->print = &print_obj_rectangle;
-	c_obj->intersect = parse_obj_rt_intersec(c_obj->rt.dir);
+	c_obj->intersect = parse_obj_rt_intersect(c_obj->rt.dir);
 	c_obj->normal = &normal_rectangle;
 	c_obj->rt.rel_pos = (t_vec3){0.0, 0.0, 0.0};
 	return (0);

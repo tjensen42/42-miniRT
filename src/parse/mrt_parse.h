@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:16 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 14:56:18 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/09 15:34:55 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int				parse_res(t_scene *scene, char **split, int line_num);
 int				parse_ppm(t_scene *scene, char **split, int line_num);
 
 int				parse_obj_rectangle_dir(t_obj *c_obj, const char *dir);
-t_f_intersect	parse_obj_rt_intersec(t_vec3 dir);
+t_f_intersect	parse_obj_rt_intersect(t_vec3 dir);
 
 int				parse_texture(t_scene *scene, char **split, int line_num);
 t_texture		*parse_c_texture_find(t_list *l_texture, const char *name);

@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:48 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 14:56:48 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/09 15:34:55 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	parse_rectangle_obj(t_scene *scene, char **split, int line_num)
 static void	parse_obj_rectangle_function_ptrs(t_list *obj)
 {
 	obj_cont(obj)->print = &print_obj_rectangle;
-	obj_cont(obj)->intersect = parse_obj_rt_intersec(obj_cont(obj)->rt.dir);
+	obj_cont(obj)->intersect = parse_obj_rt_intersect(obj_cont(obj)->rt.dir);
 	obj_cont(obj)->normal = &normal_rectangle;
 	obj_cont(obj)->material.get_color = &obj_color;
 }

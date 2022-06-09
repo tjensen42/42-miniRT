@@ -6,7 +6,7 @@
 #    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 09:02:38 by tjensen           #+#    #+#              #
-#    Updated: 2022/06/09 14:16:07 by tjensen          ###   ########.fr        #
+#    Updated: 2022/06/09 15:38:53 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME			:= miniRT
 
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -Werror -pthread -O3
+CFLAGS			:= -Wall -Wextra -Werror -pthread -O3 #-g -fsanitize=address
 
 SRCS			:= main.c								\
 				   mrt_color.c							\
