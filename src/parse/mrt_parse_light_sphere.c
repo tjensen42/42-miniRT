@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:46 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 14:56:46 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:31:46 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	parse_sphere_obj(t_scene *scene, char **split, int line_num)
 	c_obj = obj_cont(obj);
 	if (parse_vec3(split[1], &(c_obj->sp.pos)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_POS, VEC3_RANGE));
-	if (double_from_str(split[2], 6, 3, &(c_obj->sp.radius))
+	if (double_from_str(split[2], 6, 4, &(c_obj->sp.radius))
 		|| c_obj->sp.radius <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_RAD, NULL));
 	if (parse_color(split[3], &(c_obj->material.color)))

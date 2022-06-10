@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:54 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 16:57:58 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:50:22 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	parse_cam(t_scene *scene, char **split, int line_num)
 	t_vec3	look_at;
 
 	if (scene->cam.set == true)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_DUPLICATE, ID_CAM));
+		return (print_error_scene(line_num, ERR_PARSE, ERR_DUP_ID, ID_CAM));
 	if (ft_split_count_str(split) != 4)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_NUM_PARA, NULL));
 	if (parse_vec3(split[1], &(scene->cam.pos)))

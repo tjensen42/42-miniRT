@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:22 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 14:56:23 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:43:38 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	parse_texture(t_scene *scene, char **split, int line_num)
 	mlx_texture = mlx_load_png(split[2]);
 	if (mlx_texture == NULL)
 		return (print_error_scene(line_num, ERR_PARSE,
-				"Cannot load png", split[2]));
+				ERR_LOAD_TEXTURE, split[2]));
 	texture_cont(texture)->width = mlx_texture->width;
 	texture_cont(texture)->height = mlx_texture->height;
 	if (mlx_texture_to_color(mlx_texture, texture_cont(texture)))

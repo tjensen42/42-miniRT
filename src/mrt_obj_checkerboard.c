@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mrt_obj_checkerboard.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepple <hepple@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:54:17 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 15:47:47 by hepple           ###   ########.fr       */
+/*   Updated: 2022/06/10 10:19:36 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ t_color	checkerboard_rectangle(t_list *obj, t_hit *hit)
 	p = vec3_sub(hit->p, obj_cont(obj)->rt.pos);
 	if (fabs(obj_cont(obj)->rt.dir.x) == 1.0)
 	{
-		u = -p.y / obj_cont(obj)->rt.width + 0.5;
-		v = p.z / obj_cont(obj)->rt.height + 0.5;
+		u = -p.z / obj_cont(obj)->rt.width + 0.5;
+		v = -p.y / obj_cont(obj)->rt.height + 0.5;
 	}
 	else if (fabs(obj_cont(obj)->rt.dir.y) == 1.0)
 	{

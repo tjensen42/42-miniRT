@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:16 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 15:34:55 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:58:32 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,50 +33,49 @@
 /* ************************************************************************** */
 
 // ERRORS
+# define ERR_FILE			"Invalid scene file (<scene>.rt)"
 # define ERR_FILE_TABS		"Tabs are not allowed"
 
 # define ERR_PARSE			"Parsing error"
-# define ERR_DUPLICATE		"Duplicate identifier"
-
-# define ERR_NUM_PARA		"Wrong number of parameters"
-# define ERR_FILE			"Invalid scene file (<scene>.rt)"
 # define ERR_ID				"Invalid identifier"
+# define ERR_DUP_ID			"Duplicate identifier"
+# define ERR_NUM_PARA		"Wrong number of parameters"
 
-# define VEC3_RANGE			"3x <double> [-999999.9999,+999999.9999]"
-
-# define ERR_POS			"Invalid position"
-# define ERR_DIR			"Invalid direction"
-
-# define ERR_ROT			"Invalid rotation angles"
-# define ERR_RAD			"Invalid radius"
-# define ERR_WIDTH			"Invalid width"
-# define ERR_HEIGHT			"Invalid height"
-# define ERR_DEPTH			"Invalid depth"
-
-# define ERR_CB				"Invalid checkerboard factor"
-# define ERR_TEXTURE		"Invalid texture"
-
+# define ERR_RES			"Invalid resolution: <int> [10,10000]"
 # define ERR_MAX_SAMP		"Invalid number of samples: <int> [1,9999]"
 # define ERR_REC_DEPTH		"Invalid bounces: <int> [1,1000]"
-# define ERR_IMPORT_SAMP	"Invalid light sampling: <double> [0.0,9.9999]"
-# define ERR_COSINE_SAMP	"Invalid cosine sampling: <double> [0.0,9.9999]"
+# define ERR_IMPORT_SAMP	"Invalid light sampling: <double> [0.0,1.0000]"
+# define ERR_COSINE_SAMP	"Invalid cosine sampling: <double> [0.0,1.0000]"
 # define ERR_SAMP_SUM		"Invalid sampling: light + cosine = 1.0"
 # define ERR_GAMMA			"Invalid gamma: <bool> true/false"
+# define ERR_LIGHT_SF		"Invalid sampling factor"
 
 # define ERR_CAM_LOOK		"Cam look-from and look-at cannot be equal"
 # define ERR_LOOK_AT		"Invalid look-at"
 # define ERR_FOV			"Invalid camera FOV (range [1,179])"
 
-# define ERR_RES			"Invalid resolution: <int> [10,10000]"
-# define ERR_LIGHT_SF		"Invalid sampling factor"
+# define ERR_POS			"Invalid position"
+# define ERR_DIR			"Invalid direction"
+# define ERR_ROT			"Invalid rotation angles"
+# define VEC3_RANGE			"3x <double> [-999999.9999,+999999.9999]"
+
+# define ERR_RAD			"Invalid radius: <double> [0.0,999999.9999]"
+# define ERR_WIDTH			"Invalid width: <double> [0.0,999999.9999]"
+# define ERR_HEIGHT			"Invalid height: <double> [0.0,999999.9999]"
+# define ERR_DEPTH			"Invalid depth: <double> [0.0,999999.9999]"
+# define ERR_RATIO			"Invalid ratio: <double> [0.0,1.00]"
 
 # define ERR_COLOR			"Invalid color: 3x <int> [0,255]"
-# define ERR_BRIGHT			"Invalid brightness: <double> [0.0,9999.99]"
-# define ERR_FUZZ			"Invalid fuzz: <double> [0.0,9.99]"
-# define ERR_REFRACTION		"Invalid refraction index: <double> [1.00,2.00]"
 # define ERR_SURF			"Invalid surfaces: 3x <double> [0.0,1.00]"
 # define ERR_SURF_SUM		"Surface parameters must add up to 1.0"
 # define ERR_DIELECTRIC		"2D objects cannot be dielectric"
+# define ERR_FUZZ			"Invalid fuzz: <double> [0.0,9.99]"
+# define ERR_REFRACTION		"Invalid refraction index: <double> [1.00,2.00]"
+# define ERR_BRIGHT			"Invalid brightness: <double> [0.0,9999.99]"
+
+# define ERR_CB				"Invalid checkerboard factor"
+# define ERR_LOAD_TEXTURE	"Unable to load texture"
+# define ERR_TEXTURE		"Invalid texture"
 
 // IDENTIFIERS
 # define ID_RES				"R"

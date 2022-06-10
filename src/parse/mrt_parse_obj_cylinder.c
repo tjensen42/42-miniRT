@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:41 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 14:56:41 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:33:54 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	parse_obj_cylinder(t_scene *scene, char **split, int line_num)
 	if (parse_vec3(split[2], &(obj_cont(obj)->tb.dir)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_DIR, VEC3_RANGE));
 	obj_cont(obj)->tb.dir = vec3_norm(obj_cont(obj)->tb.dir);
-	if (double_from_str(split[3], 6, 3, &(obj_cont(obj)->tb.radius))
+	if (double_from_str(split[3], 6, 4, &(obj_cont(obj)->tb.radius))
 		|| obj_cont(obj)->tb.radius <= 0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_RAD, NULL));
-	if (double_from_str(split[4], 6, 3, &(obj_cont(obj)->tb.height))
+	if (double_from_str(split[4], 6, 4, &(obj_cont(obj)->tb.height))
 		|| obj_cont(obj)->tb.height <= 0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_HEIGHT, NULL));
 	if (parse_material(&(obj_cont(obj)->material), &split[5], line_num))

@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:54:24 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 14:54:25 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:42:45 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	c_texture_destroy(void *in)
 	texture = in;
 	free(texture->name);
 	texture->name = NULL;
-	if (texture->color)
-		free(texture->color);
+	free(texture->color);
 	texture->color = NULL;
 	free(texture);
 }

@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:42 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 18:36:46 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:33:23 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	parse_obj_cuboid(t_scene *scene, char **split, int line_num)
 	ft_lstadd_back(&(scene->l_obj), obj);
 	if (parse_vec3(split[1], &(obj_cont(obj)->rt.pos)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_POS, VEC3_RANGE));
-	if (double_from_str(split[2], 6, 3, &size.x) || size.x <= 0.0)
+	if (double_from_str(split[2], 6, 4, &size.x) || size.x <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_WIDTH, NULL));
-	if (double_from_str(split[3], 6, 3, &size.y) || size.y <= 0.0)
+	if (double_from_str(split[3], 6, 4, &size.y) || size.y <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_HEIGHT, NULL));
-	if (double_from_str(split[4], 6, 3, &size.z) || size.z <= 0.0)
+	if (double_from_str(split[4], 6, 4, &size.z) || size.z <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_DEPTH, NULL));
 	if (parse_vec3(split[5], &(obj_cont(obj)->rt.rot)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_ROT, VEC3_RANGE));

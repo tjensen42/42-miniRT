@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:39 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 14:56:39 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:32:00 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	parse_obj_disc(t_scene *scene, char **split, int line_num)
 	if (parse_vec3(split[2], &(di->dir)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_DIR, VEC3_RANGE));
 	di->dir = vec3_norm(di->dir);
-	if (double_from_str(split[3], 6, 3, &(di->radius)) || di->radius <= 0)
+	if (double_from_str(split[3], 6, 4, &(di->radius)) || di->radius <= 0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_RAD, NULL));
 	if (parse_material(obj_material(obj), &split[4], line_num))
 		return (-1);

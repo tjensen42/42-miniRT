@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:35 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 15:34:55 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:33:33 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	parse_obj_rectangle(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_POS, VEC3_RANGE));
 	if (parse_obj_rectangle_dir(c_obj, split[2]))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_DIR, NULL));
-	if (double_from_str(split[3], 6, 3, &(c_obj->rt.width))
+	if (double_from_str(split[3], 6, 4, &(c_obj->rt.width))
 		|| c_obj->rt.width <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_WIDTH, NULL));
-	if (double_from_str(split[4], 6, 3, &(c_obj->rt.height))
+	if (double_from_str(split[4], 6, 4, &(c_obj->rt.height))
 		|| c_obj->rt.height <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_HEIGHT, NULL));
 	if (parse_vec3(split[5], &(c_obj->rt.rot)))

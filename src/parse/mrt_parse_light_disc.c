@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:51 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 14:56:51 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:31:42 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	parse_disc_obj(t_scene *scene, char **split, int line_num)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_POS, VEC3_RANGE));
 	if (parse_vec3(split[2], &(obj_cont(obj)->di.dir)))
 		return (print_error_scene(line_num, ERR_PARSE, ERR_DIR, VEC3_RANGE));
-	if (double_from_str(split[3], 6, 3, &(obj_cont(obj)->di.radius))
+	if (double_from_str(split[3], 6, 4, &(obj_cont(obj)->di.radius))
 		|| obj_cont(obj)->di.radius <= 0.0)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_RAD, NULL));
 	if (parse_color(split[4], &(obj_cont(obj)->material.color)))

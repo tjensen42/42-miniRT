@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:27 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 14:56:28 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:50:22 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	parse_sampling(t_scene *scene, char **split, int line_num)
 {
 	if (scene->sampling.set == true)
-		return (print_error_scene(line_num, ERR_PARSE, ERR_DUPLICATE,
+		return (print_error_scene(line_num, ERR_PARSE, ERR_DUP_ID,
 				ID_SAMPLING));
 	if (ft_split_count_str(split) != 6)
 		return (print_error_scene(line_num, ERR_PARSE, ERR_NUM_PARA, NULL));
