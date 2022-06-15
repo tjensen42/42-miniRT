@@ -4,7 +4,7 @@
 
 <br>
 <hr>
-<b>*All 42 projects must be written in C (later C++) in accordance to the 42 School Norm.<br></b>
+<b>*This 42 project is written in C and in accordance to the 42 school norm.<br></b>
 <br>
 
 > #### Sample restrictions:
