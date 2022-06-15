@@ -1,6 +1,42 @@
 # 42-miniRT-new
 
+<img width="1498" alt="42-logo" src="https://user-images.githubusercontent.com/56789534/173826141-045ce31b-b8be-4065-b711-4e385cb72ef6.png">
 
+[Ray Tracing in One Weekend series of books](https://raytracing.github.io/)
+
+## How to use it
+
+*The only supported and tested operating systems are ```macOS``` and ```Ubuntu 20.04```.
+
+For ```Ubuntu``` it is necessary to install the GLFW library:
+```
+sudo apt-get update && \
+sudo apt-get install libglfw3 && \
+sudo apt-get install libglfw3-dev
+```
+
+1. ```git clone link miniRT```
+2. ```cd miniRT && make```
+3. ```./miniRT scenes/template.rt```
+
+
+## Scenes
+
+<b>Example: [Template](scenes/template.rt)</b>
+
+| Identifier  | Description | Identifier    | Description
+| :---         | :---         | :---         | :---         |
+| ```R```  | Resolution | ```ls```  | Light sphere |
+| ```S```  | Sampling specifications |```ld```  | Light disc |
+| ```B```  | Background |```lr```  | Light rectangle |
+| ```A```  | Ambient light |```tx```  | Texture |
+| ```C```  | Camera |```pl```  | Plane |
+|   |   | ```sp```  | Sphere |
+|   |   | ```cy```  | Cylinder |
+|   |   | ```tb```  | Tube |
+|   |   | ```di```  | Disc |
+|   |   | ```rt```  | Rectangle |
+|   |   | ```cu```  | Cuboid |
 
 <br>
 <hr>
