@@ -1,4 +1,4 @@
-# 42-miniRT-new
+# 42-miniRT
 
 <img width="1498" alt="42-logo" src="https://user-images.githubusercontent.com/56789534/173826141-045ce31b-b8be-4065-b711-4e385cb72ef6.png">
 
