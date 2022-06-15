@@ -2,6 +2,10 @@
 
 <img width="1498" alt="42-logo" src="https://user-images.githubusercontent.com/56789534/173826141-045ce31b-b8be-4065-b711-4e385cb72ef6.png">
 
+This 42 project is an introduction to the beautiful world of Raytracing. 
+It is one of the group projects in the 42 core curriculum. <br>
+Done by: [hepple42](https://github.com/hepple42) & [tjensen42](https://github.com/tjensen42) 
+
 Working on this project, we have noticed more and more interesting optical effects in everyday life and were constantly thinking about possible implementation in our RayTracer. Once the basic principle was implemented, it was fun to add more and more objects and functionalities. We were especially excited about implementing relatively fundamental physical laws in code.
 
 An excellent source on raytracing which helped us a lot is [Ray Tracing in One Weekend series of books](https://raytracing.github.io/) by Peter Shirley. It is a really detailed step-by-step guide for implementing a path-tracer in C++.
