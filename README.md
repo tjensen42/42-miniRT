@@ -24,7 +24,7 @@ sudo apt-get install libglfw3-dev
 ```
 
 <b>Compile and run miniRT in 3 simple steps:</b>
-1. ```git clone [link](https://github.com/tjensen42/42-miniRT) miniRT```
+1. ```git clone (link)[https://github.com/tjensen42/42-miniRT] miniRT```
 2. ```cd miniRT && make```
 3. ```./miniRT scenes/template.rt```
 
