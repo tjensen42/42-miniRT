@@ -57,7 +57,7 @@ ls  +0.000,+1000,+1600     100.0    255,255,230   200.0        1
 tx  sun         textures/8k_sun.png
 tx  mercury     textures/8k_mercury.png
 tx  venus       textures/8k_venus_surface.png
-tx  earth       textures/8k_earth_daymap.png
+tx  earth       textures/2k_earth_daymap.png
 tx  mars        textures/8k_mars.png
 tx  jupiter     textures/8k_jupiter.png
 tx  saturn      textures/8k_saturn.png
