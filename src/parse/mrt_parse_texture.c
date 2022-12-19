@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:22 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/10 09:43:38 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/12/19 12:43:34 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "print/mrt_print.h"
 #include "trace/mrt_trace.h"
 
-#include "lib/libmlx/include/MLX42/MLX42.h"
+#include "libmlx/include/MLX42/MLX42.h"
 
 int	mlx_texture_to_color(mlx_texture_t *mlx_texture, t_texture *c_texture);
 

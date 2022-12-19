@@ -6,7 +6,7 @@
 #    By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 09:02:38 by tjensen           #+#    #+#              #
-#    Updated: 2022/07/25 17:06:02 by tjensen          ###   ########.fr        #
+#    Updated: 2022/12/19 12:42:28 by tjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,7 @@
 NAME			:= miniRT
 
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -Werror -pthread -O3#-g -fsanitize=address
-
-CPPFLAGS    	:=
+CFLAGS			:= -Wall -Wextra -Werror -O3#-g -fsanitize=address
 DEPFLAGS     	 = -MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
 VPATH			:= src/ src/graphic/ src/math/ src/parse/ src/print/ src/trace/
@@ -94,7 +92,7 @@ DDIR			:= $(ODIR)/.deps
 DEPS			:= $(SRCS:%.c=$(DDIR)/%.d)
 
 LIBS			:= lib/libft/libft.a lib/libmlx/libmlx42.a
-LDLIBS          := $(LIBS) -lm
+LDLIBS          := $(LIBS) -lm -lpthread
 LDFLAGS         :=
 
 # **************************************************************************** #
@@ -125,7 +123,7 @@ $(NAME): $(LIBS) $(OBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(NAME) $(LDLIBS)
 
 $(ODIR)/%.o: %.c $(DDIR)/%.d | $(ODIR) $(DDIR)
-	$(CC) $(CFLAGS) $(DEPFLAGS) -I./src -c $< -o $@
+	$(CC) $(CFLAGS) $(DEPFLAGS) -I./src -I./lib -c $< -o $@
 
 $(ODIR):
 	@mkdir -p $@

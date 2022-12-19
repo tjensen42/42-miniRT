@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:56:16 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/10 09:58:32 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/12/19 12:43:17 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 /* INCLUDES																	  */
 /* ************************************************************************** */
 
-# include "lib/libft/inc/libft.h"
+# include "libft/inc/libft.h"
 # include "mrt_color.h"
 # include "mrt_vec3.h"
 # include "mrt_scene.h"

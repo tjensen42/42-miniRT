@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   mrt_vec3.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepple <hepple@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 10:27:56 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/08 11:50:08 by hepple           ###   ########.fr       */
+/*   Updated: 2022/12/19 12:42:53 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MRT_VEC3_H
 # define MRT_VEC3_H
 
-# include "lib/libft/inc/libft.h"
+# include "libft/inc/libft.h"
 
 # include <stdbool.h>
 

@@ -6,11 +6,11 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:54:17 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/10 10:19:36 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/12/19 12:43:17 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib/libft/inc/libft.h"
+#include "libft/inc/libft.h"
 #include "mrt_color.h"
 #include "mrt_vec3.h"
 #include "mrt_obj.h"

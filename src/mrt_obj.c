@@ -6,12 +6,12 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:54:30 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/09 14:54:31 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/12/19 12:43:34 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt_obj.h"
-#include "lib/libmlx/include/MLX42/MLX42.h"
+#include "libmlx/include/MLX42/MLX42.h"
 
 t_list	*obj_new(void)
 {

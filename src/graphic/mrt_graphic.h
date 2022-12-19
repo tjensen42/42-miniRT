@@ -6,7 +6,7 @@
 /*   By: tjensen <tjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 09:50:23 by tjensen           #+#    #+#             */
-/*   Updated: 2022/06/07 18:25:15 by tjensen          ###   ########.fr       */
+/*   Updated: 2022/12/19 12:43:34 by tjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "mrt_scene.h"
 # include "math/mrt_math.h"
 # include "trace/mrt_trace.h"
-# include "lib/libmlx/include/MLX42/MLX42.h"
+# include "libmlx/include/MLX42/MLX42.h"
 
 # define WIN_NAME		"miniRT"
 
